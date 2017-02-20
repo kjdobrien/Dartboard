@@ -69,11 +69,11 @@ namespace Dartboard
 			// aapt resource value: 0x7f050000
 			public const int Main = 2131034112;
 			
-			// aapt resource value: 0x7f05000c
-			public const int checkin = 2131034124;
+			// aapt resource value: 0x7f05000b
+			public const int checkin = 2131034123;
 			
-			// aapt resource value: 0x7f05000d
-			public const int checkout = 2131034125;
+			// aapt resource value: 0x7f05000c
+			public const int checkout = 2131034124;
 			
 			// aapt resource value: 0x7f050002
 			public const int dartboard = 2131034114;
@@ -81,11 +81,11 @@ namespace Dartboard
 			// aapt resource value: 0x7f050001
 			public const int dartboardoverlay = 2131034113;
 			
-			// aapt resource value: 0x7f05000f
-			public const int numSets = 2131034127;
-			
 			// aapt resource value: 0x7f05000e
-			public const int numberofsets = 2131034126;
+			public const int numSets = 2131034126;
+			
+			// aapt resource value: 0x7f05000d
+			public const int numberofsets = 2131034125;
 			
 			// aapt resource value: 0x7f050006
 			public const int numplayers = 2131034118;
@@ -102,14 +102,11 @@ namespace Dartboard
 			// aapt resource value: 0x7f050008
 			public const int space1 = 2131034120;
 			
-			// aapt resource value: 0x7f05000b
-			public const int space3 = 2131034123;
-			
 			// aapt resource value: 0x7f05000a
-			public const int startScores = 2131034122;
+			public const int space3 = 2131034122;
 			
-			// aapt resource value: 0x7f050010
-			public const int submit = 2131034128;
+			// aapt resource value: 0x7f05000f
+			public const int submit = 2131034127;
 			
 			// aapt resource value: 0x7f050004
 			public const int textView1 = 2131034116;

@@ -22,7 +22,6 @@ namespace Dartboard
             base.OnCreate(bundle);
 
             int numPlayers = Intent.GetIntExtra("numPlayers", 1);
-            int startScore = Intent.GetIntExtra("startScore", 301);
             bool checkIn = Intent.GetBooleanExtra("isCheckIn", false);
             bool checkOut = Intent.GetBooleanExtra("isCheckOut", true);
             int numSets = Intent.GetIntExtra("numSets", 1);
