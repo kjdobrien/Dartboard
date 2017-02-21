@@ -23,6 +23,8 @@ namespace Dartboard
         {
             base.OnCreate(savedInstanceState);
 
+            SetContentView(Resource.Layout.Setup);
+
             // Get the number of players
             RadioGroup playersRadioGroup = FindViewById<RadioGroup>(Resource.Id.numplayers);
             
@@ -32,33 +34,29 @@ namespace Dartboard
                   
             // How many Sets
             EditText numOfSetsTextBox = (EditText)FindViewById(Resource.Id.numSets);
-            
 
             // Send to MainActivity
-            Button submit = (FindViewById<Button>(Resource.Id.submit);
+            Button submit = FindViewById<Button>(Resource.Id.submit);
 
             submit.Click += delegate
-            {
-                RadioButton checkedRadioButton = FindViewById<RadioButton>(playersRadioGroup.CheckedRadioButtonId);
-                int playerRadioSelect = Convert.ToInt32(checkedRadioButton.Text);
+                {
+                    RadioButton checkedRadioButton = FindViewById<RadioButton>(playersRadioGroup.CheckedRadioButtonId);
+                    int playerRadioSelect = Convert.ToInt32(checkedRadioButton.Text);
 
-                isCheckin = doubleIn.Checked;
+                    isCheckin = doubleIn.Checked;
 
-                isCheckout = doubleOut.Checked;
+                    isCheckout = doubleOut.Checked;
 
-                int numOfSet = Convert.ToInt32(numOfSetsTextBox.Text);
+                    int numOfSet = Convert.ToInt32(numOfSetsTextBox.Text);
 
-                var setupIntent = new Intent(this, typeof(Setup));
-                setupIntent.PutExtra("numplayers", playerRadioSelect);
-                setupIntent.PutExtra("isCheckIn", isCheckin);
-                setupIntent.PutExtra("isCheckOut", isCheckout);
-                setupIntent.PutExtra("numSets", numOfSet);
+                    var setupIntent = new Intent(this, typeof(MainActivity));
+                    setupIntent.PutExtra("numplayers", playerRadioSelect);
+                    setupIntent.PutExtra("isCheckIn", isCheckin);
+                    setupIntent.PutExtra("isCheckOut", isCheckout);
+                    setupIntent.PutExtra("numSets", numOfSet);
 
-                StartActivity(typeof(MainActivity));
-
-
-                             
-            };
+                    StartActivity(setupIntent);              
+                };
 
         }
 
