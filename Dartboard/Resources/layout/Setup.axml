@@ -3,42 +3,20 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <RelativeLayout
-        android:minWidth="25px"
-        android:minHeight="25px"
+    <TextView
+        android:text="Number of Players"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView1" />
+  
+    <EditText
+        android:inputType="number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/relativeLayout1">
-        <TextView
-            android:text="Number of Players"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView1" />
-    </RelativeLayout>
-    <RadioGroup
-        android:minWidth="25px"
-        android:minHeight="25px"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:checkedButton="@+id/p1"
-        android:id="@+id/numplayers">
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="1"
-            android:id="@+id/p1" />
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="2"
-            android:id="@+id/p2" />
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/space1" />
-    </RadioGroup>
+        android:id="@+id/numPlayers" />
+
+  
     <TextView
         android:text="Start Score"
         android:textAppearance="?android:attr/textAppearanceMedium"
@@ -67,11 +45,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/numberofsets" />
+  
     <EditText
         android:inputType="number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/numSets" />
+  
     <Button
         android:text="Play"
         android:layout_width="match_parent"

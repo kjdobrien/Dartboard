@@ -15,7 +15,7 @@ namespace Dartboard
     [Activity(Label = "Setup", MainLauncher = true)]
     public class Setup : Activity
     {
-        int playerRadioSelect;
+
         bool isCheckin;
         bool isCheckout;
 
@@ -26,7 +26,7 @@ namespace Dartboard
             SetContentView(Resource.Layout.Setup);
 
             // Get the number of players
-            RadioGroup playersRadioGroup = FindViewById<RadioGroup>(Resource.Id.numplayers);
+            EditText numPlayers = (EditText)FindViewById(Resource.Id.numPlayers);
             
             // Double in Double out? 
             Switch doubleIn = (Switch)FindViewById(Resource.Id.checkin);
@@ -40,17 +40,13 @@ namespace Dartboard
 
             submit.Click += delegate
                 {
-                    RadioButton checkedRadioButton = FindViewById<RadioButton>(playersRadioGroup.CheckedRadioButtonId);
-                    int playerRadioSelect = Convert.ToInt32(checkedRadioButton.Text);
-
+                    int numOfPlayers = Convert.ToInt32(numPlayers.Text);
                     isCheckin = doubleIn.Checked;
-
                     isCheckout = doubleOut.Checked;
-
                     int numOfSet = Convert.ToInt32(numOfSetsTextBox.Text);
 
                     var setupIntent = new Intent(this, typeof(MainActivity));
-                    setupIntent.PutExtra("numplayers", playerRadioSelect);
+                    setupIntent.PutExtra("numplayers", numOfPlayers);
                     setupIntent.PutExtra("isCheckIn", isCheckin);
                     setupIntent.PutExtra("isCheckOut", isCheckout);
                     setupIntent.PutExtra("numSets", numOfSet);
@@ -60,11 +56,7 @@ namespace Dartboard
 
         }
 
-        private void RadioButtonClick(object sender, EventArgs e)
-        {
-            RadioButton rb = (RadioButton)sender;
-            playerRadioSelect = Convert.ToInt32(rb.Text);
-        }
+   
     
     }
 }

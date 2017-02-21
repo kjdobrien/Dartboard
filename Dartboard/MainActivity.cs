@@ -20,20 +20,25 @@ namespace Dartboard
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
+            
+            // Set our view from the "main" layout resource
+            SetContentView(Resource.Layout.Main);
+
 
             int numPlayers = Intent.GetIntExtra("numPlayers", 1);
             bool checkIn = Intent.GetBooleanExtra("isCheckIn", false);
             bool checkOut = Intent.GetBooleanExtra("isCheckOut", true);
             int numSets = Intent.GetIntExtra("numSets", 1);
 
+            Console.WriteLine("Game Details: " + "Number of Players:  " + numPlayers + "  Check in? " + checkIn + " Check out? " + checkOut + " Number of Sets: " + numSets);
 
 
-            // Set our view from the "main" layout resource
-            SetContentView (Resource.Layout.Main);
+            
             // Setup the view 
             ImageView iv = (ImageView)FindViewById(Resource.Id.dartboard);
             iv.SetOnTouchListener(this);
-            // Start the game loop            
+            // Start the game loop
+                   
         }
 
 
@@ -45,7 +50,7 @@ namespace Dartboard
             switch (e.Action)
             {
                 case MotionEventActions.Down:
-                    Console.WriteLine("getting x and y now so I am");
+                    Console.WriteLine("getting x and y now ");
                     break;
                 case MotionEventActions.Up:
                     int touchColor = getColorHotspot(Resource.Id.dartboardoverlay, x, y);

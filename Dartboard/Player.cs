@@ -17,13 +17,13 @@ namespace Dartboard
 
         List<int> Darts = new List<int>();
 
-
+        public int id { get; set; }
         public string name { get; set; }
 
 
-        public Player()
+        public Player(int idit)
         {
-            name = "Player 1";
+            id = idit; 
         }
     }
 }
