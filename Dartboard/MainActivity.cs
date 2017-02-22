@@ -24,13 +24,16 @@ namespace Dartboard
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
 
-
-            int numPlayers = Intent.GetIntExtra("numPlayers", 1);
+            var player1 = Intent.GetParcelableExtra("player1");
+            if (Intent.HasExtra("player2"))
+            {
+                var player2 = Intent.GetParcelableExtra("player2");
+            }
             bool checkIn = Intent.GetBooleanExtra("isCheckIn", false);
             bool checkOut = Intent.GetBooleanExtra("isCheckOut", true);
             int numSets = Intent.GetIntExtra("numSets", 1);
 
-            Console.WriteLine("Game Details: " + "Number of Players:  " + numPlayers + "  Check in? " + checkIn + " Check out? " + checkOut + " Number of Sets: " + numSets);
+            Console.WriteLine("Game Details: Check in? " + checkIn + " Check out? " + checkOut + " Number of Sets: " + numSets);
 
 
             

@@ -10,9 +10,11 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
+
+
 namespace Dartboard
 {
-    class Player
+    class Player : IParcelable
     {
 
         List<int> Darts = new List<int>();
@@ -20,10 +22,32 @@ namespace Dartboard
         public int id { get; set; }
         public string name { get; set; }
 
-
-        public Player(int idit)
+        public IntPtr Handle
         {
-            id = idit; 
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public Player()
+        {
+            
+        }
+
+        public int DescribeContents()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void WriteToParcel(Parcel dest, [GeneratedEnum] ParcelableWriteFlags flags)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
         }
     }
 }
