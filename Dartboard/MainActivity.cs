@@ -27,24 +27,33 @@ namespace Dartboard
             var player1 = (Player)Intent.GetParcelableExtra("player1");
             player1.name = "this is me";
             
-            
-
             if (Intent.HasExtra("player2"))
-            {
-                var player2 = Intent.GetParcelableExtra("player2");
-            }
-           // bool checkIn = Intent.GetBooleanExtra("isCheckIn", false);
-           // bool checkOut = Intent.GetBooleanExtra("isCheckOut", true);
-           // int numSets = Intent.GetIntExtra("numSets", 1);
+             {
+                var player2 = (Player)Intent.GetParcelableExtra("player2");
+                player2.name = "me too thanks";
+             }
 
-            //Console.WriteLine("Game Details: Check in? " + checkIn + " Check out? " + checkOut + " Number of Sets: " + numSets);
+            string startScore = Intent.GetStringExtra("startScore");
+            bool checkIn = Intent.GetBooleanExtra("isCheckIn", false);
+            bool checkOut = Intent.GetBooleanExtra("isCheckOut", true);
+            int numSets = Intent.GetIntExtra("numSets", 1);
 
-            Console.WriteLine("Player Object Test " + player1.name);
+            int gameScore = Convert.ToInt32(startScore);
 
             // Setup the view 
             ImageView iv = (ImageView)FindViewById(Resource.Id.dartboard);
             iv.SetOnTouchListener(this);
+            
             // Start the game loop
+
+            while (gameScore > 0)
+            {
+                // game logic
+
+                
+            }
+            // Play again ?
+
                    
         }
 
