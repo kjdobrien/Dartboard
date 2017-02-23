@@ -10,44 +10,99 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
+using Java.Interop;
+
 
 
 namespace Dartboard
 {
-    class Player : IParcelable
+    class Player : Java.Lang.Object, IParcelable
     {
 
-        List<int> Darts = new List<int>();
+        public Player() { }
 
         public int id { get; set; }
         public string name { get; set; }
 
-        public IntPtr Handle
+
+
+        #region IParcelable implementation 
+        public static readonly GenericParcelableCreator<Player> _creator = new GenericParcelableCreator<Player>((parcel) => new Player(parcel));
+
+        [ExportField("CREATOR")]
+        public static GenericParcelableCreator<Player> GetCreator()
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            return _creator;
         }
 
-        public Player()
+        public Player(Parcel parcel)
         {
-            
+            id = parcel.ReadInt();
+            name = parcel.ReadString();
+
         }
+
+
+        //public IntPtr Handle
+        //{
+        //    get
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //}
+
+
 
         public int DescribeContents()
         {
-            throw new NotImplementedException();
+            // 0 means no special objects
+            return 0;
         }
 
         public void WriteToParcel(Parcel dest, [GeneratedEnum] ParcelableWriteFlags flags)
         {
-            throw new NotImplementedException();
+            dest.WriteInt(id);
+            dest.WriteString(name);
         }
 
-        public void Dispose()
+        //public void Dispose()
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        #endregion
+
+        public sealed class GenericParcelableCreator<T> : Java.Lang.Object, IParcelableCreator
+        where T : Java.Lang.Object, new()
         {
-            throw new NotImplementedException();
+            private readonly Func<Parcel, T> _createFunc;
+
+            /// <summary>
+            /// Initializes a new instance of the <see cref="ParcelableDemo.GenericParcelableCreator`1"/> class.
+            /// </summary>
+            /// <param name='createFromParcelFunc'>
+            /// Func that creates an instance of T, populated with the values from the parcel parameter
+            /// </param>
+            public GenericParcelableCreator(Func<Parcel, T> createFromParcelFunc)
+            {
+                _createFunc = createFromParcelFunc;
+            }
+
+            #region IParcelableCreator Implementation
+
+            public Java.Lang.Object CreateFromParcel(Parcel source)
+            {
+                return _createFunc(source);
+            }
+
+            public Java.Lang.Object[] NewArray(int size)
+            {
+                return new T[size];
+            }
+
+            #endregion
+
+
         }
     }
 }

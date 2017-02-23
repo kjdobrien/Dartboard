@@ -12,7 +12,7 @@ using Android.Widget;
 
 namespace Dartboard
 {
-    [Activity(Label = "Setup", MainLauncher = true)]
+    [Activity(Label = "Setup")]
     public class Setup : Activity
     {
 

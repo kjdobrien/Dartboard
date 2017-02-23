@@ -24,19 +24,23 @@ namespace Dartboard
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
 
-            var player1 = Intent.GetParcelableExtra("player1");
+            var player1 = (Player)Intent.GetParcelableExtra("player1");
+            player1.name = "this is me";
+            
+            
+
             if (Intent.HasExtra("player2"))
             {
                 var player2 = Intent.GetParcelableExtra("player2");
             }
-            bool checkIn = Intent.GetBooleanExtra("isCheckIn", false);
-            bool checkOut = Intent.GetBooleanExtra("isCheckOut", true);
-            int numSets = Intent.GetIntExtra("numSets", 1);
+           // bool checkIn = Intent.GetBooleanExtra("isCheckIn", false);
+           // bool checkOut = Intent.GetBooleanExtra("isCheckOut", true);
+           // int numSets = Intent.GetIntExtra("numSets", 1);
 
-            Console.WriteLine("Game Details: Check in? " + checkIn + " Check out? " + checkOut + " Number of Sets: " + numSets);
+            //Console.WriteLine("Game Details: Check in? " + checkIn + " Check out? " + checkOut + " Number of Sets: " + numSets);
 
+            Console.WriteLine("Player Object Test " + player1.name);
 
-            
             // Setup the view 
             ImageView iv = (ImageView)FindViewById(Resource.Id.dartboard);
             iv.SetOnTouchListener(this);

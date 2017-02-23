@@ -2,4 +2,13 @@
 <resources>
     <string name="Hello">Hello World, Click Me!</string>
     <string name="ApplicationName">Dartboard</string>
+    <string name="scorePrompt">Start Score</string>
+
+  <string-array name="startScoreArray">
+    <item>101</item>
+    <item>201</item>
+    <item>301</item>
+    <item>401</item>
+    <item>501</item>
+  </string-array>
 </resources>

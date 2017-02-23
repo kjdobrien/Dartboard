@@ -3,6 +3,41 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <TextView
+        android:text="Start Score"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/startScoreBanner" />
+    <Spinner
+        android:id="@+id/startScoreSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/startScoreArray"
+        android:prompt="@string/scorePrompt" />
+    <Switch
+        android:text="Check-In on Double"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:checked="false"
+        android:id="@+id/checkin" />
+    <Switch
+        android:text="Check-out on Double"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:id="@+id/checkout" />
+    <TextView
+        android:text="Number of Sets"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/numberofsets" />
+    <EditText
+        android:inputType="number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/numSets" />
     <Button
         android:text="1 Player"
         android:layout_width="match_parent"
