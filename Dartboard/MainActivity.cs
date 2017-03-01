@@ -54,17 +54,7 @@ namespace Dartboard
             ImageView iv = (ImageView)FindViewById(Resource.Id.dartboard);
             iv.SetOnTouchListener(this);
 
-            while (player1.score > 0)
-            {
-                foreach (Player p in Players)
-                {
-                    onScore = true;
-                    foreach (int d in p.Darts)
-                    {
-                        displayTv.Text = Convert.ToString(display);
-                    }
-                }
-            }
+       
 
         }
 
@@ -81,16 +71,11 @@ namespace Dartboard
                     int touchColor = getColorHotspot(Resource.Id.dartboardoverlay, x, y);
                     Color myColor = new Color(touchColor);
                     score = board.ColorScores.FirstOrDefault(k => k.Value == myColor).Key;
-                    display = score;
-
-                   // Console.WriteLine("X = " + x + "Y = " + y + "and the color is: " + myColor);
-                    
-                   // Console.WriteLine("Score = " + score);
-                  //  Console.WriteLine(total + " left");
-
+                    Toast toast = Toast.MakeText(this, String.Format("{0}",score), ToastLength.Short);
+                    toast.Show();
                     break;
             }
-            return onScore;
+            return true;
         }
 
 
