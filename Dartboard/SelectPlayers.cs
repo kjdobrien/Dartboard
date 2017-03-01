@@ -12,7 +12,7 @@ using Android.Widget;
 
 namespace Dartboard
 {
-    [Activity(Label = "SelectPlayers", MainLauncher = true)]
+    [Activity(Label = "SelectPlayers", MainLauncher = false)]
     public class SelectPlayers : Activity
     {
         string selectedScore;

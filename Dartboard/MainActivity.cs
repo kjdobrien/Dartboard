@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
 namespace Dartboard
 {
-    [Activity(Label = "Dartboard", MainLauncher = false, Icon = "@drawable/icon")]
+    [Activity(Label = "Dartboard", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : Activity, View.IOnTouchListener
     {
 
