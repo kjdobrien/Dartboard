@@ -16,9 +16,5 @@
         android:layout_height="fill_parent"
         android:scaleType="fitCenter"
         android:src="@drawable/dartboard" />
-    <TextView
-        android:text="Enter Score"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/displayScore" />
+    
 </FrameLayout>
