@@ -19,11 +19,19 @@ namespace Dartboard
     class Player : Java.Lang.Object, IParcelable
     {
 
-        public Player() { }
+        public Player()
+        {
+            Darts.Add(d1);
+            Darts.Add(d2);
+            Darts.Add(d3);
+        }
 
         public int id { get; set; }
         public string name { get; set; }
+        public int score { get; set; }
 
+        public List<int> Darts = new List<int>();
+        public int d1, d2, d3;
 
 
         #region IParcelable implementation 
