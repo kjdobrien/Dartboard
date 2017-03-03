@@ -17,8 +17,18 @@
         android:scaleType="fitCenter"
         android:src="@drawable/dartboard" />
     <TextView
-        android:text="Enter Score"
+        android:text="301"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/displayScore" />
+        android:id="@+id/dart1" />
+  <!--<TextView
+      android:text="Dart 2"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:id="@+id/dart2" />
+  <TextView
+      android:text="Dart 3"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:id="@+id/dart3" />-->
 </FrameLayout>

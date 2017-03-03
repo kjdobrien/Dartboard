@@ -91,14 +91,14 @@ namespace Dartboard
 			// aapt resource value: 0x7f060007
 			public const int checkout = 2131099655;
 			
+			// aapt resource value: 0x7f060003
+			public const int dart1 = 2131099651;
+			
 			// aapt resource value: 0x7f060002
 			public const int dartboard = 2131099650;
 			
 			// aapt resource value: 0x7f060001
 			public const int dartboardoverlay = 2131099649;
-			
-			// aapt resource value: 0x7f060003
-			public const int displayScore = 2131099651;
 			
 			// aapt resource value: 0x7f06000d
 			public const int numPlayers = 2131099661;

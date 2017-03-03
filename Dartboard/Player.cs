@@ -16,7 +16,7 @@ using Java.Interop;
 
 namespace Dartboard
 {
-    class Player : Java.Lang.Object, IParcelable
+    public class Player : Java.Lang.Object, IParcelable
     {
 
         public Player()
@@ -24,15 +24,19 @@ namespace Dartboard
             Darts.Add(d1);
             Darts.Add(d2);
             Darts.Add(d3);
+            score = 301;
+            
         }
 
         public int id { get; set; }
         public string name { get; set; }
         public int score { get; set; }
+        public bool turn { get; set; }
 
         public List<int> Darts = new List<int>();
         public int d1, d2, d3;
 
+    
 
         #region IParcelable implementation 
         public static readonly GenericParcelableCreator<Player> _creator = new GenericParcelableCreator<Player>((parcel) => new Player(parcel));
