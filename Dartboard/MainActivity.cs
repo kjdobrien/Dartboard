@@ -83,7 +83,13 @@ namespace Dartboard
 
         public bool OnTouch(View v, MotionEvent e)
         {
+            
             Player currentPlayer  = GameLogic.WhosTurn(testPlayer, player2);
+            if (GameLogic.IsWinner(currentPlayer))
+            {
+                d1.Text = currentPlayer.name + " Wins!";
+                return false;
+            }
             var x = (int)e.GetX();
             var y = (int)e.GetY();
             switch (e.Action)
@@ -104,7 +110,7 @@ namespace Dartboard
 
                     d1.Text = "Player: " + currentPlayer.name + " " + text;
                     Console.WriteLine(touchCount);
-                    
+                  
                     break;
             }
             if (touchCount == 3)

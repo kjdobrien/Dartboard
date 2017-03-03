@@ -39,6 +39,20 @@ namespace Dartboard
             p2.turn = !p2.turn;
         }
 
+        public static bool IsWinner(Player p)
+        {
+            //TODO double out logic 
+            if (p.score == 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+
 
     }
 }
