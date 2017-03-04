@@ -16,17 +16,13 @@
         android:layout_height="fill_parent"
         android:scaleType="fitCenter"
         android:src="@drawable/dartboard" />
-    <RelativeLayout
-        android:id="@+id/textArea"
+    <TextView
+        android:text="301"
         android:layout_width="match_parent"
-        android:layout_height="10%">
-        <TextView
-            android:text="301"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="left"
-            android:id="@+id/dart1" />
-    <!--<TextView
+        android:layout_height="match_parent"
+        android:gravity="left"
+        android:id="@+id/dart1" />
+<!--<TextView
         android:text="Dart 2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -36,11 +32,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/dart3" />-->
-        <TextView
-            android:text="Checkout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="right"
-            android:id="@+id/Checkout" />
-    </RelativeLayout>
+    <TextView
+        android:text="Checkout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="right"
+        android:id="@+id/Checkout" />
 </FrameLayout>
