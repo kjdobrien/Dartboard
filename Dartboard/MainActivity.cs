@@ -4,6 +4,7 @@ using Android.OS;
 using Android.Views;
 using Android.Graphics;
 using System;
+using System.IO;
 using System.Linq;
 using System.Collections.Generic;
 
@@ -34,15 +35,28 @@ namespace Dartboard
         {
             base.OnCreate(bundle);
             
+
+
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
 
             List<Player> Players = new List<Player>();
 
-            
-            //var player1 = (Player)Intent.GetParcelableExtra("player1");
-            
-            Players.Add(testPlayer);
+            using (StreamReader sr = new StreamReader(Assets.Open("Checkouts.txt")))
+            {
+                char[] delim = { ':' };
+                string line;
+                while( (line = sr.ReadLine()) != null)
+                    {
+                        string[] words = line.Split();
+                        board.Checkouts.Add(Convert.ToInt32(words[0]), words[1]);
+                    }
+            }
+
+
+                //var player1 = (Player)Intent.GetParcelableExtra("player1");
+
+                Players.Add(testPlayer);
             testPlayer.name = "1";
             testPlayer.turn = true;
             Players.Add(player2);
@@ -133,6 +147,8 @@ namespace Dartboard
             img.DrawingCacheEnabled = false;
             return hotspots.GetPixel(x, y);
         }
+
+        
     }
 }
 
