@@ -27,6 +27,8 @@ namespace Dartboard
         List<Player> Players = new List<Player>();
        
         TextView d1;
+        
+        TextView Checkout;
 
 
 
@@ -47,16 +49,19 @@ namespace Dartboard
                 char[] delim = { ':' };
                 string line;
                 while( (line = sr.ReadLine()) != null)
-                    {
-                        string[] words = line.Split();
-                        board.Checkouts.Add(Convert.ToInt32(words[0]), words[1]);
-                    }
+                {                    
+                    string[] words = line.Split(delim);
+                    int scoreValue;
+                    int.TryParse(words[0], out scoreValue);
+                    string bestCheckout = words[1];
+                    board.Checkouts.Add(scoreValue, bestCheckout); 
+                }
             }
 
 
                 //var player1 = (Player)Intent.GetParcelableExtra("player1");
 
-                Players.Add(testPlayer);
+            Players.Add(testPlayer);
             testPlayer.name = "1";
             testPlayer.turn = true;
             Players.Add(player2);
@@ -72,6 +77,7 @@ namespace Dartboard
             //player1.score = gameScore;
 
             d1 = FindViewById<TextView>(Resource.Id.dart1);
+            Checkout = FindViewById<TextView>(Resource.Id.Checkout);
             //TextView d2 = FindViewById<TextView>(Resource.Id.dart2);
             //TextView d3 = FindViewById<TextView>(Resource.Id.dart3);
 
@@ -124,9 +130,18 @@ namespace Dartboard
 
                     d1.Text = "Player: " + currentPlayer.name + " " + text;
                     Console.WriteLine(touchCount);
-                  
+             
+                    if (currentPlayer.score <= 170)
+                    {
+                        string value;
+                        if (board.Checkouts.TryGetValue(currentPlayer.score, out value))
+                        {
+                            Checkout.Text = value;
+                        }
+                    }
                     break;
             }
+
             if (touchCount == 3)
             {
                 touchCount = 0;
