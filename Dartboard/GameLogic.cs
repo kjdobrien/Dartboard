@@ -29,7 +29,13 @@ namespace Dartboard
 
         public static void ThrowDart(Player player, int dart, int score, int remaining )
         {
-            player.score -= score;
+           
+          
+                player.score -= score;
+            
+            
+         
+         
 
         }
 
@@ -37,6 +43,32 @@ namespace Dartboard
         {
             p1.turn = !p1.turn;
             p2.turn = !p2.turn;
+        }
+
+        public static bool IsCheckout(Player player)
+        {
+            if (player.score <= 170 && player.score % 2 == 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static string GetCheckout(Player player, Board board)
+        {
+           
+            string value;
+            if (board.Checkouts.TryGetValue(player.score, out value))
+            {
+                return value;
+            }
+            else
+            {
+                return "No Checkout";
+            }
         }
 
         public static bool IsWinner(Player p)
@@ -52,6 +84,8 @@ namespace Dartboard
             }
 
         }
+
+        
 
 
     }

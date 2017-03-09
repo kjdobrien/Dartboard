@@ -30,6 +30,8 @@ namespace Dartboard
         
         TextView Checkout;
 
+        Button undo;
+
 
 
 
@@ -124,28 +126,51 @@ namespace Dartboard
                     Color myColor = new Color(touchColor);
                     score = board.ColorScores.FirstOrDefault(k => k.Value == myColor).Key;
                     Console.WriteLine(score);
-                    GameLogic.ThrowDart(currentPlayer, touchCount, score, currentPlayer.score);
-                    
+                    if (score > currentPlayer.score || currentPlayer.score - score == 1)
+                    {
+                        Toast toast = Toast.MakeText(this, "Bust", ToastLength.Short);
+                        toast.SetGravity(GravityFlags.Center, 0, 0);
+                        toast.Show();
+                    }
+                    else
+                    {
+                        GameLogic.ThrowDart(currentPlayer, touchCount, score, currentPlayer.score);
+                    }
                     string text = Convert.ToString(currentPlayer.score);
 
                     d1.Text = "Player: " + currentPlayer.name + " " + text;
                     Console.WriteLine(touchCount);
-             
+
                     if (currentPlayer.score <= 170)
                     {
-                        string value;
-                        if (board.Checkouts.TryGetValue(currentPlayer.score, out value))
-                        {
-                            Checkout.Text = value;
-                        }
+                        Checkout.Text = GameLogic.GetCheckout(currentPlayer, board);
+                    }
+                    else
+                    {
+                        Checkout.Text = " ";
                     }
                     break;
-            }
 
-            if (touchCount == 3)
+                
+            }
+            if (currentPlayer.score > 0)
             {
-                touchCount = 0;
-                GameLogic.SwitchPlayer(testPlayer, player2);
+                if (touchCount == 3)
+                {
+                    touchCount = 0;
+                    GameLogic.SwitchPlayer(testPlayer, player2);
+                    d1.Text = "Player: " + currentPlayer.name + " " + currentPlayer.score;
+                }
+            }
+            else if (GameLogic.IsWinner(currentPlayer))
+            {
+                // restart the game 
+                AlertDialog.Builder alert = new AlertDialog.Builder(this);
+                alert.SetTitle("Player " + currentPlayer.name + " wins!");
+                alert.SetPositiveButton("Play again?", (senderAlert, args) => { /* Start the activity again*/});
+                alert.SetNegativeButton("Back to setup", (senderAlert, args) => {/* Run the setup activity */ });
+                Dialog dialog = alert.Create();
+                dialog.Show();
             }
             return true;
          }
