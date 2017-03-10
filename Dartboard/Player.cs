@@ -32,6 +32,8 @@ namespace Dartboard
         public string name { get; set; }
         public int score { get; set; }
         public bool turn { get; set; }
+        public TextView ScoreBoard;
+        public TextView Checkout;
 
         public List<int> Darts = new List<int>();
         public int d1, d2, d3;

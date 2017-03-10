@@ -27,16 +27,12 @@ namespace Dartboard
             }
         }
 
-        public static void ThrowDart(Player player, int dart, int score, int remaining )
+        public static void ThrowDart(Player player, int dart, int score)
         {
-           
-          
-                player.score -= score;
+            player.score -= score;
+            string scoreBoard = string.Format("Player {0}: {1} Dart: {2}",player.name,  player.score, dart);
+            player.ScoreBoard.Text = scoreBoard;
             
-            
-         
-         
-
         }
 
         public static void SwitchPlayer(Player p1, Player p2)
@@ -57,23 +53,48 @@ namespace Dartboard
             }
         }
 
-        public static string GetCheckout(Player player, Board board)
+        public static void GetCheckout(Player player, Board board, int touchCount)
         {
-           
+
             string value;
-            if (board.Checkouts.TryGetValue(player.score, out value))
+
+            if (touchCount == 0 || touchCount == 3)
             {
-                return value;
+
+                if (board.Checkouts.TryGetValue(player.score, out value))
+                {
+                    
+                    player.Checkout.Text = value;
+
+                }
+                else
+                {                   
+                    player.Checkout.Text = "No Checkout";
+                }
+            }
+            else if (touchCount == 1)
+            {
+                if (board.TwoDartCheckouts.TryGetValue(player.score, out value))
+                {
+                    player.Checkout.Text = value;
+                }
+                else
+                {
+                    player.Checkout.Text = "No Checkout";
+                }
+            }
+            else if (player.score <= 40 && player.score % 2 == 0)
+            {
+                player.Checkout.Text = "D" + (player.score / 2);
             }
             else
             {
-                return "No Checkout";
+                player.Checkout.Text = "No Checkout";
             }
         }
 
         public static bool IsWinner(Player p)
         {
-            //TODO double out logic 
             if (p.score == 0)
             {
                 return true;
@@ -83,6 +104,19 @@ namespace Dartboard
                 return false;
             }
 
+        }
+
+        public static void ShowWinDialog(Context c, Player p)
+        {
+            // restart the game 
+            AlertDialog.Builder alert = new AlertDialog.Builder(c);
+            alert.SetTitle("Player " + p.name + " wins!");
+            // move to next set/leg or start new game 
+            alert.SetPositiveButton("Play again?", (senderAlert, args) => { /* Start the activity again*/});
+            // neutral 
+            alert.SetNegativeButton("Back to setup", (senderAlert, args) => {/* Run the setup activity */ });
+            Dialog dialog = alert.Create();
+            dialog.Show();
         }
 
         

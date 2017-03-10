@@ -22,15 +22,20 @@ namespace Dartboard
         Player testPlayer = new Player();
         Player player2 = new Player();
 
+        // Will collect from oncreate in next stage 
+        //int numSets = 3;
+
 
 
         List<Player> Players = new List<Player>();
        
         TextView d1;
+        TextView p2Score;
         
         TextView Checkout;
+        TextView p2Checkout;
 
-        Button undo;
+        //Button undo;
 
 
 
@@ -60,8 +65,24 @@ namespace Dartboard
                 }
             }
 
+            using (StreamReader sr = new StreamReader(Assets.Open("twoDartCheckouts.txt")))
+            {
+                char[] delim = { ':' };
+                string line;
+                while ((line = sr.ReadLine()) != null)
+                {
+                    string[] words = line.Split(delim);
+                    int scoreValue;
+                    int.TryParse(words[0], out scoreValue);
+                    string bestCheckout = words[1];
+                    board.TwoDartCheckouts.Add(scoreValue, bestCheckout);
+                }
+            }
 
-                //var player1 = (Player)Intent.GetParcelableExtra("player1");
+
+
+
+            //var player1 = (Player)Intent.GetParcelableExtra("player1");
 
             Players.Add(testPlayer);
             testPlayer.name = "1";
@@ -75,13 +96,24 @@ namespace Dartboard
             bool checkOut = Intent.GetBooleanExtra("isCheckOut", true);
             int numSets = Intent.GetIntExtra("numSets", 1);
 
-            int gameScore = Convert.ToInt32(startScore);
-            //player1.score = gameScore;
+            int gameScore = Convert.ToInt32(startScore);   
+            
+            
+            
+            
+                    
 
             d1 = FindViewById<TextView>(Resource.Id.dart1);
             Checkout = FindViewById<TextView>(Resource.Id.Checkout);
-            //TextView d2 = FindViewById<TextView>(Resource.Id.dart2);
-            //TextView d3 = FindViewById<TextView>(Resource.Id.dart3);
+
+            p2Score = FindViewById<TextView>(Resource.Id.dart2);
+            p2Checkout = FindViewById<TextView>(Resource.Id.Checkout2);
+
+            testPlayer.ScoreBoard = d1;
+            player2.ScoreBoard = p2Score;
+
+            testPlayer.Checkout = FindViewById<TextView>(Resource.Id.Checkout);
+            player2.Checkout = FindViewById<TextView>(Resource.Id.Checkout2);
 
 
             //if (Intent.HasExtra("player2"))
@@ -109,9 +141,12 @@ namespace Dartboard
             Player currentPlayer  = GameLogic.WhosTurn(testPlayer, player2);
             if (GameLogic.IsWinner(currentPlayer))
             {
-                d1.Text = currentPlayer.name + " Wins!";
+                GameLogic.ShowWinDialog(this, currentPlayer);
                 return false;
             }
+
+            
+
             var x = (int)e.GetX();
             var y = (int)e.GetY();
             switch (e.Action)
@@ -134,20 +169,20 @@ namespace Dartboard
                     }
                     else
                     {
-                        GameLogic.ThrowDart(currentPlayer, touchCount, score, currentPlayer.score);
+                        GameLogic.ThrowDart(currentPlayer, touchCount, score);
                     }
                     string text = Convert.ToString(currentPlayer.score);
 
-                    d1.Text = "Player: " + currentPlayer.name + " " + text;
+                    
                     Console.WriteLine(touchCount);
 
                     if (currentPlayer.score <= 170)
                     {
-                        Checkout.Text = GameLogic.GetCheckout(currentPlayer, board);
+                        GameLogic.GetCheckout(currentPlayer, board, touchCount);  
                     }
                     else
                     {
-                        Checkout.Text = " ";
+                        currentPlayer.Checkout.Text = " ";
                     }
                     break;
 
@@ -159,18 +194,11 @@ namespace Dartboard
                 {
                     touchCount = 0;
                     GameLogic.SwitchPlayer(testPlayer, player2);
-                    d1.Text = "Player: " + currentPlayer.name + " " + currentPlayer.score;
                 }
             }
             else if (GameLogic.IsWinner(currentPlayer))
             {
-                // restart the game 
-                AlertDialog.Builder alert = new AlertDialog.Builder(this);
-                alert.SetTitle("Player " + currentPlayer.name + " wins!");
-                alert.SetPositiveButton("Play again?", (senderAlert, args) => { /* Start the activity again*/});
-                alert.SetNegativeButton("Back to setup", (senderAlert, args) => {/* Run the setup activity */ });
-                Dialog dialog = alert.Create();
-                dialog.Show();
+                GameLogic.ShowWinDialog(this, currentPlayer);
             }
             return true;
          }

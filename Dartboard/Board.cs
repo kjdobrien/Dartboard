@@ -17,6 +17,7 @@ namespace Dartboard
     {
         public Dictionary<int, Color> ColorScores = new Dictionary<int, Color>();
         public Dictionary<int, string> Checkouts = new Dictionary<int, string>();
+        public Dictionary<int, string> TwoDartCheckouts = new Dictionary<int, string>();
 
 
 

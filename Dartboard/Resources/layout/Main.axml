@@ -17,25 +17,35 @@
         android:scaleType="fitCenter"
         android:src="@drawable/dartboard" />
     <TextView
-        android:text="301"
+        android:text="Player 1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="left"
         android:id="@+id/dart1" />
-<!--<TextView
-        android:text="Dart 2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/dart2" />
-    <TextView
-        android:text="Dart 3"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/dart3" />-->
     <TextView
         android:text="Checkout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="right"
         android:id="@+id/Checkout" />
+    <TextView
+        android:text="Player 2 "
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="left"
+        android:layout_marginTop="20dp"
+        android:id="@+id/dart2" />
+    <TextView
+        android:text="Checkout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="right"
+        android:layout_marginTop="20dp"
+        android:id="@+id/Checkout2" />
+    <Button
+        android:text="Undo"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
+        android:id="@+id/button1"
+        android:layout_gravity="bottom|center_horizontal" />
 </FrameLayout>
