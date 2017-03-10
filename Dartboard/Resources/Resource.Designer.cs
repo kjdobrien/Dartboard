@@ -91,9 +91,6 @@ namespace Dartboard
 			// aapt resource value: 0x7f060000
 			public const int Main = 2131099648;
 			
-			// aapt resource value: 0x7f060007
-			public const int button1 = 2131099655;
-			
 			// aapt resource value: 0x7f06000a
 			public const int checkin = 2131099658;
 			
@@ -141,6 +138,9 @@ namespace Dartboard
 			
 			// aapt resource value: 0x7f06000f
 			public const int twoPlayer = 2131099663;
+			
+			// aapt resource value: 0x7f060007
+			public const int undo = 2131099655;
 			
 			static Id()
 			{

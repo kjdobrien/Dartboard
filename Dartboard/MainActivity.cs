@@ -17,10 +17,13 @@ namespace Dartboard
 
   
         int score;
+        int previousTurn;
+
         Board board = new Board();
         
         Player testPlayer = new Player();
         Player player2 = new Player();
+        Player currentPlayer;
 
         // Will collect from oncreate in next stage 
         //int numSets = 3;
@@ -35,7 +38,7 @@ namespace Dartboard
         TextView Checkout;
         TextView p2Checkout;
 
-        //Button undo;
+        Button undo;
 
 
 
@@ -97,11 +100,6 @@ namespace Dartboard
             int numSets = Intent.GetIntExtra("numSets", 1);
 
             int gameScore = Convert.ToInt32(startScore);   
-            
-            
-            
-            
-                    
 
             d1 = FindViewById<TextView>(Resource.Id.dart1);
             Checkout = FindViewById<TextView>(Resource.Id.Checkout);
@@ -115,6 +113,8 @@ namespace Dartboard
             testPlayer.Checkout = FindViewById<TextView>(Resource.Id.Checkout);
             player2.Checkout = FindViewById<TextView>(Resource.Id.Checkout2);
 
+            undo = (Button)FindViewById(Resource.Id.undo);
+
 
             //if (Intent.HasExtra("player2"))
             //{
@@ -127,6 +127,8 @@ namespace Dartboard
             ImageView iv = (ImageView)FindViewById(Resource.Id.dartboard);
             iv.SetOnTouchListener(this);
 
+            undo.Click += UndoButton;
+
          
 
         }
@@ -138,7 +140,7 @@ namespace Dartboard
         public bool OnTouch(View v, MotionEvent e)
         {
             
-            Player currentPlayer  = GameLogic.WhosTurn(testPlayer, player2);
+            currentPlayer  = GameLogic.WhosTurn(testPlayer, player2);
             if (GameLogic.IsWinner(currentPlayer))
             {
                 GameLogic.ShowWinDialog(this, currentPlayer);
@@ -156,10 +158,12 @@ namespace Dartboard
                     Console.WriteLine("getting x and y");
                     break;
                 case MotionEventActions.Up:
+                    previousTurn = touchCount;
                     touchCount++;
                     int touchColor = getColorHotspot(Resource.Id.dartboardoverlay, x, y);
-                    Color myColor = new Color(touchColor);
+                    Color myColor = new Color(touchColor);                   
                     score = board.ColorScores.FirstOrDefault(k => k.Value == myColor).Key;
+                    undo.Enabled = true;
                     Console.WriteLine(score);
                     if (score > currentPlayer.score || currentPlayer.score - score == 1)
                     {
@@ -192,6 +196,7 @@ namespace Dartboard
             {
                 if (touchCount == 3)
                 {
+                    
                     touchCount = 0;
                     GameLogic.SwitchPlayer(testPlayer, player2);
                 }
@@ -214,6 +219,15 @@ namespace Dartboard
             Bitmap hotspots = Bitmap.CreateBitmap(img.DrawingCache);
             img.DrawingCacheEnabled = false;
             return hotspots.GetPixel(x, y);
+        }
+
+        public void UndoButton(object sender, EventArgs args)
+        {
+            currentPlayer.score += score;
+            touchCount = previousTurn;
+            string scoreBoard = string.Format("Player {0}: {1} Dart: {2}", currentPlayer.name, currentPlayer.score, touchCount);
+            currentPlayer.ScoreBoard.Text = scoreBoard;
+            undo.Enabled = false;
         }
 
         
