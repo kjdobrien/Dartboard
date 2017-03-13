@@ -23,7 +23,13 @@ namespace Dartboard
             }
             else
             {
+
+                p2.ScoreBoard.SetTextColor(Android.Graphics.Color.Red);
+                p1.ScoreBoard.SetTextColor(Android.Graphics.Color.Gainsboro);
+
+
                 return p2;
+
             }
         }
 
@@ -37,9 +43,26 @@ namespace Dartboard
 
         public static void SwitchPlayer(Player p1, Player p2)
         {
+
             p1.turn = !p1.turn;
             p2.turn = !p2.turn;
+
+            if (p1.turn)
+            {
+                p1.ScoreBoard.SetTextColor(Android.Graphics.Color.Red);
+                p2.ScoreBoard.SetTextColor(Android.Graphics.Color.Gainsboro);
+            }
+            else
+            {
+                p1.ScoreBoard.SetTextColor(Android.Graphics.Color.Gainsboro);
+                p2.ScoreBoard.SetTextColor(Android.Graphics.Color.Red);
+            }
+            
+
+
         }
+
+      
 
         public static bool IsCheckout(Player player)
         {
@@ -69,7 +92,7 @@ namespace Dartboard
                 }
                 else
                 {                   
-                    player.Checkout.Text = "No Checkout";
+                    player.Checkout.Text = " ";
                 }
             }
             else if (touchCount == 1)
@@ -80,7 +103,7 @@ namespace Dartboard
                 }
                 else
                 {
-                    player.Checkout.Text = "No Checkout";
+                    player.Checkout.Text = " ";
                 }
             }
             else if (player.score <= 40 && player.score % 2 == 0)
@@ -89,7 +112,7 @@ namespace Dartboard
             }
             else
             {
-                player.Checkout.Text = "No Checkout";
+                player.Checkout.Text = " ";
             }
         }
 
@@ -106,7 +129,7 @@ namespace Dartboard
 
         }
 
-        public static void ShowWinDialog(Context c, Player p)
+        public static void ShowWinDialog(Context c, Player p, int leg)
         {
             // restart the game 
             AlertDialog.Builder alert = new AlertDialog.Builder(c);

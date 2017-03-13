@@ -18,6 +18,8 @@ namespace Dartboard
   
         int score;
         int previousTurn;
+        // default
+        int legs = 3;
 
         Board board = new Board();
         
@@ -104,10 +106,13 @@ namespace Dartboard
             d1 = FindViewById<TextView>(Resource.Id.dart1);
             Checkout = FindViewById<TextView>(Resource.Id.Checkout);
 
+            
+
             p2Score = FindViewById<TextView>(Resource.Id.dart2);
             p2Checkout = FindViewById<TextView>(Resource.Id.Checkout2);
 
             testPlayer.ScoreBoard = d1;
+            testPlayer.ScoreBoard.SetTextColor(Android.Graphics.Color.Red);
             player2.ScoreBoard = p2Score;
 
             testPlayer.Checkout = FindViewById<TextView>(Resource.Id.Checkout);
@@ -141,6 +146,7 @@ namespace Dartboard
         {
             
             currentPlayer  = GameLogic.WhosTurn(testPlayer, player2);
+
             if (GameLogic.IsWinner(currentPlayer))
             {
                 GameLogic.ShowWinDialog(this, currentPlayer);
@@ -199,11 +205,15 @@ namespace Dartboard
                     
                     touchCount = 0;
                     GameLogic.SwitchPlayer(testPlayer, player2);
+
+                    
                 }
             }
             else if (GameLogic.IsWinner(currentPlayer))
             {
-                GameLogic.ShowWinDialog(this, currentPlayer);
+                GameLogic.ShowWinDialog(this, currentPlayer, legs);
+                
+
             }
             return true;
          }
