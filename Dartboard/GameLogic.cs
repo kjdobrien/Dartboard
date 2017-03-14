@@ -129,14 +129,18 @@ namespace Dartboard
 
         }
 
-        public static void ShowWinDialog(Context c, Player p, int leg)
+        public static void ShowWinDialog(Context c, Player p, Intent intent,  int leg)
         {
             // restart the game 
             AlertDialog.Builder alert = new AlertDialog.Builder(c);
             alert.SetTitle("Player " + p.name + " wins!");
             // move to next set/leg or start new game 
-            alert.SetPositiveButton("Play again?", (senderAlert, args) => { /* Start the activity again*/});
+            alert.SetPositiveButton("Move to next leg", (senderAlert, args) => { /* Start the activity again*/});
             // neutral 
+            if (leg == 0)
+            {
+                alert.SetNeutralButton("Start Over", (senderAlert, args) => { c.StartActivity(intent); });
+            }
             alert.SetNegativeButton("Back to setup", (senderAlert, args) => {/* Run the setup activity */ });
             Dialog dialog = alert.Create();
             dialog.Show();

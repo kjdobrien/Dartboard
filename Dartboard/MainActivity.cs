@@ -7,7 +7,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Collections.Generic;
-
+using Android.Content;
 
 namespace Dartboard
 {
@@ -19,7 +19,7 @@ namespace Dartboard
         int score;
         int previousTurn;
         // default
-        int legs = 3;
+        int legs = 0;
 
         Board board = new Board();
         
@@ -41,6 +41,8 @@ namespace Dartboard
         TextView p2Checkout;
 
         Button undo;
+
+        Intent intent;
 
 
 
@@ -120,6 +122,10 @@ namespace Dartboard
 
             undo = (Button)FindViewById(Resource.Id.undo);
 
+            intent = new Intent(this, typeof(MainActivity));
+            intent.SetFlags(ActivityFlags.ClearTop);
+
+
 
             //if (Intent.HasExtra("player2"))
             //{
@@ -149,7 +155,7 @@ namespace Dartboard
 
             if (GameLogic.IsWinner(currentPlayer))
             {
-                GameLogic.ShowWinDialog(this, currentPlayer);
+                GameLogic.ShowWinDialog(this, currentPlayer, intent, legs);
                 return false;
             }
 
@@ -211,7 +217,9 @@ namespace Dartboard
             }
             else if (GameLogic.IsWinner(currentPlayer))
             {
-                GameLogic.ShowWinDialog(this, currentPlayer, legs);
+              
+
+                GameLogic.ShowWinDialog(this, currentPlayer, intent, legs);
                 
 
             }
