@@ -32,7 +32,7 @@ namespace Dartboard
 
 
 
-        List<Player> Players = new List<Player>();
+        List<Player> Players;
        
         TextView d1;
         TextView p2Score;
@@ -56,7 +56,7 @@ namespace Dartboard
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
 
-            List<Player> Players = new List<Player>();
+            Players = new List<Player>();
 
             using (StreamReader sr = new StreamReader(Assets.Open("Checkouts.txt")))
             {
@@ -155,7 +155,7 @@ namespace Dartboard
 
             if (GameLogic.IsWinner(currentPlayer))
             {
-                GameLogic.ShowWinDialog(this, currentPlayer, intent, legs);
+                GameLogic.ShowWinDialog(this, currentPlayer, Players, intent, legs, touchCount);
                 return false;
             }
 
@@ -219,7 +219,7 @@ namespace Dartboard
             {
               
 
-                GameLogic.ShowWinDialog(this, currentPlayer, intent, legs);
+                GameLogic.ShowWinDialog(this, currentPlayer, Players, intent, legs, touchCount);
                 
 
             }

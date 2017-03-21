@@ -129,13 +129,13 @@ namespace Dartboard
 
         }
 
-        public static void ShowWinDialog(Context c, Player p, Intent intent,  int leg)
+        public static void ShowWinDialog(Context c, Player winner, List<Player> players,  Intent intent,  int leg, int touchCount)
         {
             // restart the game 
             AlertDialog.Builder alert = new AlertDialog.Builder(c);
-            alert.SetTitle("Player " + p.name + " wins!");
+            alert.SetTitle("Player " + winner.name + " wins!");
             // move to next set/leg or start new game 
-            alert.SetPositiveButton("Move to next leg", (senderAlert, args) => { /* Start the activity again*/});
+            alert.SetPositiveButton("Move to next leg", (senderAlert, args) => { MoveToNextLeg(leg, players, touchCount); });
             // neutral 
             if (leg == 0)
             {
@@ -144,9 +144,25 @@ namespace Dartboard
             alert.SetNegativeButton("Back to setup", (senderAlert, args) => {/* Run the setup activity */ });
             Dialog dialog = alert.Create();
             dialog.Show();
+           
         }
 
-        
+        public static void MoveToNextLeg(int leg, List<Player> players, int touchCount)
+        {
+            leg++;
+            ResetScores(players[0], 301);
+            ResetScores(players[1], 301);
+            touchCount = 0;
+
+        }
+
+        public static void ResetScores(Player p, int gameScore)
+        {
+            p.score = gameScore;
+            string scoreBoard = string.Format("Player {0}: {1} Dart: 1", p.name, p.score);
+            p.ScoreBoard.Text = scoreBoard;
+
+        }
 
 
     }
