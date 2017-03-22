@@ -137,7 +137,7 @@ namespace Dartboard
             // move to next set/leg or start new game 
             alert.SetPositiveButton("Move to next leg", (senderAlert, args) => { MoveToNextLeg(leg, players, touchCount); });
             // neutral 
-            if (leg == 0)
+            if (leg == 3)
             {
                 alert.SetNeutralButton("Start Over", (senderAlert, args) => { c.StartActivity(intent); });
             }
