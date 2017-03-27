@@ -210,9 +210,11 @@ namespace Dartboard
                 {
                     
                     touchCount = 0;
-                    GameLogic.SwitchPlayer(testPlayer, player2);
-
-                    
+                    if (Players.Count > 1)
+                    {
+                        GameLogic.SwitchPlayer(testPlayer, player2);
+                    }
+                                        
                 }
             }
             else if (GameLogic.IsWinner(currentPlayer))

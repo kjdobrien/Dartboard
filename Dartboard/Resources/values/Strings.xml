@@ -3,6 +3,7 @@
     <string name="Hello">Hello World, Click Me!</string>
     <string name="ApplicationName">Dartboard</string>
     <string name="scorePrompt">Start Score</string>
+    <string name="playerNameHint">Enter a name</string>
 
 
   <string-array name="startScoreArray">
