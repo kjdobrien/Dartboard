@@ -18,6 +18,7 @@ namespace Dartboard
   
         int score;
         int previousTurn;
+
         // default
         int legs = 0;
 
@@ -86,62 +87,48 @@ namespace Dartboard
                 }
             }
 
+            int startScore = Convert.ToInt32(Intent.GetStringExtra("startScore"));
 
-
-
-            //var player1 = (Player)Intent.GetParcelableExtra("player1");
-
+            // Setup Player 1 
             Players.Add(testPlayer);
-            testPlayer.name = "1";
+            testPlayer.name = "1"; // intent.playeronename
             testPlayer.turn = true;
-            Players.Add(player2);
-            player2.name = "2";
-            player2.turn = false;
-
-            string startScore = Intent.GetStringExtra("startScore");
-            bool checkIn = Intent.GetBooleanExtra("isCheckIn", false);
-            bool checkOut = Intent.GetBooleanExtra("isCheckOut", true);
-            int numSets = Intent.GetIntExtra("numSets", 1);
-
-            int gameScore = Convert.ToInt32(startScore);   
-
+            testPlayer.score = startScore;
             d1 = FindViewById<TextView>(Resource.Id.dart1);
             Checkout = FindViewById<TextView>(Resource.Id.Checkout);
-
-            
-
-            p2Score = FindViewById<TextView>(Resource.Id.dart2);
-            p2Checkout = FindViewById<TextView>(Resource.Id.Checkout2);
-
             testPlayer.ScoreBoard = d1;
             testPlayer.ScoreBoard.SetTextColor(Android.Graphics.Color.Red);
-            player2.ScoreBoard = p2Score;
-
             testPlayer.Checkout = FindViewById<TextView>(Resource.Id.Checkout);
-            player2.Checkout = FindViewById<TextView>(Resource.Id.Checkout2);
 
+
+            // Setup Player 2 
+            if (Intent.HasExtra("playerTwoName"))
+            {
+                player2.name = Intent.GetStringExtra("playerTwoName");
+                Players.Add(player2);
+                player2.score = startScore;
+                player2.turn = false;
+                p2Score = FindViewById<TextView>(Resource.Id.dart2);
+                p2Checkout = FindViewById<TextView>(Resource.Id.Checkout2);
+                player2.ScoreBoard = p2Score;
+                player2.Checkout = FindViewById<TextView>(Resource.Id.Checkout2);
+            }
+            
+           
+           
+            
+           
+
+            // Setup Common Game Settings 
+            int legs = Intent.GetIntExtra("numSets", 1);    
             undo = (Button)FindViewById(Resource.Id.undo);
-
             intent = new Intent(this, typeof(MainActivity));
             intent.SetFlags(ActivityFlags.ClearTop);
-
-
-
-            //if (Intent.HasExtra("player2"))
-            //{
-            //    var player2 = (Player)Intent.GetParcelableExtra("player2");
-            //    Players.Add(player2);
-            //    player2.score = gameScore;
-            //}
-
             // Setup the view 
             ImageView iv = (ImageView)FindViewById(Resource.Id.dartboard);
             iv.SetOnTouchListener(this);
 
             undo.Click += UndoButton;
-
-         
-
         }
 
 
@@ -151,6 +138,7 @@ namespace Dartboard
         public bool OnTouch(View v, MotionEvent e)
         {
             
+
             currentPlayer  = GameLogic.WhosTurn(testPlayer, player2);
 
             if (GameLogic.IsWinner(currentPlayer))

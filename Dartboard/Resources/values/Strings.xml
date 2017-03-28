@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    
     <string name="Hello">Hello World, Click Me!</string>
     <string name="ApplicationName">Dartboard</string>
     <string name="scorePrompt">Start Score</string>
+    <string name="legsPrompt">Number of Legs</string>
     <string name="playerNameHint">Enter a name</string>
 
 
@@ -12,5 +14,13 @@
     <item>301</item>
     <item>401</item>
     <item>501</item>
+  </string-array>
+
+  <string-array name="legsArray">
+    <item>1</item>
+    <item>2</item>
+    <item>3</item>
+    <item>4</item>
+    <item>5</item>
   </string-array>
 </resources>
