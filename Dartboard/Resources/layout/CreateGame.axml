@@ -10,12 +10,12 @@
         android:minHeight="25px"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/listView1" />
+        android:id="@+id/playerNames" />
     <Button
         android:text="Add Player"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/button1" />
+        android:id="@+id/addPlayer" />
     <TextView
         android:text="Start Score"
         android:textAppearance="?android:attr/textAppearanceMedium"
@@ -40,4 +40,9 @@
         android:layout_height="wrap_content"
         android:entries="@array/legsArray"
         android:prompt="@string/legsPrompt" />
+    <Button
+        android:text="Start Game"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/startGame" />
 </LinearLayout>

@@ -11,7 +11,7 @@ using Android.Content;
 
 namespace Dartboard
 {
-    [Activity(Label = "Dartboard", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity(Label = "Dartboard", MainLauncher = false, Icon = "@drawable/dartboard")]
     public class MainActivity : Activity, View.IOnTouchListener
     {
 

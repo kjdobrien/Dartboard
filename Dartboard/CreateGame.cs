@@ -12,14 +12,78 @@ using Android.Widget;
 
 namespace Dartboard
 {
-    [Activity(Label = "CreateGame")]
+    [Activity(Label = "CreateGame", MainLauncher = true)]
     public class CreateGame : Activity
     {
+        int startingScore;
+        int numLegs;
+        EditText nameEditText;
+        List<string> items;
+        ArrayAdapter<string> nameAdapter;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+            SetContentView(Resource.Layout.CreateGame);
 
-            // Create your application here
+            
+           
+
+            // Initialize listView
+            ListView PlayerNames = FindViewById<ListView>(Resource.Id.playerNames);
+            items = new List<string> { };
+            nameAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, items);
+            PlayerNames.Adapter = nameAdapter;
+
+            // Get Player Name
+            Button AddPlayer = FindViewById<Button>(Resource.Id.addPlayer);
+            AddPlayer.Click += delegate 
+            {
+                AlertDialog.Builder addName = new AlertDialog.Builder(this);
+                addName.SetView(Resource.Layout.NamePlayer);
+                addName.SetPositiveButton("Enter", HandlePositiveButtonClick);
+                Dialog nameDialog = addName.Create();
+                nameDialog.Show();
+
+            };
+
+            
+            
+            // Get Start Score
+            Spinner selectStartScore = FindViewById<Spinner>(Resource.Id.startScoreSpinner);
+            selectStartScore.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs>(spinner_ItemSelected);
+            var adapter = ArrayAdapter.CreateFromResource(this, Resource.Array.startScoreArray, Android.Resource.Layout.SimpleSpinnerDropDownItem);
+            adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
+            selectStartScore.Adapter = adapter;
+
+            // Get Number of legs
+            Spinner legSpinner = FindViewById<Spinner>(Resource.Id.legsSpinner);
+            legSpinner.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs>(spinner_ItemSelected);
+            var legAdapter = ArrayAdapter.CreateFromResource(this, Resource.Array.legsArray, Android.Resource.Layout.SimpleSpinnerDropDownItem);   
+            legAdapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
+            legSpinner.Adapter = legAdapter;
+
+
+            
+        }
+
+        private void spinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        {
+            Spinner spinner = (Spinner)sender;
+            string startScore =  Convert.ToString(spinner.GetItemAtPosition(e.Position));
+            startingScore = Convert.ToInt32(startScore);
+
+        }
+
+        private void HandlePositiveButtonClick(object sender, DialogClickEventArgs e)
+        {
+            var dialog = (AlertDialog)sender;
+            //SetContentView(Resource.Layout.NamePlayer);
+            nameEditText = (EditText)dialog.FindViewById(Resource.Id.playerName);
+            string name = nameEditText.Text;
+            items.Add(name);
+            nameAdapter.Add(name);
+            nameAdapter.NotifyDataSetChanged();
         }
     }
 }
