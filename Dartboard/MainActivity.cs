@@ -28,10 +28,7 @@ namespace Dartboard
         Player player2 = new Player();
         Player currentPlayer;
 
-        // Will collect from oncreate in next stage 
-        //int numSets = 3;
-
-
+        int startScore;
 
         List<Player> Players;
        
@@ -44,6 +41,7 @@ namespace Dartboard
         Button undo;
 
         Intent intent;
+
 
 
 
@@ -87,11 +85,16 @@ namespace Dartboard
                 }
             }
 
-            int startScore = Convert.ToInt32(Intent.GetStringExtra("startScore"));
+            startScore = Intent.GetIntExtra("startingScore", 101);
+            legs = Intent.GetIntExtra("numLegs", 1);
+
+            //List<string> playerNames = Intent.GetStringArrayListExtra("playerNames") as List<string>;
+
+            string p1name = Intent.GetStringExtra("p1name");
 
             // Setup Player 1 
             Players.Add(testPlayer);
-            testPlayer.name = "1"; // intent.playeronename
+            testPlayer.name = p1name;
             testPlayer.turn = true;
             testPlayer.score = startScore;
             d1 = FindViewById<TextView>(Resource.Id.dart1);
@@ -102,9 +105,10 @@ namespace Dartboard
 
 
             // Setup Player 2 
-            if (Intent.HasExtra("playerTwoName"))
+            if (Intent.HasExtra("p2name"))
             {
-                player2.name = Intent.GetStringExtra("playerTwoName");
+                string p2name = Intent.GetStringExtra("p2name");
+                player2.name = p2name;
                 Players.Add(player2);
                 player2.score = startScore;
                 player2.turn = false;
@@ -119,8 +123,9 @@ namespace Dartboard
             
            
 
-            // Setup Common Game Settings 
-            int legs = Intent.GetIntExtra("numSets", 1);    
+            
+            
+               
             undo = (Button)FindViewById(Resource.Id.undo);
             intent = new Intent(this, typeof(MainActivity));
             intent.SetFlags(ActivityFlags.ClearTop);
@@ -143,7 +148,7 @@ namespace Dartboard
 
             if (GameLogic.IsWinner(currentPlayer))
             {
-                GameLogic.ShowWinDialog(this, currentPlayer, Players, intent, legs, touchCount);
+                GameLogic.ShowWinDialog(this, currentPlayer, Players, intent, legs, touchCount, startScore);
                 return false;
             }
 
@@ -209,7 +214,7 @@ namespace Dartboard
             {
               
 
-                GameLogic.ShowWinDialog(this, currentPlayer, Players, intent, legs, touchCount);
+                GameLogic.ShowWinDialog(this, currentPlayer, Players, intent, legs, touchCount, startScore);
                 
 
             }

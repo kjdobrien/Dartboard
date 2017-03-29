@@ -20,30 +20,41 @@ namespace Dartboard
         EditText nameEditText;
         List<string> items;
         ArrayAdapter<string> nameAdapter;
+        ListView PlayerNames;
+        Button StartGame;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.CreateGame);
 
-            
-           
+            // Start the Game button
+            StartGame = FindViewById<Button>(Resource.Id.startGame);
+            StartGame.Enabled = false;
+
 
             // Initialize listView
-            ListView PlayerNames = FindViewById<ListView>(Resource.Id.playerNames);
+            PlayerNames = FindViewById<ListView>(Resource.Id.playerNames);
             items = new List<string> { };
             nameAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, items);
             PlayerNames.Adapter = nameAdapter;
 
             // Get Player Name
             Button AddPlayer = FindViewById<Button>(Resource.Id.addPlayer);
+            
+           
             AddPlayer.Click += delegate 
             {
                 AlertDialog.Builder addName = new AlertDialog.Builder(this);
                 addName.SetView(Resource.Layout.NamePlayer);
                 addName.SetPositiveButton("Enter", HandlePositiveButtonClick);
                 Dialog nameDialog = addName.Create();
-                nameDialog.Show();
+                nameDialog.Show();                                                    
+                if (PlayerNames.Count > 1)
+                {
+                    AddPlayer.Enabled = false;
+                    
+                }
 
             };
 
@@ -58,10 +69,35 @@ namespace Dartboard
 
             // Get Number of legs
             Spinner legSpinner = FindViewById<Spinner>(Resource.Id.legsSpinner);
-            legSpinner.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs>(spinner_ItemSelected);
+            legSpinner.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs>(legSpinner_ItemSelected);
             var legAdapter = ArrayAdapter.CreateFromResource(this, Resource.Array.legsArray, Android.Resource.Layout.SimpleSpinnerDropDownItem);   
             legAdapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
             legSpinner.Adapter = legAdapter;
+
+           
+
+            StartGame.Click += delegate 
+            {
+
+                Console.WriteLine(startingScore);
+                Console.WriteLine(numLegs);
+
+
+                string p1name = items[0];              
+                Intent intent = new Intent(this, typeof(MainActivity));
+                intent.PutStringArrayListExtra("playerNames", items);
+                intent.PutExtra("p1name", p1name);
+                intent.PutExtra("startingScore", startingScore);
+                intent.PutExtra("numLegs", numLegs);
+                if (items.Count > 1)
+                {
+                    string p2name = items[1];
+                    intent.PutExtra("p2name", p2name);
+                }
+                
+                StartActivity(intent); 
+                
+            };
 
 
             
@@ -75,15 +111,27 @@ namespace Dartboard
 
         }
 
+        private void legSpinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        {
+            Spinner spinner = (Spinner)sender;
+            string SnumLegs = Convert.ToString(spinner.GetItemAtPosition(e.Position));
+            numLegs = Convert.ToInt32(SnumLegs);
+
+        }
+
         private void HandlePositiveButtonClick(object sender, DialogClickEventArgs e)
         {
             var dialog = (AlertDialog)sender;
-            //SetContentView(Resource.Layout.NamePlayer);
             nameEditText = (EditText)dialog.FindViewById(Resource.Id.playerName);
             string name = nameEditText.Text;
-            items.Add(name);
+            items.Add(name);         
             nameAdapter.Add(name);
-            nameAdapter.NotifyDataSetChanged();
+            RunOnUiThread(() =>
+            { 
+                nameAdapter.NotifyDataSetChanged();
+            });
+            StartGame.Enabled = true;
+
         }
     }
 }
