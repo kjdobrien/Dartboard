@@ -22,6 +22,7 @@ namespace Dartboard
         ArrayAdapter<string> nameAdapter;
         ListView PlayerNames;
         Button StartGame;
+        Button AddPlayer;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -40,7 +41,7 @@ namespace Dartboard
             PlayerNames.Adapter = nameAdapter;
 
             // Get Player Name
-            Button AddPlayer = FindViewById<Button>(Resource.Id.addPlayer);
+            AddPlayer = FindViewById<Button>(Resource.Id.addPlayer);
             
            
             AddPlayer.Click += delegate 
@@ -50,11 +51,7 @@ namespace Dartboard
                 addName.SetPositiveButton("Enter", HandlePositiveButtonClick);
                 Dialog nameDialog = addName.Create();
                 nameDialog.Show();                                                    
-                if (PlayerNames.Count > 1)
-                {
-                    AddPlayer.Enabled = false;
-                    
-                }
+              
 
             };
 
@@ -130,6 +127,11 @@ namespace Dartboard
             { 
                 nameAdapter.NotifyDataSetChanged();
             });
+            if (PlayerNames.Count == 2)
+            {
+                AddPlayer.Enabled = false;
+
+            }
             StartGame.Enabled = true;
 
         }

@@ -98,6 +98,7 @@ namespace Dartboard
             testPlayer.turn = true;
             testPlayer.score = startScore;
             d1 = FindViewById<TextView>(Resource.Id.dart1);
+            d1.Text = p1name;
             Checkout = FindViewById<TextView>(Resource.Id.Checkout);
             testPlayer.ScoreBoard = d1;
             testPlayer.ScoreBoard.SetTextColor(Android.Graphics.Color.Red);
@@ -113,6 +114,7 @@ namespace Dartboard
                 player2.score = startScore;
                 player2.turn = false;
                 p2Score = FindViewById<TextView>(Resource.Id.dart2);
+                p2Score.Text = p2name;
                 p2Checkout = FindViewById<TextView>(Resource.Id.Checkout2);
                 player2.ScoreBoard = p2Score;
                 player2.Checkout = FindViewById<TextView>(Resource.Id.Checkout2);
