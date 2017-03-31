@@ -129,6 +129,7 @@ namespace Dartboard
             
                
             undo = (Button)FindViewById(Resource.Id.undo);
+            undo.Enabled = false;
             intent = new Intent(this, typeof(MainActivity));
             intent.SetFlags(ActivityFlags.ClearTop);
             // Setup the view 
@@ -181,6 +182,7 @@ namespace Dartboard
                     else
                     {
                         GameLogic.ThrowDart(currentPlayer, touchCount, score);
+                        
                     }
                     string text = Convert.ToString(currentPlayer.score);
 

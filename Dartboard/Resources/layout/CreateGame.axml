@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/DartsAppStyle"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:minWidth="25px"
     android:minHeight="25px">
     <ListView
+        style="@style/DartsAppStyle"
         android:minWidth="25px"
         android:minHeight="25px"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/playerNames" />
     <Button
+        style="@style/buttonStyle"
         android:text="Add Player"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -41,6 +44,7 @@
         android:entries="@array/legsArray"
         android:prompt="@string/legsPrompt" />
     <Button
+        style="@style/buttonStyle"
         android:text="Start Game"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

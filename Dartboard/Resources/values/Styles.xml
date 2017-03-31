@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+  
+  <color name="background">#413C58</color>
+  <color name="white">#FFFFFF</color>
+  <color name="red">#FF0000</color>
+  <color name="lightBlue">#8FB8ED</color>
+  
+    <style name="DartsAppStyle" parent="@android:style/Theme.Light">
+    
+      <item name="android:background">@color/background</item>
+      <item name="android:textColor">@color/white</item>
+      
+      
+    
+  </style>
+
+  <style name="buttonStyle">
+    <item name="android:background">@color/lightBlue</item>
+  </style>
+</resources>
