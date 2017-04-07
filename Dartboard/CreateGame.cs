@@ -12,7 +12,7 @@ using Android.Widget;
 
 namespace Dartboard
 {
-    [Activity(Label = "CreateGame", MainLauncher = true)]
+    [Activity(Label = "CreateGame", MainLauncher = true, Theme="@style/DartsAppStyle")]
     public class CreateGame : Activity
     {
         int startingScore;
@@ -46,11 +46,14 @@ namespace Dartboard
            
             AddPlayer.Click += delegate 
             {
-                AlertDialog.Builder addName = new AlertDialog.Builder(this);
-                addName.SetView(Resource.Layout.NamePlayer);
+                //AlertDialog.Builder 
+                var addName = new Android.Support.V7.App.AlertDialog.Builder(this);
+                addName.SetView(Resource.Layout.NamePlayer);               
                 addName.SetPositiveButton("Enter", HandlePositiveButtonClick);
+                
                 Dialog nameDialog = addName.Create();
-                nameDialog.Show();                                                    
+                nameDialog.Show();
+                                                                 
               
 
             };
@@ -118,7 +121,7 @@ namespace Dartboard
 
         private void HandlePositiveButtonClick(object sender, DialogClickEventArgs e)
         {
-            var dialog = (AlertDialog)sender;
+            var dialog = (Android.Support.V7.App.AlertDialog)sender;
             nameEditText = (EditText)dialog.FindViewById(Resource.Id.playerName);
             string name = nameEditText.Text;
             items.Add(name);         

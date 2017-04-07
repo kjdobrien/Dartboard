@@ -132,7 +132,7 @@ namespace Dartboard
         public static void ShowWinDialog(Context c, Player winner, List<Player> players,  Intent intent,  int leg, int touchCount, int startScore)
         {
             // restart the game 
-            AlertDialog.Builder alert = new AlertDialog.Builder(c);
+            var alert = new Android.Support.V7.App.AlertDialog.Builder(c);
             alert.SetTitle("Player " + winner.name + " wins!");
             // move to next set/leg or start new game 
             alert.SetPositiveButton("Move to next leg", (senderAlert, args) => { MoveToNextLeg(leg, players, touchCount, startScore); });
@@ -142,6 +142,7 @@ namespace Dartboard
                 alert.SetNeutralButton("Start Over", (senderAlert, args) => { c.StartActivity(intent); });
             }
             alert.SetNegativeButton("Back to setup", (senderAlert, args) => { c.StartActivity(typeof(CreateGame)); });
+
             Dialog dialog = alert.Create();
             dialog.Show();
            

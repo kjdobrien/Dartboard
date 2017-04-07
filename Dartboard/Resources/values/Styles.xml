@@ -6,16 +6,12 @@
   <color name="red">#FF0000</color>
   <color name="lightBlue">#8FB8ED</color>
   
-    <style name="DartsAppStyle" parent="@android:style/Theme.Light">
+    <style name="DartsAppStyle" parent="Theme.AppCompat.Light">
     
-      <item name="android:background">@color/background</item>
-      <item name="android:textColor">@color/white</item>
-      
-      
-    
+      <!--<item name="android:background">@color/background</item>-->
+      <!--<item name="android:textColor">@color/white</item>-->
+       
   </style>
 
-  <style name="buttonStyle">
-    <item name="android:background">@color/lightBlue</item>
-  </style>
+
 </resources>
