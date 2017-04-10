@@ -7,9 +7,6 @@
   <color name="lightBlue">#8FB8ED</color>
   
     <style name="DartsAppStyle" parent="Theme.AppCompat.Light">
-    
-      <!--<item name="android:background">@color/background</item>-->
-      <!--<item name="android:textColor">@color/white</item>-->
        
   </style>
 

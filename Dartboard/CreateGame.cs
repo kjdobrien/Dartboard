@@ -12,7 +12,7 @@ using Android.Widget;
 
 namespace Dartboard
 {
-    [Activity(Label = "CreateGame", MainLauncher = true, Theme="@style/DartsAppStyle")]
+    [Activity(Label = "CreateGame", MainLauncher = true, Icon ="@drawable/icon-dartboard", Theme="@style/DartsAppStyle")]
     public class CreateGame : Activity
     {
         int startingScore;
