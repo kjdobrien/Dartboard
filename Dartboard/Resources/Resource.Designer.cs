@@ -1655,40 +1655,43 @@ namespace Dartboard
 			public const int Icon = 2130837589;
 			
 			// aapt resource value: 0x7f020056
-			public const int notification_action_background = 2130837590;
+			public const int iconDartboard = 2130837590;
 			
 			// aapt resource value: 0x7f020057
-			public const int notification_bg = 2130837591;
+			public const int notification_action_background = 2130837591;
 			
 			// aapt resource value: 0x7f020058
-			public const int notification_bg_low = 2130837592;
+			public const int notification_bg = 2130837592;
 			
 			// aapt resource value: 0x7f020059
-			public const int notification_bg_low_normal = 2130837593;
+			public const int notification_bg_low = 2130837593;
 			
 			// aapt resource value: 0x7f02005a
-			public const int notification_bg_low_pressed = 2130837594;
+			public const int notification_bg_low_normal = 2130837594;
 			
 			// aapt resource value: 0x7f02005b
-			public const int notification_bg_normal = 2130837595;
+			public const int notification_bg_low_pressed = 2130837595;
 			
 			// aapt resource value: 0x7f02005c
-			public const int notification_bg_normal_pressed = 2130837596;
+			public const int notification_bg_normal = 2130837596;
 			
 			// aapt resource value: 0x7f02005d
-			public const int notification_icon_background = 2130837597;
-			
-			// aapt resource value: 0x7f020060
-			public const int notification_template_icon_bg = 2130837600;
-			
-			// aapt resource value: 0x7f020061
-			public const int notification_template_icon_low_bg = 2130837601;
+			public const int notification_bg_normal_pressed = 2130837597;
 			
 			// aapt resource value: 0x7f02005e
-			public const int notification_tile_bg = 2130837598;
+			public const int notification_icon_background = 2130837598;
+			
+			// aapt resource value: 0x7f020061
+			public const int notification_template_icon_bg = 2130837601;
+			
+			// aapt resource value: 0x7f020062
+			public const int notification_template_icon_low_bg = 2130837602;
 			
 			// aapt resource value: 0x7f02005f
-			public const int notify_panel_notification_icon_bg = 2130837599;
+			public const int notification_tile_bg = 2130837599;
+			
+			// aapt resource value: 0x7f020060
+			public const int notify_panel_notification_icon_bg = 2130837600;
 			
 			static Drawable()
 			{

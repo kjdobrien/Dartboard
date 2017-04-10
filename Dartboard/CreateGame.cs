@@ -12,7 +12,7 @@ using Android.Widget;
 
 namespace Dartboard
 {
-    [Activity(Label = "CreateGame", MainLauncher = true, Icon ="@drawable/icon-dartboard", Theme="@style/DartsAppStyle")]
+    [Activity(Label = "CreateGame", MainLauncher = true, Icon ="@drawable/iconDartboard", Theme="@style/DartsAppStyle")]
     public class CreateGame : Activity
     {
         int startingScore;
@@ -23,6 +23,7 @@ namespace Dartboard
         ListView PlayerNames;
         Button StartGame;
         Button AddPlayer;
+        ImageView icon;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -33,6 +34,7 @@ namespace Dartboard
             StartGame = FindViewById<Button>(Resource.Id.startGame);
             StartGame.Enabled = false;
 
+            icon = FindViewById<ImageView>(Resource.Id.icon);
 
             // Initialize listView
             PlayerNames = FindViewById<ListView>(Resource.Id.playerNames);

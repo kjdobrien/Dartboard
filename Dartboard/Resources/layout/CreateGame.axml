@@ -6,11 +6,13 @@
     android:layout_height="match_parent"
     android:minWidth="25px"
     android:minHeight="25px">
-  <ImageView
-      android:id="@+id/icon"
-      android:layout_width="100dp"
-      android:layout_height="100dp"
-      android:src="@drawable/icon-dartboard" />
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:paddingTop="10dp"
+        android:layout_gravity="center"
+        android:src="@drawable/iconDartboard" />
     <ListView
         style="@style/DartsAppStyle"
         android:minWidth="25px"
