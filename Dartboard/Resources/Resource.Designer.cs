@@ -1646,52 +1646,58 @@ namespace Dartboard
 			public const int abc_vector_test = 2130837586;
 			
 			// aapt resource value: 0x7f020053
-			public const int dartboard = 2130837587;
+			public const int appIcon = 2130837587;
 			
 			// aapt resource value: 0x7f020054
-			public const int dartboardoverlay = 2130837588;
+			public const int appIconSmallBW = 2130837588;
 			
 			// aapt resource value: 0x7f020055
-			public const int Icon = 2130837589;
+			public const int dartboard = 2130837589;
 			
 			// aapt resource value: 0x7f020056
-			public const int iconDartboard = 2130837590;
+			public const int dartboardoverlay = 2130837590;
 			
 			// aapt resource value: 0x7f020057
-			public const int notification_action_background = 2130837591;
+			public const int Icon = 2130837591;
 			
 			// aapt resource value: 0x7f020058
-			public const int notification_bg = 2130837592;
+			public const int iconDartboard = 2130837592;
 			
 			// aapt resource value: 0x7f020059
-			public const int notification_bg_low = 2130837593;
+			public const int notification_action_background = 2130837593;
 			
 			// aapt resource value: 0x7f02005a
-			public const int notification_bg_low_normal = 2130837594;
+			public const int notification_bg = 2130837594;
 			
 			// aapt resource value: 0x7f02005b
-			public const int notification_bg_low_pressed = 2130837595;
+			public const int notification_bg_low = 2130837595;
 			
 			// aapt resource value: 0x7f02005c
-			public const int notification_bg_normal = 2130837596;
+			public const int notification_bg_low_normal = 2130837596;
 			
 			// aapt resource value: 0x7f02005d
-			public const int notification_bg_normal_pressed = 2130837597;
+			public const int notification_bg_low_pressed = 2130837597;
 			
 			// aapt resource value: 0x7f02005e
-			public const int notification_icon_background = 2130837598;
-			
-			// aapt resource value: 0x7f020061
-			public const int notification_template_icon_bg = 2130837601;
-			
-			// aapt resource value: 0x7f020062
-			public const int notification_template_icon_low_bg = 2130837602;
+			public const int notification_bg_normal = 2130837598;
 			
 			// aapt resource value: 0x7f02005f
-			public const int notification_tile_bg = 2130837599;
+			public const int notification_bg_normal_pressed = 2130837599;
 			
 			// aapt resource value: 0x7f020060
-			public const int notify_panel_notification_icon_bg = 2130837600;
+			public const int notification_icon_background = 2130837600;
+			
+			// aapt resource value: 0x7f020063
+			public const int notification_template_icon_bg = 2130837603;
+			
+			// aapt resource value: 0x7f020064
+			public const int notification_template_icon_low_bg = 2130837604;
+			
+			// aapt resource value: 0x7f020061
+			public const int notification_tile_bg = 2130837601;
+			
+			// aapt resource value: 0x7f020062
+			public const int notify_panel_notification_icon_bg = 2130837602;
 			
 			static Drawable()
 			{
@@ -2279,11 +2285,8 @@ namespace Dartboard
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f050022
-			public const int ApplicationName = 2131034146;
-			
 			// aapt resource value: 0x7f050021
-			public const int Hello = 2131034145;
+			public const int ApplicationName = 2131034145;
 			
 			// aapt resource value: 0x7f050000
 			public const int abc_action_bar_home_description = 2131034112;
@@ -2378,14 +2381,14 @@ namespace Dartboard
 			// aapt resource value: 0x7f050012
 			public const int abc_toolbar_collapse_description = 2131034130;
 			
-			// aapt resource value: 0x7f050024
-			public const int legsPrompt = 2131034148;
-			
-			// aapt resource value: 0x7f050025
-			public const int playerNameHint = 2131034149;
-			
 			// aapt resource value: 0x7f050023
-			public const int scorePrompt = 2131034147;
+			public const int legsPrompt = 2131034147;
+			
+			// aapt resource value: 0x7f050024
+			public const int playerNameHint = 2131034148;
+			
+			// aapt resource value: 0x7f050022
+			public const int scorePrompt = 2131034146;
 			
 			// aapt resource value: 0x7f050013
 			public const int search_menu_title = 2131034131;

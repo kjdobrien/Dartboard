@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     
-    <string name="Hello">Hello World, Click Me!</string>
-    <string name="ApplicationName">Dartboard</string>
+    <string name="ApplicationName">Touch Dartboard</string>
     <string name="scorePrompt">Start Score</string>
     <string name="legsPrompt">Number of Legs</string>
     <string name="playerNameHint">Enter a name</string>
@@ -10,10 +9,15 @@
 
   <string-array name="startScoreArray">
     <item>101</item>
+    <item>170</item>
     <item>201</item>
     <item>301</item>
     <item>401</item>
-    <item>501</item>
+    <item>601</item>
+    <item>701</item>
+    <item>801</item>
+    <item>901</item>
+    <item>1001</item>
   </string-array>
 
   <string-array name="legsArray">
