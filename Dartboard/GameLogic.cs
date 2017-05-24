@@ -118,6 +118,7 @@ namespace Dartboard
 
         public static bool IsWinner(Player p)
         {
+           
             if (p.score == 0)
             {
                 return true;
@@ -129,20 +130,25 @@ namespace Dartboard
 
         }
 
-        public static void ShowWinDialog(Context c, Player winner, List<Player> players,  Intent intent,  int leg, int touchCount, int startScore)
+        public static void ShowWinDialog(Context c, Player winner, List<Player> players,  Intent intent,  int leg, int touchCount, int startScore, int numLegs)
         {
             // restart the game 
             var alert = new Android.Support.V7.App.AlertDialog.Builder(c);
-            alert.SetTitle("Player " + winner.name + " wins!");
-            // move to next set/leg or start new game 
-            alert.SetPositiveButton("Move to next leg", (senderAlert, args) => { MoveToNextLeg(leg, players, touchCount, startScore); });
-            // neutral 
-            if (leg == 0)
+            if (leg == 0 && winner.legsWon >= 2 / (numLegs + 1))
             {
+                alert.SetTitle("Player " + winner.name + " wins the match!");
                 alert.SetNeutralButton("Start Over", (senderAlert, args) => { c.StartActivity(intent); });
             }
-            alert.SetNegativeButton("Back to setup", (senderAlert, args) => { c.StartActivity(typeof(CreateGame)); });
+            else
+            {
+                alert.SetTitle("Player " + winner.name + " wins the leg!");
+                // move to next set/leg or start new game 
+                alert.SetPositiveButton("Move to next leg", (senderAlert, args) => { MoveToNextLeg(leg, players, touchCount, startScore); });
+                // neutral 
 
+                
+            }
+            alert.SetNegativeButton("Back to setup", (senderAlert, args) => { c.StartActivity(typeof(CreateGame)); });
             Dialog dialog = alert.Create();
             dialog.Show();
            

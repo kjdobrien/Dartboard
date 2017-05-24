@@ -32,6 +32,7 @@ namespace Dartboard
         public string name { get; set; }
         public int score { get; set; }
         public bool turn { get; set; }
+        public int legsWon { get; set; }
         public TextView ScoreBoard;
         public TextView Checkout;
 

@@ -21,7 +21,7 @@ namespace Dartboard
 
         // default
         int legs = 0;
-
+        int numLegs;
         Board board = new Board();
         
         Player testPlayer = new Player();
@@ -87,6 +87,7 @@ namespace Dartboard
 
             startScore = Intent.GetIntExtra("startingScore", 101);
             legs = Intent.GetIntExtra("numLegs", 1);
+            numLegs = Intent.GetIntExtra("numLegs", 1);
 
             //List<string> playerNames = Intent.GetStringArrayListExtra("playerNames") as List<string>;
 
@@ -121,12 +122,7 @@ namespace Dartboard
             }
             
            
-           
-            
-           
-
-            
-            
+                                                         
                
             undo = (Button)FindViewById(Resource.Id.undo);
             undo.Enabled = false;
@@ -151,7 +147,8 @@ namespace Dartboard
 
             if (GameLogic.IsWinner(currentPlayer))
             {
-                GameLogic.ShowWinDialog(this, currentPlayer, Players, intent, legs, touchCount, startScore);
+                GameLogic.ShowWinDialog(this, currentPlayer, Players, intent, legs, touchCount, startScore, numLegs);
+                
                 return false;
             }
 
@@ -173,6 +170,7 @@ namespace Dartboard
                     score = board.ColorScores.FirstOrDefault(k => k.Value == myColor).Key;
                     undo.Enabled = true;
                     Console.WriteLine(score);
+                    // Score checking 
                     if (score > currentPlayer.score || currentPlayer.score - score == 1)
                     {
                         Toast toast = Toast.MakeText(this, "Bust", ToastLength.Short);
@@ -201,6 +199,7 @@ namespace Dartboard
 
                 
             }
+
             if (currentPlayer.score > 0)
             {
                 if (touchCount == 3)
@@ -216,9 +215,10 @@ namespace Dartboard
             }
             else if (GameLogic.IsWinner(currentPlayer))
             {
-              
 
-                GameLogic.ShowWinDialog(this, currentPlayer, Players, intent, legs, touchCount, startScore);
+                touchCount = 0;
+                currentPlayer.legsWon++;
+                GameLogic.ShowWinDialog(this, currentPlayer, Players, intent, legs, touchCount, startScore, numLegs);
                 
 
             }
