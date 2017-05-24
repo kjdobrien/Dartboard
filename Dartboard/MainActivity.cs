@@ -43,7 +43,7 @@ namespace Dartboard
         Intent intent;
 
 
-
+       
 
 
         protected override void OnCreate(Bundle bundle)
@@ -98,7 +98,7 @@ namespace Dartboard
             testPlayer.turn = true;
             testPlayer.score = startScore;
             d1 = FindViewById<TextView>(Resource.Id.dart1);
-            d1.Text = p1name;
+            d1.Text = p1name;           
             Checkout = FindViewById<TextView>(Resource.Id.Checkout);
             testPlayer.ScoreBoard = d1;
             testPlayer.ScoreBoard.SetTextColor(Android.Graphics.Color.Red);

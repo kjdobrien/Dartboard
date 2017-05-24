@@ -36,7 +36,7 @@ namespace Dartboard
         public static void ThrowDart(Player player, int dart, int score)
         {
             player.score -= score;
-            string scoreBoard = string.Format("Player {0}: {1} Dart: {2}",player.name,  player.score, dart);
+            string scoreBoard = string.Format("{0}: {1} Dart: {2}",player.name,  player.score, dart);
             player.ScoreBoard.Text = scoreBoard;
             
         }

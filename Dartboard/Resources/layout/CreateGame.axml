@@ -8,11 +8,21 @@
     android:minHeight="25px">
     <ImageView
         android:id="@+id/icon"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="175dp"
+        android:layout_height="140dp"
         android:paddingTop="10dp"
         android:layout_gravity="center"
-        android:src="@drawable/iconDartboard" />
+        android:src="@drawable/one80dartsBrand" />
+    <TextView
+        android:text="180 Darts"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fontFamily="sans-serif"
+        android:id="@+id/brand"
+        android:gravity="center"
+        android:textStyle="bold" />
     <ListView
         style="@style/DartsAppStyle"
         android:minWidth="25px"
