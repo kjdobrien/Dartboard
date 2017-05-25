@@ -49,6 +49,7 @@ namespace Dartboard
             p1.turn = !p1.turn;
             p2.turn = !p2.turn;
 
+
             if (p1.turn)
             {
                 p1.ScoreBoard.SetTextColor(Android.Graphics.Color.Red);
@@ -170,8 +171,9 @@ namespace Dartboard
         public static void ResetScores(Player p, int gameScore)
         {
             p.score = gameScore;
-            string scoreBoard = string.Format("Player {0}: {1} Dart: 1", p.name, p.score);
+            string scoreBoard = string.Format("{0}: {1} Dart: 1", p.name, p.score);
             p.ScoreBoard.Text = scoreBoard;
+            p.Checkout.Text = " ";
 
         }
 

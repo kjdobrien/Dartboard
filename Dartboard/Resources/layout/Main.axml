@@ -22,14 +22,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="left"
-        android:textSize="50px"
+        android:textSize="48px"
         android:id="@+id/dart1" />
     <TextView
         android:text="Checkout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="right"
-        android:textSize="50px"
+        android:textSize="48px"
         android:id="@+id/Checkout"
         android:fontFamily="@string/abc_font_family_caption_material" />
     <TextView
@@ -37,16 +37,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="left"
-        android:textSize="50px"
-        android:layout_marginTop="20dp"
+        android:textSize="48px"
+        android:layout_marginTop="25dp"
         android:id="@+id/dart2" />
     <TextView
         android:text="Checkout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="right"
-        android:textSize="50px"
-        android:layout_marginTop="20dp"
+        android:textSize="48px"
+        android:layout_marginTop="25dp"
         android:id="@+id/Checkout2"
         android:fontFamily="@string/abc_font_family_caption_material" />
     <Button
