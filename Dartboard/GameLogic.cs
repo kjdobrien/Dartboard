@@ -38,6 +38,8 @@ namespace Dartboard
             player.score -= score;
             string scoreBoard = string.Format("{0}: {1} Dart: {2}",player.name,  player.score, dart);
             player.ScoreBoard.Text = scoreBoard;
+
+           
             
         }
 
@@ -116,12 +118,13 @@ namespace Dartboard
             }
         }
 
-        public static bool IsWinner(Player p)
+        public static bool IsWinner(Player p, int legs)
         {
            
             if (p.score == 0)
             {
-                return true;
+                
+                return true;              
             }
             else
             {
@@ -134,7 +137,7 @@ namespace Dartboard
         {
             // restart the game 
             var alert = new Android.Support.V7.App.AlertDialog.Builder(c);
-            if (leg == 0 && winner.legsWon >= 2 / (numLegs + 1))
+            if (winner.legsWon >= (numLegs + 1)/2)
             {
                 alert.SetTitle("Player " + winner.name + " wins the match!");
                 alert.SetNeutralButton("Start Over", (senderAlert, args) => { c.StartActivity(intent); });
@@ -151,12 +154,13 @@ namespace Dartboard
             alert.SetNegativeButton("Back to setup", (senderAlert, args) => { c.StartActivity(typeof(CreateGame)); });
             Dialog dialog = alert.Create();
             dialog.Show();
+
            
         }
 
         public static void MoveToNextLeg(int leg, List<Player> players, int touchCount, int startScore)
         {
-            leg--;
+           
             ResetScores(players[0], startScore);
             ResetScores(players[1], startScore);
             touchCount = 0;

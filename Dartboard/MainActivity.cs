@@ -145,8 +145,11 @@ namespace Dartboard
 
             currentPlayer  = GameLogic.WhosTurn(testPlayer, player2);
 
-            if (GameLogic.IsWinner(currentPlayer))
+            if (GameLogic.IsWinner(currentPlayer, legs))
             {
+                touchCount = 0;
+                legs -= 1;
+                currentPlayer.legsWon += 1;
                 GameLogic.ShowWinDialog(this, currentPlayer, Players, intent, legs, touchCount, startScore, numLegs);
                 
                 return false;
@@ -186,6 +189,8 @@ namespace Dartboard
 
                     
                     Console.WriteLine(touchCount);
+                    Console.WriteLine("name: " + currentPlayer.name + " Legs won: " + currentPlayer.legsWon);
+                    Console.WriteLine("Current leg: " + legs);
 
                     if (currentPlayer.score <= 170)
                     {
@@ -197,7 +202,18 @@ namespace Dartboard
                     }
                     break;
 
-                
+
+            }
+
+            if (GameLogic.IsWinner(currentPlayer, legs))
+            {
+
+                touchCount = 0;
+                legs -= 1;
+                currentPlayer.legsWon += 1;
+                GameLogic.ShowWinDialog(this, currentPlayer, Players, intent, legs, touchCount, startScore, numLegs);
+
+
             }
 
             if (currentPlayer.score > 0)
@@ -213,15 +229,10 @@ namespace Dartboard
                                         
                 }
             }
-            else if (GameLogic.IsWinner(currentPlayer))
-            {
 
-                touchCount = 0;
-                currentPlayer.legsWon++;
-                GameLogic.ShowWinDialog(this, currentPlayer, Players, intent, legs, touchCount, startScore, numLegs);
-                
 
-            }
+
+           
             return true;
          }
 
