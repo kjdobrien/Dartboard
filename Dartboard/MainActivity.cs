@@ -41,6 +41,7 @@ namespace Dartboard
         Button undo;
 
         Intent intent;
+        Intent IntentReset; 
 
 
        
@@ -126,6 +127,7 @@ namespace Dartboard
                
             undo = (Button)FindViewById(Resource.Id.undo);
             undo.Enabled = false;
+            IntentReset = Intent;
             intent = new Intent(this, typeof(MainActivity));
             intent.SetFlags(ActivityFlags.ClearTop);
             // Setup the view 
@@ -141,8 +143,8 @@ namespace Dartboard
 
         public bool OnTouch(View v, MotionEvent e)
         {
-            
 
+            GC.Collect();
             currentPlayer  = GameLogic.WhosTurn(testPlayer, player2);
 
             if (GameLogic.IsWinner(currentPlayer, legs))
@@ -150,7 +152,7 @@ namespace Dartboard
                 touchCount = 0;
                 legs -= 1;
                 currentPlayer.legsWon += 1;
-                GameLogic.ShowWinDialog(this, currentPlayer, Players, intent, legs, touchCount, startScore, numLegs);
+                GameLogic.ShowWinDialog(this, currentPlayer, Players, IntentReset, legs, touchCount, startScore, numLegs);
                 
                 return false;
             }
@@ -211,7 +213,7 @@ namespace Dartboard
                 touchCount = 0;
                 legs -= 1;
                 currentPlayer.legsWon += 1;
-                GameLogic.ShowWinDialog(this, currentPlayer, Players, intent, legs, touchCount, startScore, numLegs);
+                GameLogic.ShowWinDialog(this, currentPlayer, Players, IntentReset, legs, touchCount, startScore, numLegs);
 
 
             }
