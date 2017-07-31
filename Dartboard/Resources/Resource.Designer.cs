@@ -818,44 +818,44 @@ namespace Dartboard
 		public partial class Color
 		{
 			
-			// aapt resource value: 0x7f09003f
-			public const int abc_background_cache_hint_selector_material_dark = 2131296319;
-			
-			// aapt resource value: 0x7f090040
-			public const int abc_background_cache_hint_selector_material_light = 2131296320;
-			
 			// aapt resource value: 0x7f090041
-			public const int abc_btn_colored_borderless_text_material = 2131296321;
+			public const int abc_background_cache_hint_selector_material_dark = 2131296321;
 			
 			// aapt resource value: 0x7f090042
-			public const int abc_btn_colored_text_material = 2131296322;
+			public const int abc_background_cache_hint_selector_material_light = 2131296322;
 			
 			// aapt resource value: 0x7f090043
-			public const int abc_color_highlight_material = 2131296323;
+			public const int abc_btn_colored_borderless_text_material = 2131296323;
 			
 			// aapt resource value: 0x7f090044
-			public const int abc_hint_foreground_material_dark = 2131296324;
+			public const int abc_btn_colored_text_material = 2131296324;
 			
 			// aapt resource value: 0x7f090045
-			public const int abc_hint_foreground_material_light = 2131296325;
+			public const int abc_color_highlight_material = 2131296325;
+			
+			// aapt resource value: 0x7f090046
+			public const int abc_hint_foreground_material_dark = 2131296326;
+			
+			// aapt resource value: 0x7f090047
+			public const int abc_hint_foreground_material_light = 2131296327;
 			
 			// aapt resource value: 0x7f090001
 			public const int abc_input_method_navigation_guard = 2131296257;
 			
-			// aapt resource value: 0x7f090046
-			public const int abc_primary_text_disable_only_material_dark = 2131296326;
-			
-			// aapt resource value: 0x7f090047
-			public const int abc_primary_text_disable_only_material_light = 2131296327;
-			
 			// aapt resource value: 0x7f090048
-			public const int abc_primary_text_material_dark = 2131296328;
+			public const int abc_primary_text_disable_only_material_dark = 2131296328;
 			
 			// aapt resource value: 0x7f090049
-			public const int abc_primary_text_material_light = 2131296329;
+			public const int abc_primary_text_disable_only_material_light = 2131296329;
 			
 			// aapt resource value: 0x7f09004a
-			public const int abc_search_url_text = 2131296330;
+			public const int abc_primary_text_material_dark = 2131296330;
+			
+			// aapt resource value: 0x7f09004b
+			public const int abc_primary_text_material_light = 2131296331;
+			
+			// aapt resource value: 0x7f09004c
+			public const int abc_search_url_text = 2131296332;
 			
 			// aapt resource value: 0x7f090002
 			public const int abc_search_url_text_normal = 2131296258;
@@ -866,32 +866,32 @@ namespace Dartboard
 			// aapt resource value: 0x7f090004
 			public const int abc_search_url_text_selected = 2131296260;
 			
-			// aapt resource value: 0x7f09004b
-			public const int abc_secondary_text_material_dark = 2131296331;
-			
-			// aapt resource value: 0x7f09004c
-			public const int abc_secondary_text_material_light = 2131296332;
-			
 			// aapt resource value: 0x7f09004d
-			public const int abc_tint_btn_checkable = 2131296333;
+			public const int abc_secondary_text_material_dark = 2131296333;
 			
 			// aapt resource value: 0x7f09004e
-			public const int abc_tint_default = 2131296334;
+			public const int abc_secondary_text_material_light = 2131296334;
 			
 			// aapt resource value: 0x7f09004f
-			public const int abc_tint_edittext = 2131296335;
+			public const int abc_tint_btn_checkable = 2131296335;
 			
 			// aapt resource value: 0x7f090050
-			public const int abc_tint_seek_thumb = 2131296336;
+			public const int abc_tint_default = 2131296336;
 			
 			// aapt resource value: 0x7f090051
-			public const int abc_tint_spinner = 2131296337;
+			public const int abc_tint_edittext = 2131296337;
 			
 			// aapt resource value: 0x7f090052
-			public const int abc_tint_switch_thumb = 2131296338;
+			public const int abc_tint_seek_thumb = 2131296338;
 			
 			// aapt resource value: 0x7f090053
-			public const int abc_tint_switch_track = 2131296339;
+			public const int abc_tint_spinner = 2131296339;
+			
+			// aapt resource value: 0x7f090054
+			public const int abc_tint_switch_thumb = 2131296340;
+			
+			// aapt resource value: 0x7f090055
+			public const int abc_tint_switch_track = 2131296341;
 			
 			// aapt resource value: 0x7f090005
 			public const int accent_material_dark = 2131296261;
@@ -899,8 +899,8 @@ namespace Dartboard
 			// aapt resource value: 0x7f090006
 			public const int accent_material_light = 2131296262;
 			
-			// aapt resource value: 0x7f09003b
-			public const int background = 2131296315;
+			// aapt resource value: 0x7f09003d
+			public const int background = 2131296317;
 			
 			// aapt resource value: 0x7f090007
 			public const int background_floating_material_dark = 2131296263;
@@ -932,6 +932,9 @@ namespace Dartboard
 			// aapt resource value: 0x7f090010
 			public const int bright_foreground_material_light = 2131296272;
 			
+			// aapt resource value: 0x7f09003b
+			public const int buttonColour = 2131296315;
+			
 			// aapt resource value: 0x7f090011
 			public const int button_material_dark = 2131296273;
 			
@@ -962,8 +965,11 @@ namespace Dartboard
 			// aapt resource value: 0x7f09001a
 			public const int highlighted_text_material_light = 2131296282;
 			
-			// aapt resource value: 0x7f09003e
-			public const int lightBlue = 2131296318;
+			// aapt resource value: 0x7f090040
+			public const int lightBlue = 2131296320;
+			
+			// aapt resource value: 0x7f09003c
+			public const int lighterButtonColor = 2131296316;
 			
 			// aapt resource value: 0x7f09001b
 			public const int material_blue_grey_800 = 2131296283;
@@ -1034,8 +1040,8 @@ namespace Dartboard
 			// aapt resource value: 0x7f090030
 			public const int primary_text_disabled_material_light = 2131296304;
 			
-			// aapt resource value: 0x7f09003d
-			public const int red = 2131296317;
+			// aapt resource value: 0x7f09003f
+			public const int red = 2131296319;
 			
 			// aapt resource value: 0x7f090031
 			public const int ripple_material_dark = 2131296305;
@@ -1061,11 +1067,11 @@ namespace Dartboard
 			// aapt resource value: 0x7f090038
 			public const int switch_thumb_disabled_material_light = 2131296312;
 			
-			// aapt resource value: 0x7f090054
-			public const int switch_thumb_material_dark = 2131296340;
+			// aapt resource value: 0x7f090056
+			public const int switch_thumb_material_dark = 2131296342;
 			
-			// aapt resource value: 0x7f090055
-			public const int switch_thumb_material_light = 2131296341;
+			// aapt resource value: 0x7f090057
+			public const int switch_thumb_material_light = 2131296343;
 			
 			// aapt resource value: 0x7f090039
 			public const int switch_thumb_normal_material_dark = 2131296313;
@@ -1073,8 +1079,8 @@ namespace Dartboard
 			// aapt resource value: 0x7f09003a
 			public const int switch_thumb_normal_material_light = 2131296314;
 			
-			// aapt resource value: 0x7f09003c
-			public const int white = 2131296316;
+			// aapt resource value: 0x7f09003e
+			public const int white = 2131296318;
 			
 			static Color()
 			{
@@ -2327,10 +2333,7 @@ namespace Dartboard
 			public const int select_dialog_singlechoice_material = 2130903087;
 			
 			// aapt resource value: 0x7f030030
-			public const int Splash = 2130903088;
-			
-			// aapt resource value: 0x7f030031
-			public const int support_simple_spinner_dropdown_item = 2130903089;
+			public const int support_simple_spinner_dropdown_item = 2130903088;
 			
 			static Layout()
 			{
@@ -2940,14 +2943,14 @@ namespace Dartboard
 			// aapt resource value: 0x7f07015f
 			public const int DartsAppStyle = 2131165535;
 			
-			// aapt resource value: 0x7f070161
-			public const int MyTheme = 2131165537;
-			
-			// aapt resource value: 0x7f070160
-			public const int MyTheme_Base = 2131165536;
-			
 			// aapt resource value: 0x7f070162
-			public const int MyTheme_Splash = 2131165538;
+			public const int MyTheme = 2131165538;
+			
+			// aapt resource value: 0x7f070161
+			public const int MyTheme_Base = 2131165537;
+			
+			// aapt resource value: 0x7f070163
+			public const int MyTheme_Splash = 2131165539;
 			
 			// aapt resource value: 0x7f07001e
 			public const int Platform_AppCompat = 2131165214;
@@ -3533,6 +3536,9 @@ namespace Dartboard
 			
 			// aapt resource value: 0x7f07015e
 			public const int Widget_AppCompat_Toolbar_Button_Navigation = 2131165534;
+			
+			// aapt resource value: 0x7f070160
+			public const int buttonColor = 2131165536;
 			
 			static Style()
 			{

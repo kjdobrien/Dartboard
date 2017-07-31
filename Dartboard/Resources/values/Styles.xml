@@ -7,11 +7,16 @@
   <color name="lightBlue">#8FB8ED</color>
   
     <style name="DartsAppStyle" parent="Theme.AppCompat.Light">
-    
+      
   </style>
 
 
-    <style name="MyTheme.Base" parent="Theme.AppCompat.Light">
+  <style name="buttonColor" parent="Widget.AppCompat.Button.Colored">
+    <item name="android:background">#31a447</item>
+  </style>
+
+
+  <style name="MyTheme.Base" parent="Theme.AppCompat.Light">
     </style>
 
     <style name="MyTheme" parent="MyTheme.Base">

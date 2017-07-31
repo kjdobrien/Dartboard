@@ -50,7 +50,7 @@
         android:id="@+id/Checkout2"
         android:fontFamily="@string/abc_font_family_caption_material" />
     <Button
-        style="@style/Widget.AppCompat.Button.Colored"
+        style="@style/buttonColor"
         android:text="Undo"
         android:layout_width="80dp"
         android:layout_height="40dp"

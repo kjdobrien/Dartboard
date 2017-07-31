@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/playerNames" />
     <Button
-        style="@style/Widget.AppCompat.Button.Colored"
+        style="@style/buttonColor"
         android:text="Add Player"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -61,7 +61,7 @@
         android:entries="@array/legsArray"
         android:prompt="@string/legsPrompt" />
     <Button
-        style="@style/Widget.AppCompat.Button.Colored"
+        style="@style/buttonColor"
         android:text="Start Game"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

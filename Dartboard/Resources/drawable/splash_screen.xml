@@ -3,7 +3,7 @@
 
   <item>
     <bitmap
-        android:src="@drawable/launcherIcon144x144"
+        android:src="@drawable/launcherIcon48x48"
         android:tileMode="disabled"
         android:gravity="center" />
   </item>
