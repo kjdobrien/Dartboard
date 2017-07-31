@@ -103,6 +103,7 @@
     <Compile Include="Player.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SplashActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="GettingStarted.Xamarin" />
@@ -113,6 +114,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\CreateGame.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\Splash.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
@@ -168,55 +172,49 @@
     <AndroidResource Include="Resources\drawable\one80dartsBrand.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\AppIcons\dialogue-icon-128x128.png" />
+    <AndroidResource Include="Resources\drawable\dialogueIcon32x32.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\AppIcons\dialogue-icon-32x32.png" />
+    <AndroidResource Include="Resources\drawable\googlePlayStoreIcon.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\AppIcons\dialogue-icon-48x48.png" />
+    <AndroidResource Include="Resources\drawable\dialogueIcon48x48.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\AppIcons\dialogue-icon-64x64.png" />
+    <AndroidResource Include="Resources\drawable\dialogueIcon64x64.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\AppIcons\dialogue-icon-96x96.png" />
+    <AndroidResource Include="Resources\drawable\dialogueIcon96x96.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\AppIcons\google-play-store-icon.png" />
+    <AndroidResource Include="Resources\drawable\dialogueIcon128x128.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\AppIcons\launcher-icon-144x144.png" />
+    <AndroidResource Include="Resources\drawable\launcherIcon48x48.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\AppIcons\launcher-icon-192x192.png" />
+    <AndroidResource Include="Resources\drawable\launcherIcon96x96.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\AppIcons\launcher-icon-48x48.png" />
+    <AndroidResource Include="Resources\drawable\launcherIcon144x144.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\AppIcons\launcher-icon-72x72.png" />
+    <AndroidResource Include="Resources\drawable\launcherIcon192x192.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\AppIcons\launcher-icon-96x96.png" />
+    <AndroidResource Include="Resources\drawable\notificationIcon24x24.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\AppIcons\notification-icon-24x24.png" />
+    <AndroidResource Include="Resources\drawable\notificationIcon36x36.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\AppIcons\notification-icon-36x36.png" />
+    <AndroidResource Include="Resources\drawable\notificationIcon48x48.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\AppIcons\notification-icon-48x48.png" />
+    <AndroidResource Include="Resources\drawable\notificationIcon72x72.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\AppIcons\notification-icon-72x72.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\AppIcons\notification-icon-96x96.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\drawable\AppIcons\__MACOSX\" />
+    <AndroidResource Include="Resources\drawable\notificationIcon96x96.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

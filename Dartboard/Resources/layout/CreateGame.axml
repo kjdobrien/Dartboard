@@ -12,7 +12,7 @@
         android:layout_height="140dp"
         android:paddingTop="10dp"
         android:layout_gravity="center"
-        android:src="@drawable/AppIcons/launcher-icon-48x48.png" />
+        android:src="@drawable/googlePlayStoreIcon" />
     <TextView
         android:text="180 Darts"
         android:textAppearance="?android:attr/textAppearanceLarge"
