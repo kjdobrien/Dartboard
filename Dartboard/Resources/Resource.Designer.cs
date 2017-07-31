@@ -1714,11 +1714,11 @@ namespace Dartboard
 			// aapt resource value: 0x7f020069
 			public const int notification_icon_background = 2130837609;
 			
-			// aapt resource value: 0x7f020074
-			public const int notification_template_icon_bg = 2130837620;
-			
 			// aapt resource value: 0x7f020075
-			public const int notification_template_icon_low_bg = 2130837621;
+			public const int notification_template_icon_bg = 2130837621;
+			
+			// aapt resource value: 0x7f020076
+			public const int notification_template_icon_low_bg = 2130837622;
 			
 			// aapt resource value: 0x7f02006a
 			public const int notification_tile_bg = 2130837610;
@@ -1749,6 +1749,9 @@ namespace Dartboard
 			
 			// aapt resource value: 0x7f020073
 			public const int one80dartsGrey = 2130837619;
+			
+			// aapt resource value: 0x7f020074
+			public const int splash_screen = 2130837620;
 			
 			static Drawable()
 			{
@@ -2936,6 +2939,15 @@ namespace Dartboard
 			
 			// aapt resource value: 0x7f07015f
 			public const int DartsAppStyle = 2131165535;
+			
+			// aapt resource value: 0x7f070161
+			public const int MyTheme = 2131165537;
+			
+			// aapt resource value: 0x7f070160
+			public const int MyTheme_Base = 2131165536;
+			
+			// aapt resource value: 0x7f070162
+			public const int MyTheme_Splash = 2131165538;
 			
 			// aapt resource value: 0x7f07001e
 			public const int Platform_AppCompat = 2131165214;

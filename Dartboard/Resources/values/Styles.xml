@@ -7,9 +7,22 @@
   <color name="lightBlue">#8FB8ED</color>
   
     <style name="DartsAppStyle" parent="Theme.AppCompat.Light">
-       
+      <item name="android:windowBackground">#0f6938</item>
   </style>
-  
-  
+
+
+    <style name="MyTheme.Base" parent="Theme.AppCompat.Light">
+    </style>
+
+    <style name="MyTheme" parent="MyTheme.Base">
+    </style>
+
+    <style name="MyTheme.Splash" parent ="Theme.AppCompat.Light.NoActionBar">
+      <item name="android:windowBackground">@drawable/splash_screen</item>
+      <item name="android:windowNoTitle">true</item>
+      <item name="android:windowFullscreen">true</item>
+    </style>
+
 
 </resources>
+

@@ -9,19 +9,38 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using System.Threading.Tasks;
+using Android.Util;
 
 namespace Dartboard
 {
-    [Activity(Label = "SplashActivity", MainLauncher = true, Icon = "@drawable/launcherIcon192x192", Theme = "@style/DartsAppStyle")]
+    [Activity(Label = "SplashActivity", MainLauncher = true, NoHistory = true, Icon = "@drawable/launcherIcon192x192", Theme = "@style/MyTheme.Splash")]
     public class SplashActivity : Activity
     {
+
+        static readonly string TAG = "X:" + typeof(SplashActivity).Name;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.Splash);
+            //SetContentView(Resource.Layout.Splash);
             // Create your application here
             
-            StartActivity(typeof(CreateGame));
+        }
+
+        protected override void OnResume()
+        {
+            base.OnResume();
+            Task startupWork = new Task(() => { SimulateStartup(); });
+            startupWork.Start();
+        }
+
+        async void SimulateStartup()
+        {
+            Log.Debug(TAG, "Performing some startup work that takes a bit of time.");
+            await Task.Delay(8000); // Simulate a bit of startup work.
+            Log.Debug(TAG, "Startup work is finished - starting MainActivity.");
+            StartActivity(new Intent(Application.Context, typeof(CreateGame)));
         }
     }
 }
