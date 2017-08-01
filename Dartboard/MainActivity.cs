@@ -202,6 +202,8 @@ namespace Dartboard
                     {
                         currentPlayer.Checkout.Text = " ";
                     }
+                
+
                     break;
 
 
