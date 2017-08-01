@@ -157,36 +157,31 @@ namespace Dartboard
                 return false;
             }
 
-            
+
 
             var x = (int)e.GetX();
             var y = (int)e.GetY();
+
+
             switch (e.Action)
             {
                 // add a touch count 
                 case MotionEventActions.Down:
-                    Console.WriteLine("getting x and y");
-                    break;
-
-                case MotionEventActions.Move:
-                    previousTurn = touchCount;
-                    touchCount++;
-                    int touchColorMulti = getColorHotspot(Resource.Id.dartboardoverlay, x, y);
-                    Color myColorMulti = new Color(touchColorMulti);                   
-                    score = board.ColorScores.FirstOrDefault(k => k.Value == myColorMulti).Key;
-                    undo.Enabled = true;
-                    Console.WriteLine(score);
+                    Console.WriteLine("getting x and y");                   
+                  
+                    Console.WriteLine("x: " + x + ", y: " + y);
                     break;
 
                 case MotionEventActions.Up:
                     previousTurn = touchCount;
                     touchCount++;
-                    int touchColorSingle = getColorHotspot(Resource.Id.dartboardoverlay, x, y);
-                    Color myColorSingle = new Color(touchColorSingle);                   
-                    score = board.ColorScores.FirstOrDefault(k => k.Value == myColorSingle).Key;
+                    int touchColor = getColorHotspot(Resource.Id.dartboardoverlay, x, y);
+                    Color myColor = new Color(touchColor);
+                    score = board.ColorScores.FirstOrDefault(k => k.Value == myColor).Key;
                     undo.Enabled = true;
                     Console.WriteLine(score);
                     // Score checking 
+                  
                     if (score > currentPlayer.score || currentPlayer.score - score == 1)
                     {
                         Toast toast = Toast.MakeText(this, "Bust", ToastLength.Short);
