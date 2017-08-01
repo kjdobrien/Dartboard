@@ -12,7 +12,7 @@ using Android.Content;
 namespace Dartboard
 {
     [Activity(Label = "Dartboard", MainLauncher = false, Icon = "@drawable/dartboard", Theme = "@style/DartsAppStyle")]
-    public class MainActivity : Activity, View.IOnTouchListener
+    public class MainActivity : Activity
     {
 
   
@@ -41,17 +41,17 @@ namespace Dartboard
         Button undo;
 
         Intent intent;
-        Intent IntentReset; 
+        Intent IntentReset;
 
+        private GestureDetector _gestureDetector;
 
-       
 
 
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-            
 
+            _gestureDetector = new GestureDetector(this, new MyGestureListener());
 
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
@@ -132,119 +132,35 @@ namespace Dartboard
             intent.SetFlags(ActivityFlags.ClearTop);
             // Setup the view 
             ImageView iv = (ImageView)FindViewById(Resource.Id.dartboard);
-            iv.SetOnTouchListener(this);
-
+            //iv.SetOnTouchListener(this);
+            iv.Touch += imageTouch;
             undo.Click += UndoButton;
+        }
+
+        protected override void OnResume()
+        {
+            base.OnResume();
+
+            GC.Collect();
+            currentPlayer = GameLogic.WhosTurn(testPlayer, player2);
+
+            if (GameLogic.IsWinner(currentPlayer, legs))
+            {
+                touchCount = 0;
+                legs -= 1;
+                currentPlayer.legsWon += 1;
+                GameLogic.ShowWinDialog(this, currentPlayer, Players, IntentReset, legs, touchCount, startScore, numLegs);
+            }
         }
 
 
 
         int touchCount = 0;
 
-        public bool OnTouch(View v, MotionEvent e)
+        public void imageTouch(object sender, View.TouchEventArgs e)
         {
-
-            GC.Collect();
-            currentPlayer  = GameLogic.WhosTurn(testPlayer, player2);
-
-            if (GameLogic.IsWinner(currentPlayer, legs))
-            {
-                touchCount = 0;
-                legs -= 1;
-                currentPlayer.legsWon += 1;
-                GameLogic.ShowWinDialog(this, currentPlayer, Players, IntentReset, legs, touchCount, startScore, numLegs);
-                
-                return false;
-            }
-
-
-
-            var x = (int)e.GetX();
-            var y = (int)e.GetY();
-
-
-            switch (e.Action)
-            {
-                // add a touch count 
-                case MotionEventActions.Down:
-                    Console.WriteLine("getting x and y");                   
-                  
-                    Console.WriteLine("x: " + x + ", y: " + y);
-                    break;
-
-                case MotionEventActions.Up:
-                    previousTurn = touchCount;
-                    touchCount++;
-                    int touchColor = getColorHotspot(Resource.Id.dartboardoverlay, x, y);
-                    Color myColor = new Color(touchColor);
-                    score = board.ColorScores.FirstOrDefault(k => k.Value == myColor).Key;
-                    undo.Enabled = true;
-                    Console.WriteLine(score);
-                    // Score checking 
-                  
-                    if (score > currentPlayer.score || currentPlayer.score - score == 1)
-                    {
-                        Toast toast = Toast.MakeText(this, "Bust", ToastLength.Short);
-                        toast.SetGravity(GravityFlags.Center, 0, 0);
-                        toast.Show();
-                    }
-                    else
-                    {
-                        GameLogic.ThrowDart(currentPlayer, touchCount, score);
-                        
-                    }
-                    string text = Convert.ToString(currentPlayer.score);
-
-                    
-                    Console.WriteLine(touchCount);
-                    Console.WriteLine("name: " + currentPlayer.name + " Legs won: " + currentPlayer.legsWon);
-                    Console.WriteLine("Current leg: " + legs);
-
-                    if (currentPlayer.score <= 170)
-                    {
-                        GameLogic.GetCheckout(currentPlayer, board, touchCount);  
-                    }
-                    else
-                    {
-                        currentPlayer.Checkout.Text = " ";
-                    }
-                    break;
-
-                
-
-
-            }
-
-            if (GameLogic.IsWinner(currentPlayer, legs))
-            {
-
-                touchCount = 0;
-                legs -= 1;
-                currentPlayer.legsWon += 1;
-                GameLogic.ShowWinDialog(this, currentPlayer, Players, IntentReset, legs, touchCount, startScore, numLegs);
-
-
-            }
-
-            if (currentPlayer.score > 0)
-            {
-                if (touchCount == 3)
-                {
-                    
-                    touchCount = 0;
-                    if (Players.Count > 1)
-                    {
-                        GameLogic.SwitchPlayer(testPlayer, player2);
-                    }
-                                        
-                }
-            }
-
-
-
-           
-            return true;
-         }
+            this._gestureDetector.OnTouchEvent(e.Event);
+        }
 
 
 
@@ -266,7 +182,45 @@ namespace Dartboard
             undo.Enabled = false;
         }
 
-        
+        public class MyGestureListener : GestureDetector.SimpleOnGestureListener
+        {
+            public override void OnLongPress(MotionEvent e)
+            {
+                Console.WriteLine("Long Press");
+                base.OnLongPress(e);
+
+            }
+
+            public override bool OnSingleTapConfirmed(MotionEvent e)
+            {
+                GameLogic.ThrowDart(currentPlayer, touchCount, score);
+                return true;
+            }
+
+            public override bool OnDoubleTap(MotionEvent e)
+            {
+                Console.WriteLine("Double Tap");
+                return base.OnDoubleTap(e);
+            }
+
+            public override bool OnFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY)
+            {
+                Console.WriteLine("Fling");
+                //return base.OnFling(e1, e2, velocityX, velocityY);
+                return true;
+            }
+
+            public override bool OnScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY)
+            {
+                Console.WriteLine("Scroll");
+                //return base.OnScroll(e1, e2, distanceX, distanceY);
+                return true;
+            }
+        }
+
+
+
+
     }
 }
 

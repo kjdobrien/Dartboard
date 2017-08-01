@@ -35,12 +35,27 @@ namespace Dartboard
 
         public static void ThrowDart(Player player, int dart, int score)
         {
+
             player.score -= score;
             string scoreBoard = string.Format("{0}: {1} Dart: {2}",player.name,  player.score, dart);
             player.ScoreBoard.Text = scoreBoard;
 
            
             
+        }
+
+        public static void ThrowDartDouble(Player player, int dart, int score)
+        {
+            player.score -= (score * 2);
+            string scoreBoard = string.Format("{0}: {1} Dart: {2}", player.name, player.score, dart);
+            player.ScoreBoard.Text = scoreBoard;
+        }
+
+        public static void ThrowDartTreble(Player player, int dart, int score)
+        {
+            player.score -= (score * 3);
+            string scoreBoard = string.Format("{0}: {1} Dart: {2}", player.name, player.score, dart);
+            player.ScoreBoard.Text = scoreBoard;
         }
 
         public static void SwitchPlayer(Player p1, Player p2)
@@ -177,7 +192,7 @@ namespace Dartboard
 
         }
 
-  
+      
 
 
 
