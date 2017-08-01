@@ -16,7 +16,7 @@ namespace Dartboard
     {
 
   
-        int score;
+        public int score;
         int previousTurn;
 
         // default
@@ -51,7 +51,7 @@ namespace Dartboard
         {
             base.OnCreate(bundle);
 
-            _gestureDetector = new GestureDetector(this, new MyGestureListener());
+            _gestureDetector = new GestureDetector(this, new MyGestureListener(score, currentPlayer, this,touchCount));
 
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
@@ -159,7 +159,7 @@ namespace Dartboard
 
         public void imageTouch(object sender, View.TouchEventArgs e)
         {
-            this._gestureDetector.OnTouchEvent(e.Event);
+            _gestureDetector.OnTouchEvent(e.Event);
         }
 
 
@@ -182,41 +182,7 @@ namespace Dartboard
             undo.Enabled = false;
         }
 
-        public class MyGestureListener : GestureDetector.SimpleOnGestureListener
-        {
-            public override void OnLongPress(MotionEvent e)
-            {
-                Console.WriteLine("Long Press");
-                base.OnLongPress(e);
-
-            }
-
-            public override bool OnSingleTapConfirmed(MotionEvent e)
-            {
-                GameLogic.ThrowDart(currentPlayer, touchCount, score);
-                return true;
-            }
-
-            public override bool OnDoubleTap(MotionEvent e)
-            {
-                Console.WriteLine("Double Tap");
-                return base.OnDoubleTap(e);
-            }
-
-            public override bool OnFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY)
-            {
-                Console.WriteLine("Fling");
-                //return base.OnFling(e1, e2, velocityX, velocityY);
-                return true;
-            }
-
-            public override bool OnScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY)
-            {
-                Console.WriteLine("Scroll");
-                //return base.OnScroll(e1, e2, distanceX, distanceY);
-                return true;
-            }
-        }
+       
 
 
 

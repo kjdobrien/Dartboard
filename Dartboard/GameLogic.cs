@@ -39,9 +39,7 @@ namespace Dartboard
             player.score -= score;
             string scoreBoard = string.Format("{0}: {1} Dart: {2}",player.name,  player.score, dart);
             player.ScoreBoard.Text = scoreBoard;
-
-           
-            
+                    
         }
 
         public static void ThrowDartDouble(Player player, int dart, int score)
@@ -56,6 +54,22 @@ namespace Dartboard
             player.score -= (score * 3);
             string scoreBoard = string.Format("{0}: {1} Dart: {2}", player.name, player.score, dart);
             player.ScoreBoard.Text = scoreBoard;
+        }
+
+        public static bool CheckBust(int score, Player currentPlayer, Context c, int touchCount )
+        {
+            if (score > currentPlayer.score || currentPlayer.score - score == 1)
+            {
+                Toast toast = Toast.MakeText(c, "Bust", ToastLength.Short);
+                toast.SetGravity(GravityFlags.Center, 0, 0);
+                toast.Show();
+                return false;
+            }
+            else
+            {
+                //GameLogic.ThrowDart(currentPlayer, touchCount, score);
+                return true; 
+            }
         }
 
         public static void SwitchPlayer(Player p1, Player p2)
@@ -190,6 +204,12 @@ namespace Dartboard
             p.ScoreBoard.Text = scoreBoard;
             p.Checkout.Text = " ";
 
+        }
+
+        public static void ResetCounters(int previousTurn, int touchCount )
+        {
+            previousTurn = touchCount;
+            touchCount++;
         }
 
       

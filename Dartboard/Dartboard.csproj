@@ -97,6 +97,7 @@
     <Compile Include="CreateGame.cs" />
     <Compile Include="GameLogic.cs" />
     <Compile Include="MainActivity.cs" />
+    <Compile Include="MyGestureListener.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
