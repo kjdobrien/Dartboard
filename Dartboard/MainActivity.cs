@@ -167,12 +167,23 @@ namespace Dartboard
                 case MotionEventActions.Down:
                     Console.WriteLine("getting x and y");
                     break;
+
+                case MotionEventActions.Move:
+                    previousTurn = touchCount;
+                    touchCount++;
+                    int touchColorMulti = getColorHotspot(Resource.Id.dartboardoverlay, x, y);
+                    Color myColorMulti = new Color(touchColorMulti);                   
+                    score = board.ColorScores.FirstOrDefault(k => k.Value == myColorMulti).Key;
+                    undo.Enabled = true;
+                    Console.WriteLine(score);
+                    break;
+
                 case MotionEventActions.Up:
                     previousTurn = touchCount;
                     touchCount++;
-                    int touchColor = getColorHotspot(Resource.Id.dartboardoverlay, x, y);
-                    Color myColor = new Color(touchColor);                   
-                    score = board.ColorScores.FirstOrDefault(k => k.Value == myColor).Key;
+                    int touchColorSingle = getColorHotspot(Resource.Id.dartboardoverlay, x, y);
+                    Color myColorSingle = new Color(touchColorSingle);                   
+                    score = board.ColorScores.FirstOrDefault(k => k.Value == myColorSingle).Key;
                     undo.Enabled = true;
                     Console.WriteLine(score);
                     // Score checking 
@@ -202,9 +213,9 @@ namespace Dartboard
                     {
                         currentPlayer.Checkout.Text = " ";
                     }
-                
-
                     break;
+
+                
 
 
             }
@@ -240,8 +251,6 @@ namespace Dartboard
             return true;
          }
 
-
-        
 
 
         public int getColorHotspot(int hotspotId, int x, int y)
