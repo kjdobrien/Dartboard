@@ -9,6 +9,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Android.Graphics;
 
 namespace Dartboard
 {
@@ -19,14 +20,19 @@ namespace Dartboard
         Player currentPlayer;
         Context c;
         int touchCount;
-        public MyGestureListener(int score, Player CurrentPlayer, Context c, int touchCount)
+        int previousTurn;
+        public MyGestureListener(int score, Player CurrentPlayer, Context c, int touchCount, int previousTurn)
         {
 
         }
 
         public override bool OnSingleTapConfirmed(MotionEvent e)
         {
-            GameLogic.ResetCounters(touchCount)
+             var x = (int)e.GetX();
+            var y = (int)e.GetY();
+            GameLogic.ResetCounters(previousTurn, touchCount);
+         
+            Console.WriteLine(score);
             GameLogic.CheckBust(score, currentPlayer, c, touchCount);
             GameLogic.ThrowDart(currentPlayer, touchCount, score);
             return true;
@@ -35,6 +41,7 @@ namespace Dartboard
         public override bool OnDoubleTap(MotionEvent e)
         {
             Console.WriteLine("Double Tap");
+            GameLogic.ResetCounters(previousTurn, touchCount);
             GameLogic.CheckBust(score, currentPlayer, c, touchCount);
             GameLogic.ThrowDartDouble(currentPlayer, touchCount, score);
             return base.OnDoubleTap(e);
@@ -44,6 +51,7 @@ namespace Dartboard
         {
             Console.WriteLine("Long Press");
             base.OnLongPress(e);
+            GameLogic.ResetCounters(previousTurn, touchCount);
             GameLogic.CheckBust(score, currentPlayer, c, touchCount);
             GameLogic.ThrowDartDouble(currentPlayer, touchCount, score);
 

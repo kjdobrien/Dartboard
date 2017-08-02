@@ -51,7 +51,7 @@ namespace Dartboard
         {
             base.OnCreate(bundle);
 
-            _gestureDetector = new GestureDetector(this, new MyGestureListener(score, currentPlayer, this,touchCount));
+            _gestureDetector = new GestureDetector(this, new MyGestureListener(score, currentPlayer, this,touchCount, previousTurn));
 
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
