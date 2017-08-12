@@ -15,7 +15,7 @@ namespace Dartboard
     public class MainActivity : Activity
     {
 
-  
+        ImageView img;
         public int score;
         int previousTurn;
 
@@ -51,7 +51,7 @@ namespace Dartboard
         {
             base.OnCreate(bundle);
 
-            _gestureDetector = new GestureDetector(this, new MyGestureListener(score, currentPlayer, this,touchCount, previousTurn));
+            
 
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
@@ -143,7 +143,7 @@ namespace Dartboard
 
             GC.Collect();
             currentPlayer = GameLogic.WhosTurn(testPlayer, player2);
-
+            _gestureDetector = new GestureDetector(this, new MyGestureListener(score, currentPlayer, this, touchCount, previousTurn));
             if (GameLogic.IsWinner(currentPlayer, legs))
             {
                 touchCount = 0;
@@ -151,6 +151,8 @@ namespace Dartboard
                 currentPlayer.legsWon += 1;
                 GameLogic.ShowWinDialog(this, currentPlayer, Players, IntentReset, legs, touchCount, startScore, numLegs);
             }
+
+
         }
 
 
@@ -166,7 +168,7 @@ namespace Dartboard
 
         public int getColorHotspot(int hotspotId, int x, int y)
         {
-            ImageView img = (ImageView)FindViewById(hotspotId);
+            img = (ImageView)FindViewById(hotspotId);
             img.DrawingCacheEnabled = true;
             Bitmap hotspots = Bitmap.CreateBitmap(img.DrawingCache);
             img.DrawingCacheEnabled = false;
