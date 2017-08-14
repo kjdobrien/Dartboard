@@ -48,7 +48,7 @@ namespace Dartboard
             score = board.ColorScores.FirstOrDefault(k => k.Value == myColor).Key;
             GameLogic.ResetCounters(previousTurn, touchCount);        
             Console.WriteLine(score);
-            GameLogic.CheckBust(score, currentPlayer, c, touchCount);
+            GameLogic.CheckBust(score, currentPlayer, activity, touchCount);
             GameLogic.ThrowDart(currentPlayer, touchCount, score);
             return true;
         }
@@ -63,7 +63,7 @@ namespace Dartboard
             score = board.ColorScores.FirstOrDefault(k => k.Value == myColor).Key;
             GameLogic.ResetCounters(previousTurn, touchCount);
             Console.WriteLine(score);
-            GameLogic.CheckBust(score, currentPlayer, c, touchCount);
+            GameLogic.CheckBust(score, currentPlayer, activity, touchCount);
             GameLogic.ThrowDartDouble(currentPlayer, touchCount, score);
             return true;
         }
@@ -78,8 +78,8 @@ namespace Dartboard
             score = board.ColorScores.FirstOrDefault(k => k.Value == myColor).Key;
             GameLogic.ResetCounters(previousTurn, touchCount);
             Console.WriteLine(score);
-            GameLogic.CheckBust(score, currentPlayer, c, touchCount);
-            GameLogic.ThrowDartDouble(currentPlayer, touchCount, score);
+            GameLogic.CheckBust(score, currentPlayer, activity, touchCount);
+            GameLogic.ThrowDartTreble(currentPlayer, touchCount, score);
 
         }
 
