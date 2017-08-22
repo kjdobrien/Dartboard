@@ -24,13 +24,13 @@ namespace Dartboard
         int numLegs;
         Board board = new Board();
         
-        Player testPlayer = new Player();
-        Player player2 = new Player();
+        internal static Player testPlayer = new Player();
+        internal static Player player2 = new Player();
         Player currentPlayer;
 
         int startScore;
 
-        List<Player> Players;
+        internal List<Player> Players;
        
         TextView d1;
         TextView p2Score;
@@ -130,9 +130,9 @@ namespace Dartboard
             IntentReset = Intent;
             intent = new Intent(this, typeof(MainActivity));
             intent.SetFlags(ActivityFlags.ClearTop);
+
             // Setup the view 
             ImageView iv = (ImageView)FindViewById(Resource.Id.dartboard);
-            //iv.SetOnTouchListener(this);
             iv.Touch += imageTouch;
             undo.Click += UndoButton;
         }
@@ -143,7 +143,7 @@ namespace Dartboard
 
             GC.Collect();
             currentPlayer = GameLogic.WhosTurn(testPlayer, player2);
-            _gestureDetector = new GestureDetector(this, new MyGestureListener(score, currentPlayer, this, touchCount, previousTurn));
+            _gestureDetector = new GestureDetector(this, new MyGestureListener(score, currentPlayer, this, touchCount, previousTurn, legs, startScore, numLegs));
             if (GameLogic.IsWinner(currentPlayer, legs))
             {
                 touchCount = 0;

@@ -60,15 +60,13 @@ namespace Dartboard
         {
             if (score > currentPlayer.score || currentPlayer.score - score == 1)
             {
-                Toast toast = Toast.MakeText(c, "Bust", ToastLength.Short);
-                toast.SetGravity(GravityFlags.Center, 0, 0);
-                toast.Show();
-                return false;
+
+                return true;
             }
             else
             {
-                //GameLogic.ThrowDart(currentPlayer, touchCount, score);
-                return true; 
+                
+                return false; 
             }
         }
 
@@ -94,6 +92,27 @@ namespace Dartboard
 
         }
 
+        public static void FinishedTurn(List<Player> Players, Player currentPlayer, int touchCount)
+        {
+            Player player2;
+            touchCount = 0;
+            if (currentPlayer == Players[0])
+            {
+                player2 = Players[1];
+            }
+            else
+            {
+                player2 = Players[0];
+            }
+
+            if (Players.Count > 1)
+            {                                                
+                GameLogic.SwitchPlayer(currentPlayer, player2);                                                                                  
+            }         
+        }
+            
+            
+    
       
 
         public static bool IsCheckout(Player player)
@@ -107,6 +126,8 @@ namespace Dartboard
                 return false;
             }
         }
+
+        
 
         public static void GetCheckout(Player player, Board board, int touchCount)
         {

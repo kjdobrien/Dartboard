@@ -17,45 +17,106 @@ namespace Dartboard
     {
 
         int score;
-        Player currentPlayer;
-        Context c;
+        int legs;
         int touchCount;
         int previousTurn;
+        int startScore;
+        int numLegs;
+        Player currentPlayer;
+        Context c;
+
         MainActivity activity;
         Board board = new Board();
+        Intent blankIntent;
         
 
-        public MyGestureListener(int Score, Player CurrentPlayer, MainActivity _activity, int TouchCount, int PreviousTurn)
+        public MyGestureListener(int Score, Player CurrentPlayer, MainActivity _activity, int TouchCount, int PreviousTurn, int legs, int startScore, int numLegs)
         {
             this.score = Score;
+            this.numLegs = numLegs;
+            this.startScore = startScore;
             this.currentPlayer = CurrentPlayer;
             this.activity = _activity;
             this.touchCount = TouchCount;
             this.previousTurn = PreviousTurn;
+            this.legs = legs;
             
             
         }
 
-
-
         public override bool OnSingleTapConfirmed(MotionEvent e)
         {
-            Console.WriteLine("Single Tap"); 
+            // Increase touch count 
+            touchCount++;
+            // Clear garbage
+            GC.Collect();
+            // Get the current player 
+            currentPlayer = GameLogic.WhosTurn(MainActivity.testPlayer, MainActivity.player2);
+            Console.WriteLine("Single Tap");
+            
+            // Get touch coords
             var x = (int)e.GetX();
             var y = (int)e.GetY();
+            // Use coords to get the underlying colour 
             int touchColour = activity.getColorHotspot(Resource.Id.dartboardoverlay,x, y);
             Color myColor = new Color(touchColour);
+            // Use colour to get score 
             score = board.ColorScores.FirstOrDefault(k => k.Value == myColor).Key;
+
             GameLogic.ResetCounters(previousTurn, touchCount);        
             Console.WriteLine(score);
-            GameLogic.CheckBust(score, currentPlayer, activity, touchCount);
-            GameLogic.ThrowDart(currentPlayer, touchCount, score);
+
+            // Check for bust
+            if (GameLogic.CheckBust(score, currentPlayer, activity, touchCount))
+            {
+                // Display toast message 
+                Toast toast = Toast.MakeText(activity, "Bust", ToastLength.Short);
+                toast.SetGravity(GravityFlags.Center, 0, 0);
+                toast.Show();
+                touchCount = 0;
+                GameLogic.FinishedTurn(activity.Players, currentPlayer, touchCount);
+            }
+            else
+            {
+                // Subtract the score
+                GameLogic.ThrowDart(currentPlayer, touchCount, score);
+            }
+            // Display the best check out if available 
+            if (currentPlayer.score <= 170)
+            {
+                GameLogic.GetCheckout(currentPlayer, board, touchCount);
+            }
+            else
+            {
+                currentPlayer.Checkout.Text = " ";
+            }
+            // Check to see did the player win with the last dart 
+            if (GameLogic.IsWinner(currentPlayer, legs))
+            {
+                touchCount = 0;
+                legs -= 1;
+                currentPlayer.legsWon += 1;
+                GameLogic.ShowWinDialog(activity, currentPlayer, activity.Players, blankIntent, legs, touchCount, startScore, numLegs);
+            }
+            // Check to see if the player is finished their turn 
+            if (touchCount == 3 && currentPlayer.score > 0)
+            {
+                touchCount = 0;
+                GameLogic.FinishedTurn(activity.Players ,currentPlayer, touchCount);
+
+            }
+            
+            
             return true;
         }
 
         public override bool OnDoubleTap(MotionEvent e)
         {
+            touchCount++;
+            GC.Collect();
+            currentPlayer = GameLogic.WhosTurn(MainActivity.testPlayer, MainActivity.player2);
             Console.WriteLine("Double Tap");
+
             var x = (int)e.GetX();
             var y = (int)e.GetY();
             int touchColour = activity.getColorHotspot(Resource.Id.dartboardoverlay, x, y);
@@ -63,14 +124,49 @@ namespace Dartboard
             score = board.ColorScores.FirstOrDefault(k => k.Value == myColor).Key;
             GameLogic.ResetCounters(previousTurn, touchCount);
             Console.WriteLine(score);
-            GameLogic.CheckBust(score, currentPlayer, activity, touchCount);
-            GameLogic.ThrowDartDouble(currentPlayer, touchCount, score);
+            if (GameLogic.CheckBust(score, currentPlayer, activity, touchCount))
+            {
+                Toast toast = Toast.MakeText(activity, "Bust", ToastLength.Short);
+                toast.SetGravity(GravityFlags.Center, 0, 0);
+                toast.Show();
+                touchCount = 0;
+                GameLogic.FinishedTurn(activity.Players, currentPlayer, touchCount);
+            }
+            else
+            {
+                GameLogic.ThrowDartDouble(currentPlayer, touchCount, score);
+            }
+            if (currentPlayer.score <= 170)
+            {
+                GameLogic.GetCheckout(currentPlayer, board, touchCount);
+            }
+            else
+            {
+                currentPlayer.Checkout.Text = " ";
+            }
+
+            if (GameLogic.IsWinner(currentPlayer, legs))
+            {
+                touchCount = 0;
+                legs -= 1;
+                currentPlayer.legsWon += 1;
+                GameLogic.ShowWinDialog(activity, currentPlayer, activity.Players, blankIntent, legs, touchCount, startScore, numLegs);
+            }
+            if (touchCount == 3)
+            {
+                touchCount = 0;
+                GameLogic.FinishedTurn(activity.Players, currentPlayer, touchCount);
+            }
             return true;
         }
 
         public override void OnLongPress(MotionEvent e)
         {
+            touchCount++;
+            GC.Collect();
+            currentPlayer = GameLogic.WhosTurn(MainActivity.testPlayer, MainActivity.player2);
             Console.WriteLine("Long Press");
+
             var x = (int)e.GetX();
             var y = (int)e.GetY();
             int touchColour = activity.getColorHotspot(Resource.Id.dartboardoverlay, x, y);
@@ -78,8 +174,38 @@ namespace Dartboard
             score = board.ColorScores.FirstOrDefault(k => k.Value == myColor).Key;
             GameLogic.ResetCounters(previousTurn, touchCount);
             Console.WriteLine(score);
-            GameLogic.CheckBust(score, currentPlayer, activity, touchCount);
-            GameLogic.ThrowDartTreble(currentPlayer, touchCount, score);
+            if (GameLogic.CheckBust(score, currentPlayer, activity, touchCount))
+            {
+                Toast toast = Toast.MakeText(activity, "Bust", ToastLength.Short);
+                toast.SetGravity(GravityFlags.Center, 0, 0);
+                toast.Show();
+                touchCount = 0; 
+                GameLogic.FinishedTurn(activity.Players, currentPlayer, touchCount);
+            }
+            else
+            {
+                GameLogic.ThrowDartTreble(currentPlayer, touchCount, score);
+            }
+            if (currentPlayer.score <= 170)
+            {
+                GameLogic.GetCheckout(currentPlayer, board, touchCount);
+            }
+            else
+            {
+                currentPlayer.Checkout.Text = " ";
+            }
+            if (GameLogic.IsWinner(currentPlayer, legs))
+            {
+                touchCount = 0;
+                legs -= 1;
+                currentPlayer.legsWon += 1;
+                GameLogic.ShowWinDialog(activity, currentPlayer, activity.Players, blankIntent, legs, touchCount, startScore, numLegs);
+            }
+            if (touchCount == 3)
+            {
+                touchCount = 0;
+                GameLogic.FinishedTurn(activity.Players, currentPlayer, touchCount);
+            }
 
         }
 
