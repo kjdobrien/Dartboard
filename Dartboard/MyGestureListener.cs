@@ -27,7 +27,7 @@ namespace Dartboard
 
         MainActivity activity;
         Board board = new Board();
-        Intent blankIntent;
+     
         
 
         public MyGestureListener(int Score, Player CurrentPlayer, MainActivity _activity, int TouchCount, int PreviousTurn, int legs, int startScore, int numLegs)
@@ -108,7 +108,7 @@ namespace Dartboard
                 touchCount = 0;
                 legs -= 1;
                 currentPlayer.legsWon += 1;
-                GameLogic.ShowWinDialog(activity, currentPlayer, activity.Players, blankIntent, legs, touchCount, startScore, numLegs);
+                GameLogic.ShowWinDialog(activity, currentPlayer, activity.Players, activity.Intent, legs, touchCount, startScore, numLegs);
             }
             // Check to see if the player is finished their turn 
             if (touchCount == 3 && currentPlayer.score > 0)
@@ -167,7 +167,7 @@ namespace Dartboard
                 touchCount = 0;
                 legs -= 1;
                 currentPlayer.legsWon += 1;
-                GameLogic.ShowWinDialog(activity, currentPlayer, activity.Players, blankIntent, legs, touchCount, startScore, numLegs);
+                GameLogic.ShowWinDialog(activity, currentPlayer, activity.Players, activity.Intent, legs, touchCount, startScore, numLegs);
             }
            
             if (touchCount == 3)
@@ -222,7 +222,7 @@ namespace Dartboard
                 touchCount = 0;
                 legs -= 1;
                 currentPlayer.legsWon += 1;
-                GameLogic.ShowWinDialog(activity, currentPlayer, activity.Players, blankIntent, legs, touchCount, startScore, numLegs);
+                GameLogic.ShowWinDialog(activity, currentPlayer, activity.Players, activity.Intent, legs, touchCount, startScore, numLegs);
             }
             if (touchCount == 3)
             {
