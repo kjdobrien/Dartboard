@@ -38,7 +38,7 @@ namespace Dartboard
         TextView Checkout;
         TextView p2Checkout;
 
-        Button undo;
+        internal static Button undo;
 
         Intent intent;
         Intent IntentReset;
@@ -134,16 +134,21 @@ namespace Dartboard
             // Setup the view 
             ImageView iv = (ImageView)FindViewById(Resource.Id.dartboard);
             iv.Touch += imageTouch;
-            undo.Click += UndoButton;
+            
+            
         }
-
+        
         protected override void OnResume()
         {
             base.OnResume();
 
             GC.Collect();
             currentPlayer = GameLogic.WhosTurn(testPlayer, player2);
-            _gestureDetector = new GestureDetector(this, new MyGestureListener(score, currentPlayer, this, touchCount, previousTurn, legs, startScore, numLegs));
+            MyGestureListener myGestureListener = new MyGestureListener(score, currentPlayer, this, touchCount, previousTurn, legs, startScore, numLegs);
+            _gestureDetector = new GestureDetector(this, myGestureListener);
+
+            undo.Click += myGestureListener.UndoButton;
+
             if (GameLogic.IsWinner(currentPlayer, legs))
             {
                 touchCount = 0;
@@ -175,16 +180,9 @@ namespace Dartboard
             return hotspots.GetPixel(x, y);
         }
 
-        public void UndoButton(object sender, EventArgs args)
-        {
-            currentPlayer.score += score;
-            touchCount = previousTurn;
-            string scoreBoard = string.Format("Player {0}: {1} Dart: {2}", currentPlayer.name, currentPlayer.score, touchCount);
-            currentPlayer.ScoreBoard.Text = scoreBoard;
-            undo.Enabled = false;
-        }
+        
 
-       
+
 
 
 

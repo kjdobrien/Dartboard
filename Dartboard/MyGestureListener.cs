@@ -53,7 +53,12 @@ namespace Dartboard
             // Get the current player 
             currentPlayer = GameLogic.WhosTurn(MainActivity.testPlayer, MainActivity.player2);
             Console.WriteLine("Single Tap");
+
+            // Activate undo button
+            MainActivity.undo.Enabled = true;
+
             
+
             // Get touch coords
             var x = (int)e.GetX();
             var y = (int)e.GetY();
@@ -93,6 +98,7 @@ namespace Dartboard
             // Check to see did the player win with the last dart 
             if (GameLogic.IsWinner(currentPlayer, legs))
             {
+                e.
                 touchCount = 0;
                 legs -= 1;
                 currentPlayer.legsWon += 1;
@@ -116,7 +122,8 @@ namespace Dartboard
             GC.Collect();
             currentPlayer = GameLogic.WhosTurn(MainActivity.testPlayer, MainActivity.player2);
             Console.WriteLine("Double Tap");
-
+            // Activate undo button
+            MainActivity.undo.Enabled = true;
             var x = (int)e.GetX();
             var y = (int)e.GetY();
             int touchColour = activity.getColorHotspot(Resource.Id.dartboardoverlay, x, y);
@@ -166,7 +173,8 @@ namespace Dartboard
             GC.Collect();
             currentPlayer = GameLogic.WhosTurn(MainActivity.testPlayer, MainActivity.player2);
             Console.WriteLine("Long Press");
-
+            // Activate undo button
+            MainActivity.undo.Enabled = true;
             var x = (int)e.GetX();
             var y = (int)e.GetY();
             int touchColour = activity.getColorHotspot(Resource.Id.dartboardoverlay, x, y);
@@ -221,6 +229,15 @@ namespace Dartboard
             Console.WriteLine("Scroll");
             //return base.OnScroll(e1, e2, distanceX, distanceY);
             return true;
+        }
+
+        public void UndoButton(object sender, EventArgs args)
+        {
+            GameLogic.UndoLastScore(currentPlayer, score);
+            touchCount = previousTurn;
+            string scoreBoard = string.Format("{0}: {1} Dart: {2}", currentPlayer.name, currentPlayer.score, touchCount);
+            currentPlayer.ScoreBoard.Text = scoreBoard;
+            MainActivity.undo.Enabled = false;
         }
     }
 }

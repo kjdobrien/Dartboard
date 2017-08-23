@@ -94,19 +94,21 @@ namespace Dartboard
 
         public static void FinishedTurn(List<Player> Players, Player currentPlayer, int touchCount)
         {
-            Player player2;
             touchCount = 0;
-            if (currentPlayer == Players[0])
-            {
-                player2 = Players[1];
-            }
-            else
-            {
-                player2 = Players[0];
-            }
-
             if (Players.Count > 1)
-            {                                                
+            {
+                Player player2;
+                
+                if (currentPlayer == Players[0])
+                {
+                    player2 = Players[1];
+                }
+                else
+                {
+                    player2 = Players[0];
+                }
+
+                                                                     
                 GameLogic.SwitchPlayer(currentPlayer, player2);                                                                                  
             }         
         }
@@ -233,7 +235,10 @@ namespace Dartboard
             touchCount++;
         }
 
-      
+        public static void UndoLastScore(Player currentPlayer, int score)
+        {
+            currentPlayer.score += score; 
+        }
 
 
 
