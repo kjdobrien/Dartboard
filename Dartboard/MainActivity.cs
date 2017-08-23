@@ -23,6 +23,8 @@ namespace Dartboard
         int legs = 0;
         int numLegs;
         Board board = new Board();
+
+        
         
         internal static Player testPlayer = new Player();
         internal static Player player2 = new Player();
@@ -149,13 +151,13 @@ namespace Dartboard
 
             undo.Click += myGestureListener.UndoButton;
 
-            if (GameLogic.IsWinner(currentPlayer, legs))
-            {
-                touchCount = 0;
-                legs -= 1;
-                currentPlayer.legsWon += 1;
-                GameLogic.ShowWinDialog(this, currentPlayer, Players, IntentReset, legs, touchCount, startScore, numLegs);
-            }
+            //if (GameLogic.IsWinner(currentPlayer, legs, ))
+            //{
+            //    touchCount = 0;
+            //    legs -= 1;
+            //    currentPlayer.legsWon += 1;
+            //    GameLogic.ShowWinDialog(this, currentPlayer, Players, IntentReset, legs, touchCount, startScore, numLegs);
+            //}
 
 
         }

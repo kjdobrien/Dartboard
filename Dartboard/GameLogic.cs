@@ -171,10 +171,10 @@ namespace Dartboard
             }
         }
 
-        public static bool IsWinner(Player p, int legs)
+        public static bool IsWinner(Player p, int legs, string gesture)
         {
            
-            if (p.score == 0)
+            if (p.score == 0 && gesture == "double")
             {
                 
                 return true;              

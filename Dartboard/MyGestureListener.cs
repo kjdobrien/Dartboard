@@ -48,6 +48,8 @@ namespace Dartboard
         {
             // Increase touch count 
             touchCount++;
+            // Add gesture to list 
+            string gesture = "Single";
             // Clear garbage
             GC.Collect();
             // Get the current player 
@@ -96,9 +98,9 @@ namespace Dartboard
                 currentPlayer.Checkout.Text = " ";
             }
             // Check to see did the player win with the last dart 
-            if (GameLogic.IsWinner(currentPlayer, legs))
+            if (GameLogic.IsWinner(currentPlayer, legs, gesture))
             {
-                e.
+                
                 touchCount = 0;
                 legs -= 1;
                 currentPlayer.legsWon += 1;
@@ -119,6 +121,8 @@ namespace Dartboard
         public override bool OnDoubleTap(MotionEvent e)
         {
             touchCount++;
+            // Add gesture to list 
+            string gesture = "Double";
             GC.Collect();
             currentPlayer = GameLogic.WhosTurn(MainActivity.testPlayer, MainActivity.player2);
             Console.WriteLine("Double Tap");
@@ -152,7 +156,7 @@ namespace Dartboard
                 currentPlayer.Checkout.Text = " ";
             }
 
-            if (GameLogic.IsWinner(currentPlayer, legs))
+            if (GameLogic.IsWinner(currentPlayer, legs, gesture))
             {
                 touchCount = 0;
                 legs -= 1;
@@ -170,6 +174,8 @@ namespace Dartboard
         public override void OnLongPress(MotionEvent e)
         {
             touchCount++;
+            // Add gesture to list 
+            string gesture = "double";
             GC.Collect();
             currentPlayer = GameLogic.WhosTurn(MainActivity.testPlayer, MainActivity.player2);
             Console.WriteLine("Long Press");
@@ -202,7 +208,7 @@ namespace Dartboard
             {
                 currentPlayer.Checkout.Text = " ";
             }
-            if (GameLogic.IsWinner(currentPlayer, legs))
+            if (GameLogic.IsWinner(currentPlayer, legs, gesture))
             {
                 touchCount = 0;
                 legs -= 1;
