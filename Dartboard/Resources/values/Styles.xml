@@ -5,6 +5,7 @@
   <color name="white">#FFFFFF</color>
   <color name="red">#FF0000</color>
   <color name="lightBlue">#8FB8ED</color>
+  <color name="green">#31a447</color>
   
     <style name="DartsAppStyle" parent="Theme.AppCompat.Light">
       

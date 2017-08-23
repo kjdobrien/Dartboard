@@ -10,6 +10,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
+
 namespace Dartboard
 {
     static class GameLogic
@@ -56,17 +57,15 @@ namespace Dartboard
             player.ScoreBoard.Text = scoreBoard;
         }
 
-        public static bool CheckBust(int score, Player currentPlayer, Context c, int touchCount )
-        {
-            if (score > currentPlayer.score || currentPlayer.score - score == 1)
+        public static bool CheckBust(int score, Player currentPlayer, Context c, int touchCount, string gesture)
+        {                                
+            if (score > currentPlayer.score || currentPlayer.score - score == 1 || (currentPlayer.score - score == 0 && gesture != "double"))
             {
-
                 return true;
             }
             else
             {
-                
-                return false; 
+                return false;
             }
         }
 
@@ -171,16 +170,17 @@ namespace Dartboard
             }
         }
 
-        public static bool IsWinner(Player p, int legs, string gesture)
+        public static bool IsWinner(Player currentPlayer, int legs, string gesture)
         {
-           
-            if (p.score == 0 && gesture == "double")
+            // TODO: needs to say bust when a player hits the right number but not as a double 
+            if (currentPlayer.score == 0 && gesture == "double")
             {
                 
                 return true;              
             }
             else
             {
+                
                 return false;
             }
 
@@ -238,6 +238,16 @@ namespace Dartboard
         public static void UndoLastScore(Player currentPlayer, int score)
         {
             currentPlayer.score += score; 
+        }
+
+        public static void DisplayScore(Context c, int score)
+        {
+
+            Toast toast = Toast.MakeText(c, String.Format("{0}", score), ToastLength.Short);
+            toast.SetGravity(GravityFlags.Top, 0, 0);
+            View v = toast.View;
+            v.SetBackgroundColor(Android.Graphics.Color.ParseColor("#31A447"));
+            toast.Show();
         }
 
 

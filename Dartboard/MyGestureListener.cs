@@ -49,7 +49,7 @@ namespace Dartboard
             // Increase touch count 
             touchCount++;
             // Add gesture to list 
-            string gesture = "Single";
+            string gesture = "single";
             // Clear garbage
             GC.Collect();
             // Get the current player 
@@ -74,17 +74,21 @@ namespace Dartboard
             Console.WriteLine(score);
 
             // Check for bust
-            if (GameLogic.CheckBust(score, currentPlayer, activity, touchCount))
+            if (GameLogic.CheckBust(score, currentPlayer, activity, touchCount, gesture))
             {
                 // Display toast message 
                 Toast toast = Toast.MakeText(activity, "Bust", ToastLength.Short);
                 toast.SetGravity(GravityFlags.Center, 0, 0);
+                View v = toast.View;
+                v.SetBackgroundColor(Android.Graphics.Color.ParseColor("#31A447"));
                 toast.Show();
                 touchCount = 0;
                 GameLogic.FinishedTurn(activity.Players, currentPlayer, touchCount);
             }
             else
             {
+                // Display the score
+                GameLogic.DisplayScore(activity, score);
                 // Subtract the score
                 GameLogic.ThrowDart(currentPlayer, touchCount, score);
             }
@@ -122,7 +126,7 @@ namespace Dartboard
         {
             touchCount++;
             // Add gesture to list 
-            string gesture = "Double";
+            string gesture = "double";
             GC.Collect();
             currentPlayer = GameLogic.WhosTurn(MainActivity.testPlayer, MainActivity.player2);
             Console.WriteLine("Double Tap");
@@ -135,10 +139,12 @@ namespace Dartboard
             score = board.ColorScores.FirstOrDefault(k => k.Value == myColor).Key;
             GameLogic.ResetCounters(previousTurn, touchCount);
             Console.WriteLine(score);
-            if (GameLogic.CheckBust(score, currentPlayer, activity, touchCount))
+            if (GameLogic.CheckBust(score, currentPlayer, activity, touchCount, gesture))
             {
                 Toast toast = Toast.MakeText(activity, "Bust", ToastLength.Short);
                 toast.SetGravity(GravityFlags.Center, 0, 0);
+                View v = toast.View;
+                v.SetBackgroundColor(Android.Graphics.Color.ParseColor("#31A447"));
                 toast.Show();
                 touchCount = 0;
                 GameLogic.FinishedTurn(activity.Players, currentPlayer, touchCount);
@@ -163,6 +169,7 @@ namespace Dartboard
                 currentPlayer.legsWon += 1;
                 GameLogic.ShowWinDialog(activity, currentPlayer, activity.Players, blankIntent, legs, touchCount, startScore, numLegs);
             }
+           
             if (touchCount == 3)
             {
                 touchCount = 0;
@@ -175,7 +182,7 @@ namespace Dartboard
         {
             touchCount++;
             // Add gesture to list 
-            string gesture = "double";
+            string gesture = "treble";
             GC.Collect();
             currentPlayer = GameLogic.WhosTurn(MainActivity.testPlayer, MainActivity.player2);
             Console.WriteLine("Long Press");
@@ -188,10 +195,12 @@ namespace Dartboard
             score = board.ColorScores.FirstOrDefault(k => k.Value == myColor).Key;
             GameLogic.ResetCounters(previousTurn, touchCount);
             Console.WriteLine(score);
-            if (GameLogic.CheckBust(score, currentPlayer, activity, touchCount))
+            if (GameLogic.CheckBust(score, currentPlayer, activity, touchCount, gesture))
             {
                 Toast toast = Toast.MakeText(activity, "Bust", ToastLength.Short);
                 toast.SetGravity(GravityFlags.Center, 0, 0);
+                View v = toast.View;
+                v.SetBackgroundColor(Android.Graphics.Color.ParseColor("#31A447"));
                 toast.Show();
                 touchCount = 0; 
                 GameLogic.FinishedTurn(activity.Players, currentPlayer, touchCount);
