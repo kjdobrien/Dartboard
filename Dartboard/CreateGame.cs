@@ -60,7 +60,7 @@ namespace Dartboard
 
             };
 
-            
+            PlayerNames.ItemClick += PlayerNames_ItemClick;
             
             // Get Start Score
             Spinner selectStartScore = FindViewById<Spinner>(Resource.Id.startScoreSpinner);
@@ -105,6 +105,20 @@ namespace Dartboard
             
         }
 
+        private void PlayerNames_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
+        {
+            nameAdapter.Remove(items[e.Position]);
+            RunOnUiThread(() =>
+            {
+                nameAdapter.NotifyDataSetChanged();
+            });
+            var addName = new Android.Support.V7.App.AlertDialog.Builder(this);
+            addName.SetView(Resource.Layout.NamePlayer);
+            addName.SetPositiveButton("Enter", HandlePositiveButtonClick);
+            Dialog nameDialog = addName.Create();
+            nameDialog.Show();
+        }
+
         private void spinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
         {
             Spinner spinner = (Spinner)sender;
@@ -121,6 +135,7 @@ namespace Dartboard
 
         }
 
+        
         private void HandlePositiveButtonClick(object sender, DialogClickEventArgs e)
         {
             var dialog = (Android.Support.V7.App.AlertDialog)sender;
@@ -132,6 +147,7 @@ namespace Dartboard
             { 
                 nameAdapter.NotifyDataSetChanged();
             });
+
             if (PlayerNames.Count == 2)
             {
                 AddPlayer.Enabled = false;
