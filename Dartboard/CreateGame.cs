@@ -107,16 +107,18 @@ namespace Dartboard
 
         private void PlayerNames_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
-            nameAdapter.Remove(items[e.Position]);
-            RunOnUiThread(() =>
+            try
             {
+                nameAdapter.Remove(items[e.Position]);
+                AddPlayer.Enabled = true;
                 nameAdapter.NotifyDataSetChanged();
-            });
-            var addName = new Android.Support.V7.App.AlertDialog.Builder(this);
-            addName.SetView(Resource.Layout.NamePlayer);
-            addName.SetPositiveButton("Enter", HandlePositiveButtonClick);
-            Dialog nameDialog = addName.Create();
-            nameDialog.Show();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+          
+
         }
 
         private void spinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
