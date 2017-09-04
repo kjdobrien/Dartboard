@@ -60,7 +60,8 @@ namespace Dartboard
 
             };
 
-            PlayerNames.ItemClick += PlayerNames_ItemClick;
+            // Removed until I know what the fuck I'm doing with it 
+            //PlayerNames.ItemClick += PlayerNames_ItemClick;
             
             // Get Start Score
             Spinner selectStartScore = FindViewById<Spinner>(Resource.Id.startScoreSpinner);
@@ -105,13 +106,30 @@ namespace Dartboard
             
         }
 
+        
+
         private void PlayerNames_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
             try
             {
+
+                Console.WriteLine(e.Position);
+                items.RemoveAt(e.Position);
                 nameAdapter.Remove(items[e.Position]);
+
+                RunOnUiThread(() =>
+                {
+                    nameAdapter.NotifyDataSetChanged();
+                });
+
                 AddPlayer.Enabled = true;
-                nameAdapter.NotifyDataSetChanged();
+
+                
+
+                foreach (string n in items)
+                {
+                    Console.WriteLine("This should be a name: " + n);
+                }
             }
             catch (Exception ex)
             {
@@ -156,6 +174,10 @@ namespace Dartboard
 
             }
             StartGame.Enabled = true;
+            foreach (string n in items)
+            {
+                Console.WriteLine("This should be a name: " + n);
+            }
 
         }
     }

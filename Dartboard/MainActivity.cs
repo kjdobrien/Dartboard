@@ -22,7 +22,7 @@ namespace Dartboard
         // default
         int legs = 0;
         int numLegs;
-        Board board = new Board();
+        public static Board board = new Board();
 
         
         
@@ -143,7 +143,11 @@ namespace Dartboard
         protected override void OnResume()
         {
             base.OnResume();
-
+            //GameLogic.GetCheckout(testPlayer, board, touchCount);
+            //if (player2 != null)
+            //{
+            //    GameLogic.GetCheckout(player2, board, touchCount);
+            //}
             GC.Collect();
             currentPlayer = GameLogic.WhosTurn(testPlayer, player2);
             MyGestureListener myGestureListener = new MyGestureListener(score, currentPlayer, this, touchCount, previousTurn, legs, startScore, numLegs);

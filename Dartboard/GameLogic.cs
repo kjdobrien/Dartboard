@@ -146,7 +146,7 @@ namespace Dartboard
                 }
                 else
                 {                   
-                    player.Checkout.Text = " ";
+                    player.Checkout.Text = "No Checkout";
                 }
             }
             else if (touchCount == 1)
@@ -157,7 +157,7 @@ namespace Dartboard
                 }
                 else
                 {
-                    player.Checkout.Text = " ";
+                    player.Checkout.Text = "No Checkout";
                 }
             }
             else if (player.score <= 40 && player.score % 2 == 0)
@@ -166,7 +166,7 @@ namespace Dartboard
             }
             else
             {
-                player.Checkout.Text = " ";
+                player.Checkout.Text = "No Checkout";
             }
         }
 
