@@ -10,13 +10,13 @@
         android:layout_height="fill_parent"
         android:scaleType="fitCenter"
         android:visibility="invisible"
-        android:src="@drawable/dartboardoverlay" />
+        android:src="@drawable/dartboardSegmentsOverlay" />
     <ImageView
         android:id="@+id/dartboard"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:scaleType="fitCenter"
-        android:src="@drawable/dartboard" />
+        android:src="@drawable/dartboardSegments" />
     <TextView
         android:text="Player 1"
         android:layout_width="match_parent"
