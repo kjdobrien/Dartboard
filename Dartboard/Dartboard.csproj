@@ -95,6 +95,7 @@
   <ItemGroup>
     <Compile Include="Board.cs" />
     <Compile Include="CreateGame.cs" />
+    <Compile Include="FileManager.cs" />
     <Compile Include="GameLogic.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="MyGestureListener.cs" />

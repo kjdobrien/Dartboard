@@ -9,21 +9,25 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using System.IO;
 
 namespace Dartboard
 {
-    [Activity(Label = "CreateGame", Theme="@style/DartsAppStyle")]
+    [Activity(Label = "CreateGame", Theme = "@style/DartsAppStyle")]
     public class CreateGame : Activity
     {
         int startingScore;
         int numLegs;
-        EditText nameEditText;
+        //EditText nameEditText;
+        
         List<string> items;
         ArrayAdapter<string> nameAdapter;
+        ArrayAdapter autoCompleteAdapter;
+        string[] Names =  new string[5]; 
         ListView PlayerNames;
         Button StartGame;
         Button AddPlayer;
-       
+
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -34,6 +38,11 @@ namespace Dartboard
             StartGame = FindViewById<Button>(Resource.Id.startGame);
             StartGame.Enabled = false;
 
+
+            if (!Directory.Exists(FileManager.RestoreDirectory))
+            {
+                Directory.CreateDirectory(FileManager.RestoreDirectory);
+            }
             
 
             // Initialize listView
@@ -42,27 +51,33 @@ namespace Dartboard
             nameAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, items);
             PlayerNames.Adapter = nameAdapter;
 
+            
+
             // Get Player Name
             AddPlayer = FindViewById<Button>(Resource.Id.addPlayer);
-            
-           
-            AddPlayer.Click += delegate 
+
+
+            AddPlayer.Click += delegate
             {
+                var autoCompleteOptions = FileManager.Names;
+                ArrayAdapter autoCompleteAdapter = new ArrayAdapter(this, Android.Resource.Layout.SimpleDropDownItem1Line, autoCompleteOptions);
+
+
                 //AlertDialog.Builder 
                 var addName = new Android.Support.V7.App.AlertDialog.Builder(this);
-                addName.SetView(Resource.Layout.NamePlayer);               
+                addName.SetView(Resource.Layout.NamePlayer);
                 addName.SetPositiveButton("Enter", HandlePositiveButtonClick);
-                
+
                 Dialog nameDialog = addName.Create();
                 nameDialog.Show();
-                                                                 
-              
+
+
 
             };
 
             // Removed until I know what the fuck I'm doing with it 
             //PlayerNames.ItemClick += PlayerNames_ItemClick;
-            
+
             // Get Start Score
             Spinner selectStartScore = FindViewById<Spinner>(Resource.Id.startScoreSpinner);
             selectStartScore.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs>(spinner_ItemSelected);
@@ -73,20 +88,21 @@ namespace Dartboard
             // Get Number of legs
             Spinner legSpinner = FindViewById<Spinner>(Resource.Id.legsSpinner);
             legSpinner.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs>(legSpinner_ItemSelected);
-            var legAdapter = ArrayAdapter.CreateFromResource(this, Resource.Array.legsArray, Android.Resource.Layout.SimpleSpinnerDropDownItem);   
+            var legAdapter = ArrayAdapter.CreateFromResource(this, Resource.Array.legsArray, Android.Resource.Layout.SimpleSpinnerDropDownItem);
             legAdapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
             legSpinner.Adapter = legAdapter;
 
-           
+            FileManager.ReadFromFile();
 
-            StartGame.Click += delegate 
+            StartGame.Click += delegate
             {
 
                 Console.WriteLine(startingScore);
                 Console.WriteLine(numLegs);
 
+                FileManager.WriteToFile(Names);
 
-                string p1name = items[0];              
+                string p1name = items[0];
                 Intent intent = new Intent(this, typeof(MainActivity));
                 intent.PutStringArrayListExtra("playerNames", items);
                 intent.PutExtra("p1name", p1name);
@@ -97,16 +113,16 @@ namespace Dartboard
                     string p2name = items[1];
                     intent.PutExtra("p2name", p2name);
                 }
-                
-                StartActivity(intent); 
-                
+
+                StartActivity(intent);
+
             };
 
 
-            
+
         }
 
-        
+
 
         private void PlayerNames_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
@@ -124,25 +140,22 @@ namespace Dartboard
 
                 AddPlayer.Enabled = true;
 
-                
 
-                foreach (string n in items)
-                {
-                    Console.WriteLine("This should be a name: " + n);
-                }
+
+
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
-          
+
 
         }
 
         private void spinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
         {
             Spinner spinner = (Spinner)sender;
-            string startScore =  Convert.ToString(spinner.GetItemAtPosition(e.Position));
+            string startScore = Convert.ToString(spinner.GetItemAtPosition(e.Position));
             startingScore = Convert.ToInt32(startScore);
 
         }
@@ -155,16 +168,26 @@ namespace Dartboard
 
         }
 
-        
+
         private void HandlePositiveButtonClick(object sender, DialogClickEventArgs e)
         {
-            var dialog = (Android.Support.V7.App.AlertDialog)sender;
-            nameEditText = (EditText)dialog.FindViewById(Resource.Id.playerName);
-            string name = nameEditText.Text;
-            items.Add(name);         
+            var dialog = (Android.Support.V7.App.AlertDialog)sender;   
+            
+           
+
+            var autocompleteTextView = dialog.FindViewById<AutoCompleteTextView>(Resource.Id.playerNameAuto);
+            autocompleteTextView.Adapter = autoCompleteAdapter;
+            
+            //nameEditText = (EditText)dialog.FindViewById(Resource.Id.playerName);
+
+
+            string name = autocompleteTextView.Text;
+
+            items.Add(name);
+            Names.Append(name);
             nameAdapter.Add(name);
             RunOnUiThread(() =>
-            { 
+            {
                 nameAdapter.NotifyDataSetChanged();
             });
 
@@ -174,11 +197,10 @@ namespace Dartboard
 
             }
             StartGame.Enabled = true;
-            foreach (string n in items)
-            {
-                Console.WriteLine("This should be a name: " + n);
-            }
-
+     
+            
         }
+
+        
     }
 }

@@ -2001,7 +2001,7 @@ namespace Dartboard
 			public const int parentPanel = 2131361840;
 			
 			// aapt resource value: 0x7f0a0066
-			public const int playerName = 2131361894;
+			public const int playerNameAuto = 2131361894;
 			
 			// aapt resource value: 0x7f0a0057
 			public const int playerNames = 2131361879;

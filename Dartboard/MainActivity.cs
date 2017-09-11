@@ -143,16 +143,17 @@ namespace Dartboard
         protected override void OnResume()
         {
             base.OnResume();
-            GameLogic.GetCheckout(testPlayer, board, touchCount);
-            if (player2 != null)
-            {
-                GameLogic.GetCheckout(player2, board, touchCount);
-            }
+            
             GC.Collect();
             currentPlayer = GameLogic.WhosTurn(testPlayer, player2);
             MyGestureListener myGestureListener = new MyGestureListener(score, currentPlayer, this, touchCount, previousTurn, legs, startScore, numLegs);
             _gestureDetector = new GestureDetector(this, myGestureListener);
 
+            //GameLogic.GetCheckout(testPlayer, board, touchCount);
+            //if (player2 != null)
+            //{
+            //    GameLogic.GetCheckout(player2, board, touchCount);
+            //} // Was causing null reference exception for some reason 
             undo.Click += myGestureListener.UndoButton;
 
             //if (GameLogic.IsWinner(currentPlayer, legs, ))

@@ -1,7 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="Dartboard.Dartboard" android:versionCode="1" android:versionName="1.0" android:installLocation="auto">
 	<uses-sdk android:minSdkVersion="15" android:targetSdkVersion="25" />
-	<application android:label="Dartboard">
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+	<application android:label="Dartboard" android:icon="@drawable/launcherIcon48x48">
 		<activity android:name=".CreateName" android:theme="@style/DartsAppStyle"></activity>
 		<activity android:name=".Main" android:theme="@style/DartsAppStyle"></activity>
 	</application>
