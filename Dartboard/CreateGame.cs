@@ -18,11 +18,11 @@ namespace Dartboard
     {
         int startingScore;
         int numLegs;
-        //EditText nameEditText;
+        EditText nameEditText;
         
         List<string> items;
         ArrayAdapter<string> nameAdapter;
-        ArrayAdapter autoCompleteAdapter;
+        //ArrayAdapter autoCompleteAdapter;
         string[] Names =  new string[5]; 
         ListView PlayerNames;
         Button StartGame;
@@ -39,10 +39,10 @@ namespace Dartboard
             StartGame.Enabled = false;
 
 
-            if (!Directory.Exists(FileManager.RestoreDirectory))
-            {
-                Directory.CreateDirectory(FileManager.RestoreDirectory);
-            }
+            //if (!Directory.Exists(FileManager.RestoreDirectory))
+            //{
+            //    Directory.CreateDirectory(FileManager.RestoreDirectory);
+            //}
             
 
             // Initialize listView
@@ -59,8 +59,8 @@ namespace Dartboard
 
             AddPlayer.Click += delegate
             {
-                var autoCompleteOptions = FileManager.Names;
-                ArrayAdapter autoCompleteAdapter = new ArrayAdapter(this, Android.Resource.Layout.SimpleDropDownItem1Line, autoCompleteOptions);
+                //var autoCompleteOptions = FileManager.Names;
+                //ArrayAdapter autoCompleteAdapter = new ArrayAdapter(this, Android.Resource.Layout.SimpleDropDownItem1Line, autoCompleteOptions);
 
 
                 //AlertDialog.Builder 
@@ -92,7 +92,7 @@ namespace Dartboard
             legAdapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
             legSpinner.Adapter = legAdapter;
 
-            FileManager.ReadFromFile();
+            //FileManager.ReadFromFile();
 
             StartGame.Click += delegate
             {
@@ -100,7 +100,7 @@ namespace Dartboard
                 Console.WriteLine(startingScore);
                 Console.WriteLine(numLegs);
 
-                FileManager.WriteToFile(Names);
+                //FileManager.WriteToFile(Names);
 
                 string p1name = items[0];
                 Intent intent = new Intent(this, typeof(MainActivity));
@@ -175,16 +175,17 @@ namespace Dartboard
             
            
 
-            var autocompleteTextView = dialog.FindViewById<AutoCompleteTextView>(Resource.Id.playerNameAuto);
-            autocompleteTextView.Adapter = autoCompleteAdapter;
+            //var autocompleteTextView = dialog.FindViewById<AutoCompleteTextView>(Resource.Id.playerNameAuto);
+            //autocompleteTextView.Adapter = autoCompleteAdapter;
             
-            //nameEditText = (EditText)dialog.FindViewById(Resource.Id.playerName);
+            nameEditText = (EditText)dialog.FindViewById(Resource.Id.playerName);
 
+            string name = nameEditText.Text;
 
-            string name = autocompleteTextView.Text;
+            //string name = autocompleteTextView.Text;
 
             items.Add(name);
-            Names.Append(name);
+            //Names.Append(name);
             nameAdapter.Add(name);
             RunOnUiThread(() =>
             {

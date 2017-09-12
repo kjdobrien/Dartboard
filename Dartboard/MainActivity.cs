@@ -11,7 +11,7 @@ using Android.Content;
 
 namespace Dartboard
 {
-    [Activity(Label = "Dartboard", MainLauncher = false, Icon = "@drawable/dartboard", Theme = "@style/DartsAppStyle")]
+    [Activity(Label = "Dartboard", MainLauncher = false, Icon = "@drawable/launcherIcon192x192", Theme = "@style/DartsAppStyle")]
     public class MainActivity : Activity
     {
 
@@ -52,12 +52,8 @@ namespace Dartboard
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-
-            
-
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
-
             Players = new List<Player>();
 
             using (StreamReader sr = new StreamReader(Assets.Open("Checkouts.txt")))
