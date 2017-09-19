@@ -8,11 +8,12 @@ using System.IO;
 using System.Linq;
 using System.Collections.Generic;
 using Android.Content;
+using Android.Support.V7.App;
 
 namespace Dartboard
 {
     [Activity(Label = "Dartboard", MainLauncher = false, Icon = "@drawable/launcherIcon192x192", Theme = "@style/DartsAppStyle")]
-    public class MainActivity : Activity
+    public class MainActivity : AppCompatActivity
     {
 
         ImageView img;
