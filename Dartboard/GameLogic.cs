@@ -130,7 +130,7 @@ namespace Dartboard
 
         
 
-        public static void GetCheckout(Player player, Board board, int touchCount)
+        public static void GetCheckout(Player player, int touchCount)
         {
 
             string value;
@@ -138,7 +138,7 @@ namespace Dartboard
             if (touchCount == 0 || touchCount == 3)
             {
 
-                if (board.Checkouts.TryGetValue(player.score, out value))
+                if (Board.Checkouts.TryGetValue(player.score, out value))
                 {
                     
                     player.Checkout.Text = value;
@@ -151,7 +151,7 @@ namespace Dartboard
             }
             else if (touchCount == 1)
             {
-                if (board.TwoDartCheckouts.TryGetValue(player.score, out value))
+                if (Board.TwoDartCheckouts.TryGetValue(player.score, out value))
                 {
                     player.Checkout.Text = value;
                 }

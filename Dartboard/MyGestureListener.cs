@@ -69,7 +69,7 @@ namespace Dartboard
             int touchColour = activity.getColorHotspot(Resource.Id.dartboardoverlay,x, y);
             Color myColor = new Color(touchColour);
             // Use colour to get score 
-            score = MainActivity.board.ColorScores.FirstOrDefault(k => k.Value == myColor).Key;
+            score = Board.ColorScores.FirstOrDefault(k => k.Value == myColor).Key;
 
             GameLogic.ResetCounters(previousTurn, touchCount);        
             Console.WriteLine(score);
@@ -96,7 +96,7 @@ namespace Dartboard
             // Display the best check out if available 
             if (currentPlayer.score <= 170)
             {
-                try { GameLogic.GetCheckout(currentPlayer, MainActivity.board, touchCount); }
+                try { GameLogic.GetCheckout(currentPlayer, touchCount); }
                 catch (Exception ex) { Console.WriteLine(ex.Message); }
             }
             else
@@ -138,7 +138,7 @@ namespace Dartboard
             var y = (int)e.GetY();
             int touchColour = activity.getColorHotspot(Resource.Id.dartboardoverlay, x, y);
             Color myColor = new Color(touchColour);
-            score = MainActivity.board.ColorScores.FirstOrDefault(k => k.Value == myColor).Key;
+            score = Board.ColorScores.FirstOrDefault(k => k.Value == myColor).Key;
             GameLogic.ResetCounters(previousTurn, touchCount);
             Console.WriteLine(score);
             if (GameLogic.CheckBust(score, currentPlayer, activity, touchCount, gesture))
@@ -153,11 +153,24 @@ namespace Dartboard
             }
             else
             {
-                GameLogic.ThrowDartDouble(currentPlayer, touchCount, score);
+                if (score == 25 || score == 50)
+                {
+                    // Display the score
+                    GameLogic.DisplayScore(activity, score);
+                    // Subtract the score
+                    GameLogic.ThrowDart(currentPlayer, touchCount, score);
+                }
+                else
+                {
+
+                    GameLogic.DisplayScore(activity, score * 2);
+                    GameLogic.ThrowDartDouble(currentPlayer, touchCount, score);
+                }
+               
             }
             if (currentPlayer.score <= 170)
             {
-                GameLogic.GetCheckout(currentPlayer, MainActivity.board, touchCount);
+                GameLogic.GetCheckout(currentPlayer, touchCount);
             }
             else
             {
@@ -194,7 +207,7 @@ namespace Dartboard
             var y = (int)e.GetY();
             int touchColour = activity.getColorHotspot(Resource.Id.dartboardoverlay, x, y);
             Color myColor = new Color(touchColour);
-            score = MainActivity.board.ColorScores.FirstOrDefault(k => k.Value == myColor).Key;
+            score = Board.ColorScores.FirstOrDefault(k => k.Value == myColor).Key;
             GameLogic.ResetCounters(previousTurn, touchCount);
             Console.WriteLine(score);
             if (GameLogic.CheckBust(score, currentPlayer, activity, touchCount, gesture))
@@ -209,11 +222,22 @@ namespace Dartboard
             }
             else
             {
-                GameLogic.ThrowDartTreble(currentPlayer, touchCount, score);
+                if (score == 25 || score == 50)
+                {
+                    // Display the score
+                    GameLogic.DisplayScore(activity, score);
+                    // Subtract the score
+                    GameLogic.ThrowDart(currentPlayer, touchCount, score);
+                }
+                else
+                {
+                    GameLogic.DisplayScore(activity, score * 3);
+                    GameLogic.ThrowDartTreble(currentPlayer, touchCount, score);
+                }
             }
             if (currentPlayer.score <= 170)
             {
-                GameLogic.GetCheckout(currentPlayer, MainActivity.board, touchCount);
+                GameLogic.GetCheckout(currentPlayer, touchCount);
             }
             else
             {

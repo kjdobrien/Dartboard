@@ -11,6 +11,7 @@ using Android.Views;
 using Android.Widget;
 using System.Threading.Tasks;
 using Android.Util;
+using System.IO;
 
 namespace Dartboard
 {
@@ -23,9 +24,37 @@ namespace Dartboard
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-        
+
             // Create your application here
-            
+
+            using (StreamReader sr = new StreamReader(Assets.Open("Checkouts.txt")))
+            {
+                char[] delim = { ':' };
+                string line;
+                while ((line = sr.ReadLine()) != null)
+                {
+                    string[] words = line.Split(delim);
+                    int scoreValue;
+                    int.TryParse(words[0], out scoreValue);
+                    string bestCheckout = words[1];
+                    Board.Checkouts.Add(scoreValue, bestCheckout);
+                }
+            }
+
+            using (StreamReader sr = new StreamReader(Assets.Open("twoDartCheckouts.txt")))
+            {
+                char[] delim = { ':' };
+                string line;
+                while ((line = sr.ReadLine()) != null)
+                {
+                    string[] words = line.Split(delim);
+                    int scoreValue;
+                    int.TryParse(words[0], out scoreValue);
+                    string bestCheckout = words[1];
+                    Board.TwoDartCheckouts.Add(scoreValue, bestCheckout);
+                }
+            }
+
         }
 
         protected override void OnResume()

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout 
-  xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/Main"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -17,38 +16,49 @@
         android:layout_height="fill_parent"
         android:scaleType="fitCenter"
         android:src="@drawable/dartboard" />
-    <TextView
-        android:text="Player 1"
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="Player 1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:textSize="40dp"
+            android:id="@+id/dart1" />
+        <TextView
+            android:text="Checkout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:textSize="40dp"
+            android:id="@+id/Checkout"
+            android:fontFamily="@string/abc_font_family_caption_material" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="left"
-        android:textSize="48px"
-        android:id="@+id/dart1" />
-    <TextView
-        android:text="Checkout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="right"
-        android:textSize="48px"
-        android:id="@+id/Checkout"
-        android:fontFamily="@string/abc_font_family_caption_material" />
-    <TextView
-        android:text="Player 2 "
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="left"
-        android:textSize="48px"
-        android:layout_marginTop="25dp"
-        android:id="@+id/dart2" />
-    <TextView
-        android:text="Checkout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="right"
-        android:textSize="48px"
-        android:layout_marginTop="25dp"
-        android:id="@+id/Checkout2"
-        android:fontFamily="@string/abc_font_family_caption_material" />
+        android:layout_marginTop="12dp">    
+        <TextView 
+            android:text="Player 2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:textSize="40dp"
+            android:layout_marginTop="25dp"
+            android:id="@+id/dart2" />
+        <TextView
+            android:text="Checkout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:textSize="40dp"
+            android:layout_marginTop="25dp"
+            android:id="@+id/Checkout2"
+            android:fontFamily="@string/abc_font_family_caption_material" />
+    </LinearLayout>
     <Button
         style="@style/buttonColor"
         android:text="Undo"

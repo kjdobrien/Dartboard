@@ -489,6 +489,9 @@ namespace Dartboard
 			// aapt resource value: 0x7f0100ac
 			public const int measureWithLargestChild = 2130772140;
 			
+			// aapt resource value: 0x7f0100e7
+			public const int minTextSize = 2130772199;
+			
 			// aapt resource value: 0x7f010023
 			public const int multiChoiceItemLayout = 2130772003;
 			
@@ -533,6 +536,9 @@ namespace Dartboard
 			
 			// aapt resource value: 0x7f01006a
 			public const int popupWindowStyle = 2130772074;
+			
+			// aapt resource value: 0x7f0100e8
+			public const int precision = 2130772200;
 			
 			// aapt resource value: 0x7f0100b3
 			public const int preserveIconSpacing = 2130772147;
@@ -593,6 +599,9 @@ namespace Dartboard
 			
 			// aapt resource value: 0x7f010024
 			public const int singleChoiceItemLayout = 2130772004;
+			
+			// aapt resource value: 0x7f0100e9
+			public const int sizeToFit = 2130772201;
 			
 			// aapt resource value: 0x7f0100a5
 			public const int spinBars = 2130772133;
@@ -4289,6 +4298,20 @@ namespace Dartboard
 			
 			// aapt resource value: 3
 			public const int AppCompatTheme_windowNoTitle = 3;
+			
+			public static int[] AutofitTextView = new int[] {
+					2130772199,
+					2130772200,
+					2130772201};
+			
+			// aapt resource value: 0
+			public const int AutofitTextView_minTextSize = 0;
+			
+			// aapt resource value: 1
+			public const int AutofitTextView_precision = 1;
+			
+			// aapt resource value: 2
+			public const int AutofitTextView_sizeToFit = 2;
 			
 			public static int[] ButtonBarLayout = new int[] {
 					2130772128};

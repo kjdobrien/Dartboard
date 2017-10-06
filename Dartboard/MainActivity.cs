@@ -23,7 +23,7 @@ namespace Dartboard
         // default
         int legs = 0;
         int numLegs;
-        public static Board board = new Board();
+        
 
         
         
@@ -57,33 +57,7 @@ namespace Dartboard
             SetContentView(Resource.Layout.Main);
             Players = new List<Player>();
 
-            using (StreamReader sr = new StreamReader(Assets.Open("Checkouts.txt")))
-            {
-                char[] delim = { ':' };
-                string line;
-                while( (line = sr.ReadLine()) != null)
-                {                    
-                    string[] words = line.Split(delim);
-                    int scoreValue;
-                    int.TryParse(words[0], out scoreValue);
-                    string bestCheckout = words[1];
-                    board.Checkouts.Add(scoreValue, bestCheckout); 
-                }
-            }
-
-            using (StreamReader sr = new StreamReader(Assets.Open("twoDartCheckouts.txt")))
-            {
-                char[] delim = { ':' };
-                string line;
-                while ((line = sr.ReadLine()) != null)
-                {
-                    string[] words = line.Split(delim);
-                    int scoreValue;
-                    int.TryParse(words[0], out scoreValue);
-                    string bestCheckout = words[1];
-                    board.TwoDartCheckouts.Add(scoreValue, bestCheckout);
-                }
-            }
+     
 
             startScore = Intent.GetIntExtra("startingScore", 101);
             legs = Intent.GetIntExtra("numLegs", 1);
