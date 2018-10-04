@@ -43,6 +43,11 @@ namespace Dartboard
             
         }
 
+        public static void ThrowDart(Player player, int score)
+        {
+            player.score -= score;
+        }
+
         public static void SwitchPlayer(Player p1, Player p2)
         {
 
@@ -50,16 +55,16 @@ namespace Dartboard
             p2.turn = !p2.turn;
 
 
-            if (p1.turn)
-            {
-                p1.ScoreBoard.SetTextColor(Android.Graphics.Color.Red);
-                p2.ScoreBoard.SetTextColor(Android.Graphics.Color.Gainsboro);
-            }
-            else
-            {
-                p1.ScoreBoard.SetTextColor(Android.Graphics.Color.Gainsboro);
-                p2.ScoreBoard.SetTextColor(Android.Graphics.Color.Red);
-            }
+            //if (p1.turn)
+            //{
+            //    p1.ScoreBoard.SetTextColor(Android.Graphics.Color.Red);
+            //    p2.ScoreBoard.SetTextColor(Android.Graphics.Color.Gainsboro);
+            //}
+            //else
+            //{
+            //    p1.ScoreBoard.SetTextColor(Android.Graphics.Color.Gainsboro);
+            //    p2.ScoreBoard.SetTextColor(Android.Graphics.Color.Red);
+            //}
             
 
 
@@ -78,7 +83,8 @@ namespace Dartboard
                 return false;
             }
         }
-
+        
+        // Touch version 
         public static void GetCheckout(Player player, Board board, int touchCount)
         {
 
@@ -118,6 +124,16 @@ namespace Dartboard
                 player.Checkout.Text = " ";
             }
         }
+
+        public static string GetCheckout(Player player, Board board)
+        {
+            string value;
+            board.Checkouts.TryGetValue(player.score, out value);
+            return value;
+           
+        }
+
+
 
         public static bool IsWinner(Player p, int legs)
         {

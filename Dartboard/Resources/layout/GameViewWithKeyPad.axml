@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		android:id="@+id/playerScoresLayout">
+
+		<LinearLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:orientation="vertical"
+			android:layout_weight="1"
+			android:id="@+id/player1Details">
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="Player 1"
+				android:gravity="center_horizontal"
+				android:textSize="25dp"
+				android:id="@+id/player1Name"/>
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="170"
+				android:textSize="50dp"
+				android:gravity="center_horizontal"
+				android:id="@+id/player1Score"/>
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="D20 D20 BULL"
+				android:gravity="center_horizontal"
+				android:visibility="invisible"
+				android:id="@+id/player1CheckOut"/>
+		</LinearLayout>
+
+		<LinearLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:orientation="vertical"
+			android:layout_weight="1"
+			android:id="@+id/player2Details">
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:textSize="25dp"
+				android:text="Player 2"
+				android:gravity="center_horizontal"
+				android:id="@+id/player2Name"/>
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="190"
+				android:textSize="50dp"
+				android:gravity="center_horizontal"
+				android:id="@+id/player2Score"/>
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="D20 D20 BULL"
+				android:gravity="center_horizontal"
+				android:visibility="invisible"
+				android:id="@+id/player2CheckOut"/>
+		</LinearLayout>
+
+
+	</LinearLayout>
+
+	<RelativeLayout 
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/dataEntryPoint"
+		android:layout_below="@id/playerScoresLayout">
+
+		<EditText
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:id="@+id/scoreEditText"
+			android:hint="Enter Score"
+			android:layout_above="@+id/customKBD"
+			android:maxLength="3"
+		/>
+		<android.inputmethodservice.KeyboardView
+			android:id="@+id/customKBD"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:layout_centerHorizontal="true"
+			android:focusable="true"
+			android:layout_alignParentBottom="true"
+			android:focusableInTouchMode="true"
+		/>
+
+
+	</RelativeLayout>
+
+</RelativeLayout>

@@ -96,6 +96,8 @@
     <Compile Include="Board.cs" />
     <Compile Include="CreateGame.cs" />
     <Compile Include="GameLogic.cs" />
+    <Compile Include="GameViewWithKeyboard.cs" />
+    <Compile Include="KeyboardListerner.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
@@ -215,6 +217,17 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Colors.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\GameViewWithKeyPad.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\dartsNumberPad.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\xml\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

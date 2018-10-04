@@ -86,7 +86,7 @@ namespace Dartboard
 
 
                 string p1name = items[0];              
-                Intent intent = new Intent(this, typeof(MainActivity));
+                Intent intent = new Intent(this, typeof(GameViewWithKeyboard));
                 intent.PutStringArrayListExtra("playerNames", items);
                 intent.PutExtra("p1name", p1name);
                 intent.PutExtra("startingScore", startingScore);

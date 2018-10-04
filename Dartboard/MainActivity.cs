@@ -24,7 +24,7 @@ namespace Dartboard
         int numLegs;
         Board board = new Board();
         
-        Player testPlayer = new Player();
+        Player player1 = new Player();
         Player player2 = new Player();
         Player currentPlayer;
 
@@ -95,16 +95,16 @@ namespace Dartboard
             string p1name = Intent.GetStringExtra("p1name");
 
             // Setup Player 1 
-            Players.Add(testPlayer);
-            testPlayer.name = p1name;
-            testPlayer.turn = true;
-            testPlayer.score = startScore;
+            Players.Add(player1);
+            player1.name = p1name;
+            player1.turn = true;
+            player1.score = startScore;
             d1 = FindViewById<TextView>(Resource.Id.dart1);
             d1.Text = p1name;           
             Checkout = FindViewById<TextView>(Resource.Id.Checkout);
-            testPlayer.ScoreBoard = d1;
-            testPlayer.ScoreBoard.SetTextColor(Android.Graphics.Color.Red);
-            testPlayer.Checkout = FindViewById<TextView>(Resource.Id.Checkout);
+            player1.ScoreBoard = d1;
+            player1.ScoreBoard.SetTextColor(Android.Graphics.Color.Red);
+            player1.Checkout = FindViewById<TextView>(Resource.Id.Checkout);
 
 
             // Setup Player 2 
@@ -145,7 +145,7 @@ namespace Dartboard
         {
 
             GC.Collect();
-            currentPlayer  = GameLogic.WhosTurn(testPlayer, player2);
+            currentPlayer  = GameLogic.WhosTurn(player1, player2);
 
             if (GameLogic.IsWinner(currentPlayer, legs))
             {
@@ -234,7 +234,7 @@ namespace Dartboard
                     touchCount = 0;
                     if (Players.Count > 1)
                     {
-                        GameLogic.SwitchPlayer(testPlayer, player2);
+                        GameLogic.SwitchPlayer(player1, player2);
                     }
                                         
                 }

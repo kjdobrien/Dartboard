@@ -38,7 +38,6 @@ namespace Dartboard
 
         public List<int> Darts = new List<int>();
         public int d1, d2, d3;
-
     
 
         #region IParcelable implementation 
