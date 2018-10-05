@@ -24,16 +24,18 @@ namespace Dartboard
 
         private TextView player1Name;
         private TextView player2Name;
-        private TextView player1Score;
-        private TextView player2Score;
-        private TextView player1Checkout;
-        private TextView player2Checkout;
+        public TextView player1Score;
+        public TextView player2Score;
+        public TextView player1Checkout;
+        public TextView player2Checkout;
         int startScore;
-        int legs;
+        int legsPlayed;
+        int legsToPlay; 
         int score;
         Board board;
+        Intent IntentReset;
 
-
+        private List<Player> Players = new List<Player>();
         private Player Player1 = new Player();
         private Player Player2 = new Player(); 
 
@@ -59,7 +61,7 @@ namespace Dartboard
             Player1.name = Intent.GetStringExtra("p1name");
             Player2.name = Intent.GetStringExtra("p2name");
             startScore = Intent.GetIntExtra("startingScore", 101);
-            legs = Intent.GetIntExtra("numLegs", 1);
+            legsToPlay = Intent.GetIntExtra("numLegs", 1);
 
             player1Score.Text = startScore.ToString(); 
             player2Score.Text = startScore.ToString();
@@ -68,8 +70,10 @@ namespace Dartboard
             player2Name.Text = Player2.name; 
 
             Player1.score = startScore;
-            Player2.score = startScore; 
+            Player2.score = startScore;
 
+            Players.Add(Player1);
+            Players.Add(Player2); 
 
 
             // Get checkouts 
@@ -187,6 +191,11 @@ namespace Dartboard
             else
             {
                 GameLogic.ThrowDart(p, score);
+                if (GameLogic.IsWinner(p))
+                {
+                    GameLogic.ShowWinDialog(this, p, Players, IntentReset, legsPlayed, startScore, legsToPlay, this);
+
+                }
             }
         }
 

@@ -24,8 +24,8 @@ namespace Dartboard
             else
             {
 
-                p2.ScoreBoard.SetTextColor(Android.Graphics.Color.Red);
-                p1.ScoreBoard.SetTextColor(Android.Graphics.Color.Gainsboro);
+                //p2.ScoreBoard.SetTextColor(Android.Graphics.Color.Red);
+                //p1.ScoreBoard.SetTextColor(Android.Graphics.Color.Gainsboro);
 
 
                 return p2;
@@ -37,7 +37,7 @@ namespace Dartboard
         {
             player.score -= score;
             string scoreBoard = string.Format("{0}: {1} Dart: {2}",player.name,  player.score, dart);
-            player.ScoreBoard.Text = scoreBoard;
+            //player.ScoreBoard.Text = scoreBoard;
 
            
             
@@ -74,7 +74,7 @@ namespace Dartboard
 
         public static bool IsCheckout(Player player)
         {
-            if (player.score <= 170 && player.score % 2 == 0)
+            if (player.score <= 170)
             {
                 return true;
             }
@@ -96,46 +96,61 @@ namespace Dartboard
                 if (board.Checkouts.TryGetValue(player.score, out value))
                 {
                     
-                    player.Checkout.Text = value;
+                    player.Checkout = value;
 
                 }
                 else
                 {                   
-                    player.Checkout.Text = " ";
+                    player.Checkout = " ";
                 }
             }
             else if (touchCount == 1)
             {
                 if (board.TwoDartCheckouts.TryGetValue(player.score, out value))
                 {
-                    player.Checkout.Text = value;
+                    player.Checkout = value;
                 }
                 else
                 {
-                    player.Checkout.Text = " ";
+                    player.Checkout = " ";
                 }
             }
             else if (player.score <= 40 && player.score % 2 == 0)
             {
-                player.Checkout.Text = "D" + (player.score / 2);
+                player.Checkout = "D" + (player.score / 2);
             }
             else
             {
-                player.Checkout.Text = " ";
+                player.Checkout = " ";
             }
         }
 
         public static string GetCheckout(Player player, Board board)
         {
-            string value;
-            board.Checkouts.TryGetValue(player.score, out value);
-            return value;
+            string value3dart = "";
+            string value2dart = "";
+            board.Checkouts.TryGetValue(player.score, out value3dart);
+            board.TwoDartCheckouts.TryGetValue(player.score, out value2dart);
+
+            if (value2dart != null && value2dart != "No Checkout")
+            {
+                return value2dart;
+            }
+            else if (value3dart != null && value3dart != "No Checkout")
+            {
+                return value3dart;
+            }
+            else
+            {
+                return "";
+            }
+    
            
         }
 
 
 
-        public static bool IsWinner(Player p, int legs)
+        public static bool IsWinner(Player p)
         {
            
             if (p.score == 0)
@@ -150,11 +165,36 @@ namespace Dartboard
 
         }
 
-        public static void ShowWinDialog(Context c, Player winner, List<Player> players,  Intent intent,  int leg, int touchCount, int startScore, int numLegs)
+        //public static void ShowWinDialog(Context c, Player winner, List<Player> players,  Intent intent,  int leg, int touchCount, int startScore, int numLegs)
+        //{
+        //    // restart the game 
+        //    var alert = new Android.Support.V7.App.AlertDialog.Builder(c);
+        //    if (winner.legsWon >= (numLegs + 1)/2)
+        //    {
+        //        alert.SetTitle("Player " + winner.name + " wins the match!");
+        //        alert.SetNeutralButton("Start Over", (senderAlert, args) => { c.StartActivity(intent); });
+        //    }
+        //    else
+        //    {
+        //        alert.SetTitle("Player " + winner.name + " wins the leg!");
+        //        // move to next set/leg or start new game 
+        //        alert.SetPositiveButton("Move to next leg", (senderAlert, args) => { MoveToNextLeg(leg, players, touchCount, startScore); });
+        //        // neutral 
+
+                
+        //    }
+        //    alert.SetNegativeButton("Back to setup", (senderAlert, args) => { c.StartActivity(typeof(CreateGame)); });
+        //    Dialog dialog = alert.Create();
+        //    dialog.Show();
+
+           
+        //}
+
+        public static void ShowWinDialog(Context c, Player winner, List<Player> players, Intent intent, int leg, int startScore, int numLegs, Activity activity)
         {
             // restart the game 
             var alert = new Android.Support.V7.App.AlertDialog.Builder(c);
-            if (winner.legsWon >= (numLegs + 1)/2)
+            if (winner.legsWon >= (numLegs + 1) / 2)
             {
                 alert.SetTitle("Player " + winner.name + " wins the match!");
                 alert.SetNeutralButton("Start Over", (senderAlert, args) => { c.StartActivity(intent); });
@@ -163,37 +203,49 @@ namespace Dartboard
             {
                 alert.SetTitle("Player " + winner.name + " wins the leg!");
                 // move to next set/leg or start new game 
-                alert.SetPositiveButton("Move to next leg", (senderAlert, args) => { MoveToNextLeg(leg, players, touchCount, startScore); });
+                alert.SetPositiveButton("Move to next leg", (senderAlert, args) => { MoveToNextLeg(leg, players, startScore, activity); });
                 // neutral 
 
-                
+
             }
             alert.SetNegativeButton("Back to setup", (senderAlert, args) => { c.StartActivity(typeof(CreateGame)); });
             Dialog dialog = alert.Create();
             dialog.Show();
 
-           
+
         }
 
-        public static void MoveToNextLeg(int leg, List<Player> players, int touchCount, int startScore)
+        //public static void MoveToNextLeg(int leg, List<Player> players, int touchCount, int startScore)
+        //{
+           
+        //    ResetScores(players[0], startScore);
+        //    ResetScores(players[1], startScore);
+        //    touchCount = 0;
+
+        //}
+
+        public static void MoveToNextLeg(int leg, List<Player> players, int startScore, Activity activity)
         {
-           
-            ResetScores(players[0], startScore);
-            ResetScores(players[1], startScore);
-            touchCount = 0;
+
+            ResetScores(players[0], startScore, activity);
+            ResetScores(players[1], startScore, activity);
 
         }
 
-        public static void ResetScores(Player p, int gameScore)
+        public static void ResetScores(Player p, int gameScore, Activity activity)
         {
             p.score = gameScore;
-            string scoreBoard = string.Format("{0}: {1} Dart: 1", p.name, p.score);
-            p.ScoreBoard.Text = scoreBoard;
-            p.Checkout.Text = " ";
+            (activity as GameViewWithKeyboard).player1Checkout.Text = "";
+            (activity as GameViewWithKeyboard).player1Score.Text = gameScore.ToString();
+            (activity as GameViewWithKeyboard).player2Checkout.Text = "";
+            (activity as GameViewWithKeyboard).player2Score.Text = gameScore.ToString();
+            //string scoreBoard = string.Format("{0}: {1} Dart: 1", p.name, p.score);
+            //p.ScoreBoard.Text = scoreBoard;
+            //p.Checkout.Text = " ";
 
         }
 
-  
+        
 
 
 
