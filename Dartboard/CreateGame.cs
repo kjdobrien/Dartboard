@@ -23,6 +23,7 @@ namespace Dartboard
         ListView PlayerNames;
         Button StartGame;
         Button AddPlayer;
+        Button ResumeGame;
        
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -34,7 +35,10 @@ namespace Dartboard
             StartGame = FindViewById<Button>(Resource.Id.startGame);
             StartGame.Enabled = false;
 
-            
+            //ResumeGame = FindViewById<Button>(Resource.Id.resumeGame);
+            //ResumeGame.Visibility = ViewStates.Invisible;
+            //ResumeGame.Enabled = false; 
+
 
             // Initialize listView
             PlayerNames = FindViewById<ListView>(Resource.Id.playerNames);

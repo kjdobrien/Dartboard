@@ -63,6 +63,9 @@ namespace Dartboard
             startScore = Intent.GetIntExtra("startingScore", 101);
             legsToPlay = Intent.GetIntExtra("numLegs", 1);
 
+            player1Score.TextChanged += Player1Score_TextChanged;
+            player2Score.TextChanged += Player2Score_TextChanged;
+
             player1Score.Text = startScore.ToString(); 
             player2Score.Text = startScore.ToString();
 
@@ -121,6 +124,7 @@ namespace Dartboard
             KeyboardView kbv = FindViewById<KeyboardView>(Resource.Id.customKBD);
             kbv.Keyboard = kbd;
             var myKeyboardListener = new KeyboardListener(this);
+            kbv.SetPopupOffset(0, 0); 
             kbv.OnKeyboardActionListener = myKeyboardListener;
             kbv.Key += (sender, e) => {
                 long eventTime = JavaSystem.CurrentTimeMillis();
@@ -137,65 +141,122 @@ namespace Dartboard
 
         }
 
+        private void Player2Score_TextChanged(object sender, Android.Text.TextChangedEventArgs e)
+        {
+            if (GameLogic.IsCheckout(Player2))
+            {
+                player1Checkout.Visibility = ViewStates.Visible;
+                player1Checkout.Text = GameLogic.GetCheckout(Player1, board);
+            }
+            else
+            {
+                player2Checkout.Text = "";
+                player2Checkout.Visibility = ViewStates.Invisible;
+            }
+        }
+
+        private void Player1Score_TextChanged(object sender, Android.Text.TextChangedEventArgs e)
+        {
+            if (GameLogic.IsCheckout(Player1))
+            {
+                player1Checkout.Visibility = ViewStates.Visible;
+                player1Checkout.Text = GameLogic.GetCheckout(Player1, board);
+            }
+            else
+            {
+                player1Checkout.Text = "";
+                player1Checkout.Visibility = ViewStates.Invisible;
+            }
+        }
+
         private void ScoreEditText_EditorAction(object sender, TextView.EditorActionEventArgs e)
         {
             score = Convert.ToInt32(ScoreEditText.Text);
             if (Player1.turn)
             {
-                
-                validateScore(score, Player1);
-                player1Score.Text = Player1.score.ToString();
-                if (GameLogic.IsCheckout(Player1))
+
+                if (validateScore(score, Player1))
                 {
-                    player1Checkout.Visibility = ViewStates.Visible;
-                    player1Checkout.Text = GameLogic.GetCheckout(Player1, board);
+                    player1Score.Text = Player1.score.ToString();                    
+                    if (GameLogic.IsCheckout(Player1))
+                    {
+                        player1Checkout.Visibility = ViewStates.Visible;
+                        player1Checkout.Text = GameLogic.GetCheckout(Player1, board);
+                        Player1.Checkout = player1Checkout.Text; 
+                    }
+                    else
+                    {
+                        player1Checkout.Text = "";
+                        player1Checkout.Visibility = ViewStates.Invisible;
+                    }
+                    clearScore();
+                    GameLogic.SwitchPlayer(Player1, Player2);
                 }
                 else
                 {
-                    player1Checkout.Text = "";
-                    player1Checkout.Visibility = ViewStates.Invisible; 
+                    return;
                 }
-                clearScore();
-                
             }
             else
             {
-                player2Checkout.Text = ""; 
-                validateScore(score, Player2);
-                player2Score.Text = Player2.score.ToString();
-                if (GameLogic.IsCheckout(Player1))
+                player2Checkout.Text = "";
+                if (validateScore(score, Player2))
                 {
-                    player2Checkout.Visibility = ViewStates.Visible;
-                    player2Checkout.Text = GameLogic.GetCheckout(Player2, board);
+
+                    player2Score.Text = Player2.score.ToString();
+                    if (GameLogic.IsCheckout(Player2))
+                    {
+                        player2Checkout.Visibility = ViewStates.Visible;
+                        player2Checkout.Text = GameLogic.GetCheckout(Player2, board);
+                        Player2.Checkout = player2Checkout.Text; 
+                    }
+                    else
+                    {
+                        player2Checkout.Text = "";
+                        player2Checkout.Visibility = ViewStates.Invisible;
+                    }
+                    clearScore();
+                    GameLogic.SwitchPlayer(Player1, Player2);
                 }
                 else
                 {
-                    player2Checkout.Text = "";
-                    player2Checkout.Visibility = ViewStates.Invisible; 
+                    return;
                 }
-                clearScore();
             }
-            GameLogic.SwitchPlayer(Player1, Player2); 
             
+            //GameLogic.SaveGameData(Players, legsPlayed, legsToPlay);
         }
 
-        private void validateScore(int score, Player p)
+        private bool validateScore(int score, Player p)
         {
-            if (score > p.score || p.score - score == 1)
+            if (score <= 180)
             {
-                Toast toast = Toast.MakeText(this, "Bust", ToastLength.Short);
-                toast.SetGravity(GravityFlags.Center, 0, 0);
-                toast.Show();
+                if (score > p.score | p.score - score == 1 | (p.score - score == 0 && p.Checkout == " No checkout") )
+                {
+                    Toast toast = Toast.MakeText(this, "Bust", ToastLength.Short);
+                    toast.SetGravity(GravityFlags.Center, 0, 0);
+                    toast.Show();
+                    
+                }
+                else
+                {
+                    GameLogic.ThrowDart(p, score);
+                    if (GameLogic.IsWinner(p))
+                    {
+                        GameLogic.ShowWinDialog(this, p, Players, IntentReset, legsPlayed, startScore, legsToPlay, this);
 
+                    }
+                    
+                }
+                return true;
             }
             else
             {
-                GameLogic.ThrowDart(p, score);
-                if (GameLogic.IsWinner(p))
-                {
-                    GameLogic.ShowWinDialog(this, p, Players, IntentReset, legsPlayed, startScore, legsToPlay, this);
-
-                }
+                Toast toast = Toast.MakeText(this, "Maximum Score is 180", ToastLength.Short);
+                toast.SetGravity(GravityFlags.Center, 0, 0);
+                toast.Show();
+                clearScore();
+                return false; 
             }
         }
 

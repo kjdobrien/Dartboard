@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -245,8 +246,23 @@ namespace Dartboard
 
         }
 
-        
 
+        public static void SaveGameData(List<Player> players, int legsPlayed, int legsLeft)
+        {
+            using (StreamWriter file = File.CreateText("/data/data/Dartboard/RestoreGame/previousGame.txt"))
+            {
+                file.WriteLine("Player1Name-" + players[0].name);
+                file.WriteLine("Player1Score-" + players[0].name);
+                file.WriteLine("Player1Turn-" + players[0].name);
+
+                file.WriteLine("Player2Name-" + players[1].name);
+                file.WriteLine("Player2Score-" + players[1].name);
+                file.WriteLine("Player3Turn-" + players[1].name);
+
+                file.WriteLine("LegsPlayed-" + legsPlayed);
+                file.WriteLine("LegsLeft-" + legsLeft); 
+            }
+        }
 
 
     }
