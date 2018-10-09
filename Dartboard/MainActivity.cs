@@ -15,7 +15,7 @@
 //    public class MainActivity : Activity, View.IOnTouchListener
 //    {
 
-  
+
 //        int score;
 //        int previousTurn;
 
@@ -23,7 +23,7 @@
 //        int legs = 0;
 //        int numLegs;
 //        Board board = new Board();
-        
+
 //        Player player1 = new Player();
 //        Player player2 = new Player();
 //        Player currentPlayer;
@@ -31,26 +31,26 @@
 //        int startScore;
 
 //        List<Player> Players;
-       
+
 //        TextView d1;
 //        TextView p2Score;
-        
+
 //        TextView Checkout;
 //        TextView p2Checkout;
 
 //        Button undo;
 
 //        Intent intent;
-//        Intent IntentReset; 
+//        Intent IntentReset;
 
 
-       
+
 
 
 //        protected override void OnCreate(Bundle bundle)
 //        {
 //            base.OnCreate(bundle);
-            
+
 
 
 //            // Set our view from the "main" layout resource
@@ -62,13 +62,13 @@
 //            {
 //                char[] delim = { ':' };
 //                string line;
-//                while( (line = sr.ReadLine()) != null)
-//                {                    
+//                while ((line = sr.ReadLine()) != null)
+//                {
 //                    string[] words = line.Split(delim);
 //                    int scoreValue;
 //                    int.TryParse(words[0], out scoreValue);
 //                    string bestCheckout = words[1];
-//                    board.Checkouts.Add(scoreValue, bestCheckout); 
+//                    board.Checkouts.Add(scoreValue, bestCheckout);
 //                }
 //            }
 
@@ -100,7 +100,7 @@
 //            player1.turn = true;
 //            player1.score = startScore;
 //            d1 = FindViewById<TextView>(Resource.Id.dart1);
-//            d1.Text = p1name;           
+//            d1.Text = p1name;
 //            Checkout = FindViewById<TextView>(Resource.Id.Checkout);
 //            //player1.ScoreBoard = d1;
 //            //player1.ScoreBoard.SetTextColor(Android.Graphics.Color.Red);
@@ -121,10 +121,10 @@
 //                player2.ScoreBoard = p2Score;
 //                player2.Checkout = FindViewById<TextView>(Resource.Id.Checkout2);
 //            }
-            
-           
-                                                         
-               
+
+
+
+
 //            undo = (Button)FindViewById(Resource.Id.undo);
 //            undo.Enabled = false;
 //            IntentReset = Intent;
@@ -145,7 +145,7 @@
 //        {
 
 //            GC.Collect();
-//            currentPlayer  = GameLogic.WhosTurn(player1, player2);
+//            currentPlayer = GameLogic.WhosTurn(player1, player2);
 
 //            if (GameLogic.IsWinner(currentPlayer))
 //            {
@@ -153,7 +153,7 @@
 //                legs -= 1;
 //                currentPlayer.legsWon += 1;
 //                GameLogic.ShowWinDialog(this, currentPlayer, Players, IntentReset, legs, startScore, numLegs, this);
-                
+
 //                return false;
 //            }
 
@@ -167,8 +167,8 @@
 //            {
 //                // add a touch count 
 //                case MotionEventActions.Down:
-//                    Console.WriteLine("getting x and y");                   
-                  
+//                    Console.WriteLine("getting x and y");
+
 //                    Console.WriteLine("x: " + x + ", y: " + y);
 //                    break;
 
@@ -181,7 +181,7 @@
 //                    undo.Enabled = true;
 //                    Console.WriteLine(score);
 //                    // Score checking 
-                  
+
 //                    if (score > currentPlayer.score || currentPlayer.score - score == 1)
 //                    {
 //                        Toast toast = Toast.MakeText(this, "Bust", ToastLength.Short);
@@ -191,18 +191,18 @@
 //                    else
 //                    {
 //                        GameLogic.ThrowDart(currentPlayer, touchCount, score);
-                        
+
 //                    }
 //                    string text = Convert.ToString(currentPlayer.score);
 
-                    
+
 //                    Console.WriteLine(touchCount);
 //                    Console.WriteLine("name: " + currentPlayer.name + " Legs won: " + currentPlayer.legsWon);
 //                    Console.WriteLine("Current leg: " + legs);
 
 //                    if (currentPlayer.score <= 170)
 //                    {
-//                        GameLogic.GetCheckout(currentPlayer, board, touchCount);  
+//                        GameLogic.GetCheckout(currentPlayer, board, touchCount);
 //                    }
 //                    else
 //                    {
@@ -210,7 +210,7 @@
 //                    }
 //                    break;
 
-                
+
 
 
 //            }
@@ -230,21 +230,21 @@
 //            {
 //                if (touchCount == 3)
 //                {
-                    
+
 //                    touchCount = 0;
 //                    if (Players.Count > 1)
 //                    {
 //                        GameLogic.SwitchPlayer(player1, player2);
 //                    }
-                                        
+
 //                }
 //            }
 
 
 
-           
+
 //            return true;
-//         }
+//        }
 
 
 
@@ -266,7 +266,7 @@
 //            undo.Enabled = false;
 //        }
 
-        
+
 //    }
 //}
 

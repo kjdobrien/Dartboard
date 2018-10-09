@@ -3,7 +3,8 @@
   android:keyWidth="33.3%p"
   android:keyHeight="10%p" >
   <Row>
-    <Key android:codes="67" android:keyLabel="BCKSPC" android:keyWidth="50%p" android:keyEdgeFlags="right" android:horizontalGap="50%p"/>
+    <Key android:codes="55001" android:keyLabel="UNDO" android:keyWidth="50%p" android:keyEdgeFlags="left" />
+    <Key android:codes="67" android:keyLabel="BCKSPC" android:keyWidth="50%p" android:keyEdgeFlags="right" />
   </Row>
   <Row>
     <Key android:codes="14"    android:keyLabel="7" android:keyEdgeFlags="left" />

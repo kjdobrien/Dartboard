@@ -44,7 +44,9 @@ namespace Dartboard
                 {
                     KeyCodes = keyCodes,
                     PrimaryCode = primaryCode
+
                 });
+
             //View focusCurrent = _activity.Window.CurrentFocus; 
             //EditText edittext = (EditText)focusCurrent;
             //IEditable editable = edittext.EditableText;

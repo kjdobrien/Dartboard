@@ -17,7 +17,7 @@ using static Android.Views.View;
 
 namespace Dartboard
 {
-    [Activity(Label = "GameViewWithKeyboard", WindowSoftInputMode = SoftInput.StateAlwaysHidden)]
+    [Activity(Label = "GameViewWithKeyboard", WindowSoftInputMode = SoftInput.StateAlwaysHidden, Theme = "@style/DartsAppStyle")]
     public class GameViewWithKeyboard : Activity
     {
         private EditText ScoreEditText;
@@ -28,12 +28,16 @@ namespace Dartboard
         public TextView player2Score;
         public TextView player1Checkout;
         public TextView player2Checkout;
+        public LinearLayout Player1Layout;
+        public LinearLayout Player2Layout;
         int startScore;
         int legsPlayed;
         int legsToPlay; 
         int score;
+        int previousScore; 
         Board board;
         Intent IntentReset;
+        bool undoEnabled;
 
         private List<Player> Players = new List<Player>();
         private Player Player1 = new Player();
@@ -54,6 +58,8 @@ namespace Dartboard
             player2Score = FindViewById<TextView>(Resource.Id.player2Score);
             player1Checkout = FindViewById<TextView>(Resource.Id.player1CheckOut);
             player2Checkout = FindViewById<TextView>(Resource.Id.player2CheckOut);
+            Player1Layout = FindViewById<LinearLayout>(Resource.Id.player1Details);
+            Player2Layout = FindViewById<LinearLayout>(Resource.Id.player2Details);
 
             ScoreEditText = FindViewById<EditText>(Dartboard.Resource.Id.scoreEditText);
             ScoreEditText.EditorAction += ScoreEditText_EditorAction;
@@ -76,7 +82,10 @@ namespace Dartboard
             Player2.score = startScore;
 
             Players.Add(Player1);
-            Players.Add(Player2); 
+            Players.Add(Player2);
+
+            Player1Layout.SetBackgroundColor(Android.Graphics.Color.Rgb(49, 164, 71));
+            Player1Layout.Background.SetAlpha(50); 
 
 
             // Get checkouts 
@@ -124,13 +133,39 @@ namespace Dartboard
             KeyboardView kbv = FindViewById<KeyboardView>(Resource.Id.customKBD);
             kbv.Keyboard = kbd;
             var myKeyboardListener = new KeyboardListener(this);
-            kbv.SetPopupOffset(0, 0); 
+            kbv.PreviewEnabled = false; 
             kbv.OnKeyboardActionListener = myKeyboardListener;
             kbv.Key += (sender, e) => {
                 long eventTime = JavaSystem.CurrentTimeMillis();
                 KeyEvent ev = new KeyEvent(eventTime, eventTime, KeyEventActions.Down, e.PrimaryCode, 0, 0, 0, 0, KeyEventFlags.SoftKeyboard | KeyEventFlags.KeepTouchMode);
 
-                this.DispatchKeyEvent(ev);
+                if (ev.KeyCode.ToString() == "55001")
+                {
+                    if (undoEnabled)
+                    {
+                        if (Player1.turn)
+                        {
+                            Player2.score += previousScore;
+                            player2Score.Text = Player2.score.ToString();
+                        }
+                        else
+                        {
+                            Player1.score += previousScore;
+                            player1Score.Text = Player1.score.ToString();
+                        }
+                        undoEnabled = false; 
+                        GameLogic.SwitchPlayer(Player1, Player2, this);
+                    }
+                    else
+                    {
+                        this.DispatchKeyEvent(ev);
+                    }
+                }
+                else
+                {
+                    this.DispatchKeyEvent(ev);
+                }
+                
             };
 
 
@@ -190,7 +225,7 @@ namespace Dartboard
                         player1Checkout.Visibility = ViewStates.Invisible;
                     }
                     clearScore();
-                    GameLogic.SwitchPlayer(Player1, Player2);
+                    GameLogic.SwitchPlayer(Player1, Player2, this);
                 }
                 else
                 {
@@ -216,7 +251,7 @@ namespace Dartboard
                         player2Checkout.Visibility = ViewStates.Invisible;
                     }
                     clearScore();
-                    GameLogic.SwitchPlayer(Player1, Player2);
+                    GameLogic.SwitchPlayer(Player1, Player2, this);
                 }
                 else
                 {
@@ -241,8 +276,11 @@ namespace Dartboard
                 else
                 {
                     GameLogic.ThrowDart(p, score);
+                    previousScore = score;
+                    undoEnabled = true; 
                     if (GameLogic.IsWinner(p))
                     {
+                        p.legsWon += 1; 
                         GameLogic.ShowWinDialog(this, p, Players, IntentReset, legsPlayed, startScore, legsToPlay, this);
 
                     }

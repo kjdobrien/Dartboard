@@ -49,24 +49,29 @@ namespace Dartboard
             player.score -= score;
         }
 
-        public static void SwitchPlayer(Player p1, Player p2)
+        public static void SwitchPlayer(Player p1, Player p2, Activity activity)
         {
 
             p1.turn = !p1.turn;
             p2.turn = !p2.turn;
 
 
-            //if (p1.turn)
-            //{
-            //    p1.ScoreBoard.SetTextColor(Android.Graphics.Color.Red);
-            //    p2.ScoreBoard.SetTextColor(Android.Graphics.Color.Gainsboro);
-            //}
-            //else
-            //{
-            //    p1.ScoreBoard.SetTextColor(Android.Graphics.Color.Gainsboro);
-            //    p2.ScoreBoard.SetTextColor(Android.Graphics.Color.Red);
-            //}
-            
+
+            if (p1.turn)
+            {
+                (activity as GameViewWithKeyboard).Player1Layout.SetBackgroundColor(Android.Graphics.Color.Rgb(49, 164, 71));
+                (activity as GameViewWithKeyboard).Player1Layout.Background.SetAlpha(50);
+                (activity as GameViewWithKeyboard).Player2Layout.SetBackgroundColor(Android.Graphics.Color.White);
+                (activity as GameViewWithKeyboard).Player2Layout.Background.SetAlpha(0);
+            }
+            else
+            {
+                (activity as GameViewWithKeyboard).Player2Layout.SetBackgroundColor(Android.Graphics.Color.Rgb(49, 164, 71));
+                (activity as GameViewWithKeyboard).Player2Layout.Background.SetAlpha(50);
+                (activity as GameViewWithKeyboard).Player1Layout.SetBackgroundColor(Android.Graphics.Color.White);
+                (activity as GameViewWithKeyboard).Player1Layout.Background.SetAlpha(0);
+            }
+
 
 
         }
@@ -249,7 +254,7 @@ namespace Dartboard
 
         public static void SaveGameData(List<Player> players, int legsPlayed, int legsLeft)
         {
-            using (StreamWriter file = File.CreateText("/data/data/Dartboard/RestoreGame/previousGame.txt"))
+            using (StreamWriter file = File.CreateText("/data/data/Dartboard.Dartboard/RestoreGame/previousGame.txt"))
             {
                 file.WriteLine("Player1Name-" + players[0].name);
                 file.WriteLine("Player1Score-" + players[0].name);
@@ -257,7 +262,7 @@ namespace Dartboard
 
                 file.WriteLine("Player2Name-" + players[1].name);
                 file.WriteLine("Player2Score-" + players[1].name);
-                file.WriteLine("Player3Turn-" + players[1].name);
+                file.WriteLine("Player2Turn-" + players[1].name);
 
                 file.WriteLine("LegsPlayed-" + legsPlayed);
                 file.WriteLine("LegsLeft-" + legsLeft); 
