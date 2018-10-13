@@ -97,6 +97,7 @@
     <Compile Include="CreateGame.cs" />
     <Compile Include="GameLogic.cs" />
     <Compile Include="GameViewWithKeyboard.cs" />
+    <Compile Include="HelperFunctions.cs" />
     <Compile Include="KeyboardListerner.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Player.cs" />
@@ -229,6 +230,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\xml\" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\baseline_keyboard_backspace_24.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\baseline_keyboard_backspace_24_white.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

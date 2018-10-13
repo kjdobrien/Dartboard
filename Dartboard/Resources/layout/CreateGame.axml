@@ -1,23 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/DartsAppStyle"
-    android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/DartsAppStyle"    
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:minWidth="25px"
-    android:minHeight="25px">
+    android:layout_height="match_parent">
     <ImageView
         android:id="@+id/icon"
         android:layout_width="175dp"
         android:layout_height="140dp"
         android:paddingTop="10dp"
-        android:layout_gravity="center"
+		android:scaleType="fitCenter"
+		android:layout_centerHorizontal="true"
         android:src="@drawable/googlePlayStoreIcon" />
     <TextView
         android:text="180 Darts"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+		android:layout_below="@id/icon"
         android:layout_gravity="center"
         android:fontFamily="sans-serif"
         android:id="@+id/brand"
@@ -25,8 +24,7 @@
         android:textStyle="bold" />
     <ListView
         style="@style/DartsAppStyle"
-        android:minWidth="25px"
-        android:minHeight="25px"
+		android:layout_below="@id/brand"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/playerNames" />
@@ -35,17 +33,20 @@
         android:text="Add Player"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+		android:layout_below="@id/playerNames"
         android:id="@+id/addPlayer" />
     <TextView
         android:text="Start Score"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+		android:layout_below="@id/addPlayer"
         android:id="@+id/startScoreBanner" />
     <Spinner
         android:id="@+id/startScoreSpinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+		android:layout_below="@id/startScoreBanner"
         android:entries="@array/startScoreArray"
         android:prompt="@string/scorePrompt" />
     <TextView
@@ -53,17 +54,30 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+		android:layout_below="@id/startScoreSpinner"
         android:id="@+id/numLegs" />
     <Spinner
         android:id="@+id/legsSpinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+		android:layout_below="@id/numLegs"
         android:entries="@array/legsArray"
         android:prompt="@string/legsPrompt" />
+	<Button
+        style="@style/buttonColor"
+        android:text="Resume Previous Game"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/resumeGame"
+		android:layout_above="@+id/startGame"
+		android:visibility="invisible"
+	/>
     <Button
         style="@style/buttonColor"
         android:text="Start Game"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/startGame" />
-</LinearLayout>
+        android:id="@id/startGame"
+		android:layout_alignParentBottom="true"
+	/>
+</RelativeLayout>

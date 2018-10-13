@@ -24,7 +24,9 @@ namespace Dartboard
         Button StartGame;
         Button AddPlayer;
         Button ResumeGame;
-       
+        GameData gameData;
+
+
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -35,9 +37,8 @@ namespace Dartboard
             StartGame = FindViewById<Button>(Resource.Id.startGame);
             StartGame.Enabled = false;
 
-            //ResumeGame = FindViewById<Button>(Resource.Id.resumeGame);
-            //ResumeGame.Visibility = ViewStates.Invisible;
-            //ResumeGame.Enabled = false; 
+            ResumeGame = FindViewById<Button>(Resource.Id.resumeGame);
+
 
 
             // Initialize listView
@@ -95,6 +96,7 @@ namespace Dartboard
                 intent.PutExtra("p1name", p1name);
                 intent.PutExtra("startingScore", startingScore);
                 intent.PutExtra("numLegs", numLegs);
+                intent.PutExtra("gameResumed", false); 
                 if (items.Count > 1)
                 {
                     string p2name = items[1];
@@ -105,8 +107,33 @@ namespace Dartboard
                 
             };
 
+            gameData = HelperFunctions.CheckForPreviousGame();
+            if (gameData.player1Name != "")
+            {
+                ResumeGame.Visibility = ViewStates.Visible;
+
+                ResumeGame.Click += ResumeGame_Click;
+            }
+
 
             
+        }
+
+        private void ResumeGame_Click(object sender, EventArgs e)
+        {
+            Intent intent = new Intent(this, typeof(GameViewWithKeyboard));
+            intent.PutStringArrayListExtra("playerNames", items);
+            intent.PutExtra("p1name", gameData.player1Name);
+            intent.PutExtra("p2name", gameData.player2Name);
+            intent.PutExtra("p1Score", gameData.player1Score);
+            intent.PutExtra("p2Score", gameData.player2Score);
+            intent.PutExtra("p1Turn", gameData.player1Turn);
+            intent.PutExtra("p2Turn", gameData.player2Turn);
+            intent.PutExtra("legsPlayed", gameData.LegsPlayed);
+            intent.PutExtra("legsToPlay", gameData.LegsToPlay);
+            intent.PutExtra("gameResumed", true); 
+
+            StartActivity(intent);
         }
 
         private void spinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)

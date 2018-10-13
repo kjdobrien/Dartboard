@@ -3,9 +3,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 	<LinearLayout
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:orientation="horizontal"
+		android:id="@+id/topBar">
+		<ImageButton
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"			
+			android:scaleType="fitCenter"
+			android:id="@+id/backButton"
+			android:src="@drawable/baseline_keyboard_backspace_24_white"
+		/>
+	</LinearLayout>
+	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:orientation="horizontal"
+		android:layout_below="@id/topBar"
 		android:id="@+id/playerScoresLayout">
 
 		<LinearLayout
@@ -34,6 +48,7 @@
 				android:text="D20 D20 BULL"
 				android:gravity="center_horizontal"
 				android:visibility="invisible"
+				android:layout_marginBottom="20dp"
 				android:id="@+id/player1CheckOut"/>
 		</LinearLayout>
 

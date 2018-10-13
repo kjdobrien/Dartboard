@@ -252,17 +252,17 @@ namespace Dartboard
         }
 
 
-        public static void SaveGameData(List<Player> players, int legsPlayed, int legsLeft)
+        public static void SaveGameData(Player p1, Player p2, int legsPlayed, int legsLeft)
         {
-            using (StreamWriter file = File.CreateText("/data/data/Dartboard.Dartboard/RestoreGame/previousGame.txt"))
+            using (StreamWriter file = File.CreateText("/data/data/Dartboard.Dartboard/previousGame.txt"))
             {
-                file.WriteLine("Player1Name-" + players[0].name);
-                file.WriteLine("Player1Score-" + players[0].name);
-                file.WriteLine("Player1Turn-" + players[0].name);
+                file.WriteLine("Player1Name-" + p1.name);
+                file.WriteLine("Player1Score-" + p1.score);
+                file.WriteLine("Player1Turn-" + p1.turn);
 
-                file.WriteLine("Player2Name-" + players[1].name);
-                file.WriteLine("Player2Score-" + players[1].name);
-                file.WriteLine("Player2Turn-" + players[1].name);
+                file.WriteLine("Player2Name-" + p2.name);
+                file.WriteLine("Player2Score-" + p2.score);
+                file.WriteLine("Player2Turn-" + p2.turn);
 
                 file.WriteLine("LegsPlayed-" + legsPlayed);
                 file.WriteLine("LegsLeft-" + legsLeft); 

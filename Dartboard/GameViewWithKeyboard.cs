@@ -20,6 +20,7 @@ namespace Dartboard
     [Activity(Label = "GameViewWithKeyboard", WindowSoftInputMode = SoftInput.StateAlwaysHidden, Theme = "@style/DartsAppStyle")]
     public class GameViewWithKeyboard : Activity
     {
+        private ImageButton BackArrow; 
         private EditText ScoreEditText;
 
         private TextView player1Name;
@@ -52,6 +53,8 @@ namespace Dartboard
 
             board = new Board();
 
+            BackArrow = FindViewById<ImageButton>(Resource.Id.backButton); 
+
             player1Name = FindViewById<TextView>(Resource.Id.player1Name);
             player2Name = FindViewById<TextView>(Resource.Id.player2Name);
             player1Score = FindViewById<TextView>(Resource.Id.player1Score);
@@ -66,27 +69,61 @@ namespace Dartboard
 
             Player1.name = Intent.GetStringExtra("p1name");
             Player2.name = Intent.GetStringExtra("p2name");
-            startScore = Intent.GetIntExtra("startingScore", 101);
-            legsToPlay = Intent.GetIntExtra("numLegs", 1);
+
+            if (Intent.HasExtra("gameResumed") && Intent.GetBooleanExtra("gameResumed", false) == true)
+            {
+                Player1.score = Convert.ToInt32( Intent.GetStringExtra("p1Score"));
+                Player2.score = Convert.ToInt32(Intent.GetStringExtra("p2Score"));
+                Player1.turn = Convert.ToBoolean(Intent.GetStringExtra("p1Turn"));
+                Player2.turn = Convert.ToBoolean(Intent.GetStringExtra("p2Turn"));
+                legsPlayed = Convert.ToInt32(Intent.GetStringExtra("legsPlayed"));
+                legsToPlay = Convert.ToInt32(Intent.GetStringExtra("legToPlay"));
+
+                player1Score.Text = Player1.score.ToString(); 
+                player2Score.Text = Player2.score.ToString();
+
+                
+            }
+            else
+            {
+                startScore = Intent.GetIntExtra("startingScore", 101);
+                legsToPlay = Intent.GetIntExtra("numLegs", 1);
+
+                player1Score.Text = startScore.ToString();
+                player2Score.Text = startScore.ToString();
+                Player1.score = startScore;
+                Player2.score = startScore;
+                Player1.turn = true;
+                Player2.turn = false;
+            }
+
+            player1Name.Text = Player1.name;
+            player2Name.Text = Player2.name;
 
             player1Score.TextChanged += Player1Score_TextChanged;
             player2Score.TextChanged += Player2Score_TextChanged;
 
-            player1Score.Text = startScore.ToString(); 
-            player2Score.Text = startScore.ToString();
+            if (Player1.turn)
+            {
+                Player1Layout.SetBackgroundColor(Android.Graphics.Color.Rgb(49, 164, 71));
+                Player1Layout.Background.SetAlpha(50);
+            }
+            else
+            {
+                Player2Layout.SetBackgroundColor(Android.Graphics.Color.Rgb(49, 164, 71));
+                Player2Layout.Background.SetAlpha(50);
 
-            player1Name.Text = Player1.name;
-            player2Name.Text = Player2.name; 
+            }
 
-            Player1.score = startScore;
-            Player2.score = startScore;
+
+
 
             Players.Add(Player1);
             Players.Add(Player2);
 
-            Player1Layout.SetBackgroundColor(Android.Graphics.Color.Rgb(49, 164, 71));
-            Player1Layout.Background.SetAlpha(50); 
 
+
+            BackArrow.Click += BackArrow_Click;
 
             // Get checkouts 
             using (StreamReader sr = new StreamReader(Assets.Open("Checkouts.txt")))
@@ -169,11 +206,21 @@ namespace Dartboard
             };
 
 
-            Player1.turn = true;
-            Player2.turn = false; 
+            
 
 
 
+        }
+
+        private void BackArrow_Click(object sender, EventArgs e)
+        {
+            
+            var alert = new Android.Support.V7.App.AlertDialog.Builder(this);
+            alert.SetTitle("Back to Main Menu?");
+            alert.SetPositiveButton("Yes", (senderAlert, args) => { Intent intent = new Intent(this, typeof(CreateGame)); this.StartActivity(intent); });
+            alert.SetNegativeButton("No", (senderAlert, args) => { alert.Dispose(); });
+            Dialog dialog = alert.Create();
+            dialog.Show();
         }
 
         private void Player2Score_TextChanged(object sender, Android.Text.TextChangedEventArgs e)
@@ -259,7 +306,7 @@ namespace Dartboard
                 }
             }
             
-            //GameLogic.SaveGameData(Players, legsPlayed, legsToPlay);
+            GameLogic.SaveGameData(Player1, Player2, legsPlayed, legsToPlay);
         }
 
         private bool validateScore(int score, Player p)
