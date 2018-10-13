@@ -115,6 +115,7 @@ namespace Dartboard
 
             }
 
+            
 
 
 
@@ -212,9 +213,19 @@ namespace Dartboard
 
         }
 
+        private void SetUpIntentReset(string player1Name, string player2Name, string startScore, string legsToPlay)
+        {
+            IntentReset = new Intent(this, typeof(GameViewWithKeyboard));
+            IntentReset.PutExtra("p1name", player1Name);
+            IntentReset.PutExtra("p2name", player2Name);
+            IntentReset.PutExtra("startingScore", startScore);
+            IntentReset.PutExtra("numLegs", legsToPlay);
+            IntentReset.PutExtra("gameResumed", false);
+        }
+
         private void BackArrow_Click(object sender, EventArgs e)
         {
-            
+            GameLogic.SaveGameData(Player1, Player2, legsPlayed, legsToPlay); 
             var alert = new Android.Support.V7.App.AlertDialog.Builder(this);
             alert.SetTitle("Back to Main Menu?");
             alert.SetPositiveButton("Yes", (senderAlert, args) => { Intent intent = new Intent(this, typeof(CreateGame)); this.StartActivity(intent); });
@@ -327,7 +338,8 @@ namespace Dartboard
                     undoEnabled = true; 
                     if (GameLogic.IsWinner(p))
                     {
-                        p.legsWon += 1; 
+                        p.legsWon += 1;
+                        SetUpIntentReset(Player1.name, Player2.name, startScore.ToString(), legsToPlay.ToString()); 
                         GameLogic.ShowWinDialog(this, p, Players, IntentReset, legsPlayed, startScore, legsToPlay, this);
 
                     }
