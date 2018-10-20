@@ -20,7 +20,7 @@ namespace Dartboard
             string fileName = "/data/data/Dartboard.Dartboard/previousGame.txt";
             GameData gameData = new GameData();
             if (File.Exists(fileName))
-            {                
+            {
                 using (StreamReader sr = File.OpenText(fileName))
                 {
                     gameData.player1Name = sr.ReadLine();
@@ -40,9 +40,55 @@ namespace Dartboard
                     gameData.player2Turn = gameData.player2Turn.Substring(gameData.player2Turn.IndexOf("-") + 1);
                     gameData.LegsPlayed = gameData.LegsPlayed.Substring(gameData.LegsPlayed.IndexOf("-") + 1);
                     gameData.LegsToPlay = gameData.LegsToPlay.Substring(gameData.LegsToPlay.IndexOf("-") + 1);
-                }                
+                }
             }
             return gameData;
+        }
+
+        public static List<string> GetNames()
+        {
+            string fileName = "/data/data/Dartboard.Dartboard/previousPlayers.txt";
+            List<string> Names = new List<string>();
+            if (File.Exists(fileName))
+            {
+                using (StreamReader sr = File.OpenText(fileName))
+                {
+                    while (sr.Peek() >= 0)
+                    {
+                        Names.Add(sr.ReadLine());
+                    }
+                }
+                return Names;
+            }
+            else
+            {
+                return null; 
+            }
+        }
+
+        public static void DeleteSaveFile(string FilePath)
+        {
+            if (File.Exists(FilePath))
+            {
+                File.Delete(FilePath); 
+            }
+        }
+
+        public static bool CheckForName(string name, List<string> Names)
+        {
+            return Names.Contains(name); 
+        }
+
+        public static void SavePlayerName(List<string> names)
+        {
+            using (StreamWriter file = File.AppendText("/data/data/Dartboard.Dartboard/previousPlayers.txt"))
+            {
+                foreach (string name in names)
+                {
+                    file.WriteLine(name);
+                }
+                
+            }
         }
     }
 

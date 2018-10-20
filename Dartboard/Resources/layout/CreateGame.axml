@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/DartsAppStyle"    
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+	android:background="#071e22">
     <ImageView
         android:id="@+id/icon"
         android:layout_width="175dp"
@@ -18,6 +19,7 @@
         android:layout_height="wrap_content"
 		android:layout_below="@id/icon"
         android:layout_gravity="center"
+		android:textColor="#ece5f0"
         android:fontFamily="sans-serif"
         android:id="@+id/brand"
         android:gravity="center"
@@ -27,56 +29,94 @@
 		android:layout_below="@id/brand"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+		android:textSize="20dp"
         android:id="@+id/playerNames" />
     <Button
         style="@style/buttonColor"
         android:text="Add Player"
+		android:layout_margin="5dp"
+		android:background="@drawable/rounded_buttons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 		android:layout_below="@id/playerNames"
         android:id="@+id/addPlayer" />
-    <TextView
-        android:text="Start Score"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-		android:layout_below="@id/addPlayer"
-        android:id="@+id/startScoreBanner" />
-    <Spinner
-        android:id="@+id/startScoreSpinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-		android:layout_below="@id/startScoreBanner"
-        android:entries="@array/startScoreArray"
-        android:prompt="@string/scorePrompt" />
-    <TextView
-        android:text="Number of Legs"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-		android:layout_below="@id/startScoreSpinner"
-        android:id="@+id/numLegs" />
-    <Spinner
-        android:id="@+id/legsSpinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-		android:layout_below="@id/numLegs"
-        android:entries="@array/legsArray"
-        android:prompt="@string/legsPrompt" />
+
+	<LinearLayout
+		android:orientation="horizontal"
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:id="@+id/scoreOptions"
+		android:layout_below="@id/addPlayer">
+		<TextView
+			android:text="Start Score"
+			android:textAppearance="?android:attr/textAppearanceMedium"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:gravity="left"
+			android:textColor="#ece5f0"
+			android:id="@+id/startScoreBanner" />
+		<Spinner
+			android:id="@+id/startScoreSpinner"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:gravity="right"
+			android:spinnerMode="dropdown"
+			android:layout_centerHorizontal="true"
+			android:textColor="#ece5f0"
+			android:layout_below="@id/startScoreBanner"
+			android:entries="@array/startScoreArray"
+			android:prompt="@string/scorePrompt" />
+	</LinearLayout>
+	<LinearLayout
+		android:orientation="horizontal"
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:layout_below="@id/scoreOptions">
+		<TextView
+			android:text="Number of Legs"
+			android:textAppearance="?android:attr/textAppearanceMedium"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:gravity="left"
+			android:textColor="#ece5f0"
+			android:layout_below="@id/startScoreSpinner"
+			android:id="@+id/numLegs" />
+		<Spinner
+			android:id="@+id/legsSpinner"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:gravity="right"
+			android:textColor="#ece5f0"
+			android:layout_weight="1"
+			android:spinnerMode="dropdown"
+			android:layout_below="@id/numLegs"
+			android:entries="@array/legsArray"
+			android:prompt="@string/legsPrompt" />
+	</LinearLayout>
+
+
 	<Button
         style="@style/buttonColor"
         android:text="Resume Previous Game"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+		android:layout_margin="5dp"
         android:id="@+id/resumeGame"
+		android:background="@drawable/rounded_buttons"
 		android:layout_above="@+id/startGame"
 		android:visibility="invisible"
 	/>
     <Button
         style="@style/buttonColor"
+		android:background="@drawable/rounded_buttons"
         android:text="Start Game"
+		android:layout_margin="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+		android:layout_marginBottom="5dp"
         android:id="@id/startGame"
 		android:layout_alignParentBottom="true"
 	/>

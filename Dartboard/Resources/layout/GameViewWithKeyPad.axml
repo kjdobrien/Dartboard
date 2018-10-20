@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+	android:background="#071e22">
 	<LinearLayout
 		android:layout_height="wrap_content"
 		android:layout_width="match_parent"
@@ -12,6 +13,7 @@
 			android:layout_width="wrap_content"			
 			android:scaleType="fitCenter"
 			android:id="@+id/backButton"
+			android:textColor="#ece5f0"
 			android:src="@drawable/baseline_keyboard_backspace_24_white"
 		/>
 	</LinearLayout>
@@ -33,6 +35,7 @@
 				android:layout_height="wrap_content"
 				android:text="Player 1"
 				android:gravity="center_horizontal"
+				android:textColor="#ece5f0"
 				android:textSize="25dp"
 				android:id="@+id/player1Name"/>
 			<TextView
@@ -41,12 +44,14 @@
 				android:text="170"
 				android:textSize="50dp"
 				android:gravity="center_horizontal"
+				android:textColor="#ece5f0"
 				android:id="@+id/player1Score"/>
 			<TextView
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:text="D20 D20 BULL"
 				android:gravity="center_horizontal"
+				android:textColor="#ece5f0"
 				android:visibility="invisible"
 				android:layout_marginBottom="20dp"
 				android:id="@+id/player1CheckOut"/>
@@ -63,6 +68,7 @@
 				android:layout_height="wrap_content"
 				android:textSize="25dp"
 				android:text="Player 2"
+				android:textColor="#ece5f0"
 				android:gravity="center_horizontal"
 				android:id="@+id/player2Name"/>
 			<TextView
@@ -70,6 +76,7 @@
 				android:layout_height="wrap_content"
 				android:text="190"
 				android:textSize="50dp"
+				android:textColor="#ece5f0"
 				android:gravity="center_horizontal"
 				android:id="@+id/player2Score"/>
 			<TextView
@@ -77,6 +84,7 @@
 				android:layout_height="wrap_content"
 				android:text="D20 D20 BULL"
 				android:gravity="center_horizontal"
+				android:textColor="#ece5f0"
 				android:visibility="invisible"
 				android:id="@+id/player2CheckOut"/>
 		</LinearLayout>
@@ -95,6 +103,8 @@
 			android:layout_height="wrap_content"
 			android:id="@+id/scoreEditText"
 			android:hint="Enter Score"
+			android:textColor="#ece5f0"
+			android:textColorHint="#ece5f0"
 			android:layout_above="@+id/customKBD"
 			android:maxLength="3"
 		/>

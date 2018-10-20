@@ -59,14 +59,14 @@ namespace Dartboard
 
             if (p1.turn)
             {
-                (activity as GameViewWithKeyboard).Player1Layout.SetBackgroundColor(Android.Graphics.Color.Rgb(49, 164, 71));
+                (activity as GameViewWithKeyboard).Player1Layout.SetBackgroundColor(Android.Graphics.Color.Rgb(236, 229, 240));
                 (activity as GameViewWithKeyboard).Player1Layout.Background.SetAlpha(50);
                 (activity as GameViewWithKeyboard).Player2Layout.SetBackgroundColor(Android.Graphics.Color.White);
                 (activity as GameViewWithKeyboard).Player2Layout.Background.SetAlpha(0);
             }
             else
             {
-                (activity as GameViewWithKeyboard).Player2Layout.SetBackgroundColor(Android.Graphics.Color.Rgb(49, 164, 71));
+                (activity as GameViewWithKeyboard).Player2Layout.SetBackgroundColor(Android.Graphics.Color.Rgb(236, 229, 240));
                 (activity as GameViewWithKeyboard).Player2Layout.Background.SetAlpha(50);
                 (activity as GameViewWithKeyboard).Player1Layout.SetBackgroundColor(Android.Graphics.Color.White);
                 (activity as GameViewWithKeyboard).Player1Layout.Background.SetAlpha(0);

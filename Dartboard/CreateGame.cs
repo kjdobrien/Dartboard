@@ -19,8 +19,10 @@ namespace Dartboard
         int numLegs;
         EditText nameEditText;
         List<string> items;
-        ArrayAdapter<string> nameAdapter;
+        CustomListViewAdapter nameAdapter;
         ListView PlayerNames;
+        ListView SuggestedNamesListView;
+        List<string> SuggestedNames; 
         Button StartGame;
         Button AddPlayer;
         Button ResumeGame;
@@ -39,73 +41,42 @@ namespace Dartboard
 
             ResumeGame = FindViewById<Button>(Resource.Id.resumeGame);
 
-
+            //SuggestedNames = HelperFunctions.GetNames();
 
             // Initialize listView
             PlayerNames = FindViewById<ListView>(Resource.Id.playerNames);
             items = new List<string> { };
-            nameAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, items);
+            nameAdapter = new CustomListViewAdapter(this, items); 
             PlayerNames.Adapter = nameAdapter;
 
             // Get Player Name
             AddPlayer = FindViewById<Button>(Resource.Id.addPlayer);
-            
-           
-            AddPlayer.Click += delegate 
-            {
-                //AlertDialog.Builder 
-                var addName = new Android.Support.V7.App.AlertDialog.Builder(this);
-                addName.SetView(Resource.Layout.NamePlayer);               
-                addName.SetPositiveButton("Enter", HandlePositiveButtonClick);
-                
-                Dialog nameDialog = addName.Create();
-                nameDialog.Show();
-                                                                 
-              
 
-            };
+            AddPlayer.Click += AddPlayer_Click;
+            StartGame.Click += StartGame_Click;
 
-            
-            
+
+
             // Get Start Score
             Spinner selectStartScore = FindViewById<Spinner>(Resource.Id.startScoreSpinner);
             selectStartScore.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs>(spinner_ItemSelected);
-            var adapter = ArrayAdapter.CreateFromResource(this, Resource.Array.startScoreArray, Android.Resource.Layout.SimpleSpinnerDropDownItem);
-            adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
-            selectStartScore.Adapter = adapter;
+            List<string> list1 = new List<string>();
+            list1 = Resources.GetStringArray(Resource.Array.startScoreArray).ToList();
+            selectStartScore.Adapter  = new ArrayAdapter(this, Resource.Layout.spinnerItem, Resource.Id.itemText, list1);
 
             // Get Number of legs
             Spinner legSpinner = FindViewById<Spinner>(Resource.Id.legsSpinner);
             legSpinner.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs>(legSpinner_ItemSelected);
-            var legAdapter = ArrayAdapter.CreateFromResource(this, Resource.Array.legsArray, Android.Resource.Layout.SimpleSpinnerDropDownItem);   
-            legAdapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
-            legSpinner.Adapter = legAdapter;
+            List<string> list2 = new List<string>();
+            list2 = Resources.GetStringArray(Resource.Array.legsArray).ToList();
+            legSpinner.Adapter = new ArrayAdapter(this, Resource.Layout.spinnerItem, Resource.Id.itemText, list2); 
 
-           
-
-            StartGame.Click += delegate 
-            {
-
-                Console.WriteLine(startingScore);
-                Console.WriteLine(numLegs);
+            
 
 
-                string p1name = items[0];              
-                Intent intent = new Intent(this, typeof(GameViewWithKeyboard));
-                intent.PutStringArrayListExtra("playerNames", items);
-                intent.PutExtra("p1name", p1name);
-                intent.PutExtra("startingScore", startingScore);
-                intent.PutExtra("numLegs", numLegs);
-                intent.PutExtra("gameResumed", false); 
-                if (items.Count > 1)
-                {
-                    string p2name = items[1];
-                    intent.PutExtra("p2name", p2name);
-                }
-                
-                StartActivity(intent); 
-                
-            };
+
+            
+
 
             gameData = HelperFunctions.CheckForPreviousGame();
             if (gameData.player1Name != "")
@@ -117,6 +88,46 @@ namespace Dartboard
 
 
             
+        }
+
+        private void SelectStartScore_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        {
+
+        }
+
+        private void StartGame_Click(object sender, EventArgs e)
+        {
+            Console.WriteLine(startingScore);
+            Console.WriteLine(numLegs);
+
+
+            string p1name = items[0];
+            Intent intent = new Intent(this, typeof(GameViewWithKeyboard));
+            intent.PutStringArrayListExtra("playerNames", items);
+            intent.PutExtra("p1name", p1name);
+            intent.PutExtra("startingScore", startingScore);
+            intent.PutExtra("numLegs", numLegs);
+            intent.PutExtra("gameResumed", false);
+            if (items.Count > 1)
+            {
+                string p2name = items[1];
+                intent.PutExtra("p2name", p2name);
+            }
+
+            StartActivity(intent);
+        }
+
+        private void AddPlayer_Click(object sender, EventArgs e)
+        {                         
+            var addName = new Android.Support.V7.App.AlertDialog.Builder(this);
+            addName.SetView(Resource.Layout.NamePlayer);
+            
+            addName.SetPositiveButton("Enter", HandlePositiveButtonClick);
+            Dialog nameDialog = addName.Create();
+            ///SuggestedNamesListView = (ListView)nameDialog.FindViewById(Resource.Id.enterPlayerName);
+            ///SuggestedNamesListView.Adapter = new CustomListViewAdapter(this, SuggestedNames);
+            nameDialog.Show();
+         
         }
 
         private void ResumeGame_Click(object sender, EventArgs e)
@@ -155,14 +166,15 @@ namespace Dartboard
         private void HandlePositiveButtonClick(object sender, DialogClickEventArgs e)
         {
             var dialog = (Android.Support.V7.App.AlertDialog)sender;
-            nameEditText = (EditText)dialog.FindViewById(Resource.Id.playerName);
+            nameEditText = (EditText)dialog.FindViewById(Resource.Id.enterPlayerName);
             string name = nameEditText.Text;
-            items.Add(name);         
-            nameAdapter.Add(name);
-            RunOnUiThread(() =>
-            { 
-                nameAdapter.NotifyDataSetChanged();
-            });
+            items.Add(name);
+            nameAdapter = new CustomListViewAdapter(this, items);
+            PlayerNames.Adapter = nameAdapter;
+            //RunOnUiThread(() =>
+            //{ 
+            //    nameAdapter.NotifyDataSetChanged();
+            //});
             if (PlayerNames.Count == 2)
             {
                 AddPlayer.Enabled = false;

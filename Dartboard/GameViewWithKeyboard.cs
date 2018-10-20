@@ -105,12 +105,12 @@ namespace Dartboard
 
             if (Player1.turn)
             {
-                Player1Layout.SetBackgroundColor(Android.Graphics.Color.Rgb(49, 164, 71));
+                Player1Layout.SetBackgroundColor(Android.Graphics.Color.Rgb(236, 229, 240));
                 Player1Layout.Background.SetAlpha(50);
             }
             else
             {
-                Player2Layout.SetBackgroundColor(Android.Graphics.Color.Rgb(49, 164, 71));
+                Player2Layout.SetBackgroundColor(Android.Graphics.Color.Rgb(236, 229, 240));
                 Player2Layout.Background.SetAlpha(50);
 
             }
@@ -225,7 +225,14 @@ namespace Dartboard
 
         private void BackArrow_Click(object sender, EventArgs e)
         {
-            GameLogic.SaveGameData(Player1, Player2, legsPlayed, legsToPlay); 
+            if (Player1.score != 0 && Player2.score != 0)
+            {
+                GameLogic.SaveGameData(Player1, Player2, legsPlayed, legsToPlay);
+            }
+            else
+            {
+                HelperFunctions.DeleteSaveFile(Constants.PerviousGameFile); 
+            }
             var alert = new Android.Support.V7.App.AlertDialog.Builder(this);
             alert.SetTitle("Back to Main Menu?");
             alert.SetPositiveButton("Yes", (senderAlert, args) => { Intent intent = new Intent(this, typeof(CreateGame)); this.StartActivity(intent); });

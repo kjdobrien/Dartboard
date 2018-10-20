@@ -4,7 +4,6 @@
 	<application android:label="Dartboard">
 		<activity android:name=".CreateName" android:theme="@style/DartsAppStyle"></activity>
 		<activity android:name=".Main" android:theme="@style/DartsAppStyle"></activity>
-    
 	</application>
-  <application android:largeHeap="true"></application>
+	<application android:largeHeap="true"></application>
 </manifest>
