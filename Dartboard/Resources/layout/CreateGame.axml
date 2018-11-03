@@ -10,6 +10,7 @@
         android:layout_height="140dp"
         android:paddingTop="10dp"
 		android:scaleType="fitCenter"
+		android:visibility="visible"
 		android:layout_centerHorizontal="true"
         android:src="@drawable/googlePlayStoreIcon" />
     <TextView

@@ -16,5 +16,7 @@ namespace Dartboard
     {
         public static string PerviousGameFile = "/data/data/Dartboard.Dartboard/previousGame.txt";
         public static string PerviousPlayersFile = "/data/data/Dartboard.Dartboard/previousPlayers.txt"; 
+
+        public enum ViewType {NameListItem, SuggestedName};
     }
 }

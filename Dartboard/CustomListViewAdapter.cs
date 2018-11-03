@@ -14,16 +14,18 @@ namespace Dartboard
 {
     class CustomListViewAdapter : BaseAdapter<string>
     {
-        private readonly IList<String> _items;
+        private readonly IList<string> _items;
         private readonly Context _context;
+        private readonly Constants.ViewType _typeOfView; 
 
-        public CustomListViewAdapter(Context c, IList<string> items)
+        public CustomListViewAdapter(Context c, IList<string> items, Constants.ViewType viewType)
         {
             _context = c;
-            _items = items; 
+            _items = items;
+            _typeOfView = viewType; 
         }
 
-        public override String this[int position]
+        public override string this[int position]
         {
             get { return _items[position]; }
         }
@@ -47,7 +49,15 @@ namespace Dartboard
             if (view == null)
             {
                 var inflater = LayoutInflater.FromContext(_context);
-                view = inflater.Inflate(Resource.Layout.name_list_item, parent, false);
+                if (_typeOfView == Constants.ViewType.NameListItem)
+                {
+                    view = inflater.Inflate(Resource.Layout.name_list_item, parent, false);
+                }
+                else if(_typeOfView == Constants.ViewType.SuggestedName)
+                {
+                    view = inflater.Inflate(Resource.Layout.suggested_name, parent, false);
+                }
+                
             }
 
             view.FindViewById<TextView>(Resource.Id.itemText).Text = item;

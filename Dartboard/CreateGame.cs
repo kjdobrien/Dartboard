@@ -12,7 +12,7 @@ using Android.Widget;
 
 namespace Dartboard
 {
-    [Activity(Label = "CreateGame", Theme="@style/DartsAppStyle")]
+    [Activity(Label = "CreateGame", Theme="@style/DartsAppStyle", MainLauncher = true)]
     public class CreateGame : Activity
     {
         int startingScore;
@@ -27,6 +27,7 @@ namespace Dartboard
         Button AddPlayer;
         Button ResumeGame;
         GameData gameData;
+        Dialog nameDialog;
 
 
 
@@ -41,12 +42,13 @@ namespace Dartboard
 
             ResumeGame = FindViewById<Button>(Resource.Id.resumeGame);
 
-            //SuggestedNames = HelperFunctions.GetNames();
+            SuggestedNames = HelperFunctions.GetNames();
 
             // Initialize listView
             PlayerNames = FindViewById<ListView>(Resource.Id.playerNames);
             items = new List<string> { };
-            nameAdapter = new CustomListViewAdapter(this, items); 
+            // Set up adapter 
+            nameAdapter = new CustomListViewAdapter(this, items, Constants.ViewType.NameListItem); 
             PlayerNames.Adapter = nameAdapter;
 
             // Get Player Name
@@ -55,7 +57,7 @@ namespace Dartboard
             AddPlayer.Click += AddPlayer_Click;
             StartGame.Click += StartGame_Click;
 
-
+            
 
             // Get Start Score
             Spinner selectStartScore = FindViewById<Spinner>(Resource.Id.startScoreSpinner);
@@ -71,12 +73,6 @@ namespace Dartboard
             list2 = Resources.GetStringArray(Resource.Array.legsArray).ToList();
             legSpinner.Adapter = new ArrayAdapter(this, Resource.Layout.spinnerItem, Resource.Id.itemText, list2); 
 
-            
-
-
-
-            
-
 
             gameData = HelperFunctions.CheckForPreviousGame();
             if (gameData.player1Name != "")
@@ -88,6 +84,21 @@ namespace Dartboard
 
 
             
+        }
+
+        private void SuggestedNamesListView_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
+        {
+            string name = SuggestedNames[e.Position];
+            items.Add(name);
+            nameAdapter = new CustomListViewAdapter(this, items, Constants.ViewType.NameListItem);
+            PlayerNames.Adapter = nameAdapter;
+            if (PlayerNames.Count == 2)
+            {
+                AddPlayer.Enabled = false;
+
+            }
+            StartGame.Enabled = true;
+            nameDialog.Cancel(); 
         }
 
         private void SelectStartScore_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
@@ -114,20 +125,27 @@ namespace Dartboard
                 intent.PutExtra("p2name", p2name);
             }
 
+            HelperFunctions.SavePlayerName(items); 
+
             StartActivity(intent);
         }
 
         private void AddPlayer_Click(object sender, EventArgs e)
         {                         
-            var addName = new Android.Support.V7.App.AlertDialog.Builder(this);
+            var addName = new Android.Support.V7.App.AlertDialog.Builder(this, Resource.Style.AlertDialogCustom);
             addName.SetView(Resource.Layout.NamePlayer);
             
             addName.SetPositiveButton("Enter", HandlePositiveButtonClick);
-            Dialog nameDialog = addName.Create();
-            ///SuggestedNamesListView = (ListView)nameDialog.FindViewById(Resource.Id.enterPlayerName);
-            ///SuggestedNamesListView.Adapter = new CustomListViewAdapter(this, SuggestedNames);
+            nameDialog = addName.Create();          
             nameDialog.Show();
-         
+
+            if (SuggestedNames != null)
+            {
+                SuggestedNamesListView = (ListView)nameDialog.FindViewById(Resource.Id.playerNameList);
+                SuggestedNamesListView.Adapter = new CustomListViewAdapter(this, SuggestedNames, Constants.ViewType.SuggestedName);
+                SuggestedNamesListView.ItemClick += SuggestedNamesListView_ItemClick;
+
+            }
         }
 
         private void ResumeGame_Click(object sender, EventArgs e)
@@ -168,20 +186,24 @@ namespace Dartboard
             var dialog = (Android.Support.V7.App.AlertDialog)sender;
             nameEditText = (EditText)dialog.FindViewById(Resource.Id.enterPlayerName);
             string name = nameEditText.Text;
-            items.Add(name);
-            nameAdapter = new CustomListViewAdapter(this, items);
-            PlayerNames.Adapter = nameAdapter;
-            //RunOnUiThread(() =>
-            //{ 
-            //    nameAdapter.NotifyDataSetChanged();
-            //});
-            if (PlayerNames.Count == 2)
+            if (string.IsNullOrEmpty(name))
             {
-                AddPlayer.Enabled = false;
-
+                var error = GetDrawable(Resource.Drawable.baseline_error_black_18dp);
+                nameEditText.SetError("Enter a name", error);
             }
-            StartGame.Enabled = true;
+            else
+            {
+                items.Add(name);
+                nameAdapter = new CustomListViewAdapter(this, items, Constants.ViewType.NameListItem);
+                PlayerNames.Adapter = nameAdapter;
+                if (PlayerNames.Count == 2)
+                {
+                    AddPlayer.Enabled = false;
 
+                }
+                StartGame.Enabled = true;
+            }
+         
         }
     }
 }
