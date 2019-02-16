@@ -45,6 +45,13 @@ namespace Dartboard
             return gameData;
         }
 
+        public static Toast DartsToast(Activity activity, string text, ToastLength toastLength)
+        {
+            Toast toast = Toast.MakeText(activity, text, toastLength);
+            toast.SetGravity(GravityFlags.Center, 0, 0);
+            return toast;
+        }
+
         public static List<string> GetNames()
         {
             string fileName = "/data/data/Dartboard.Dartboard/previousPlayers.txt";

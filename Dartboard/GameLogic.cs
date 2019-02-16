@@ -255,7 +255,7 @@ namespace Dartboard
             //string scoreBoard = string.Format("{0}: {1} Dart: 1", p.name, p.score);
             //p.ScoreBoard.Text = scoreBoard;
             //p.Checkout.Text = " ";
-
+           
         }
 
 

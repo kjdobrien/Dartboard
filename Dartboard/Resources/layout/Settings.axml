@@ -3,11 +3,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 	android:background="#071e22">
+	<LinearLayout
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:orientation="horizontal"
+		android:id="@+id/topBarSettings">
+		<ImageButton
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"			
+			android:scaleType="fitCenter"
+			android:id="@+id/backButtonSettings"
+			android:textColor="#ece5f0"
+			android:src="@drawable/baseline_keyboard_backspace_24_white"
+		/>
+	</LinearLayout>
 	
 	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:orientation="horizontal"
+		android:layout_marginTop="10dp"
+		android:layout_below="@id/topBarSettings"
 		android:id="@+id/saveNamesLayout">	
 		<TextView
 		android:layout_width="wrap_content"
@@ -37,6 +53,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:orientation="horizontal"
+		android:layout_marginTop="10dp"
 		android:id="@+id/tabletModeLayout"
 		android:layout_below="@id/saveNamesLayout">	
 		<TextView

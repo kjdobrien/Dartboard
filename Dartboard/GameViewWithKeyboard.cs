@@ -346,10 +346,7 @@ namespace Dartboard
             {
                 if (score > p.score | p.score - score == 1 | (p.score - score == 0 && p.Checkout == " No checkout") )
                 {
-                    Toast toast = Toast.MakeText(this, "Bust", ToastLength.Short);
-                    toast.SetGravity(GravityFlags.Center, 0, 0);
-                    toast.Show();
-                    
+                    HelperFunctions.DartsToast(this, "Bust", ToastLength.Short).Show();                    
                 }
                 else
                 {

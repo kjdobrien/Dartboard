@@ -216,8 +216,14 @@ namespace Dartboard
             string name = nameEditText.Text;
             if (string.IsNullOrEmpty(name))
             {
-                var error = GetDrawable(Resource.Drawable.baseline_error_black_18dp);
-                nameEditText.SetError("Enter a name", error);
+                //var error = GetDrawable(Resource.Drawable.baseline_error_black_18dp);
+                //nameEditText.SetError("Enter a name", error);
+
+                HelperFunctions.DartsToast(this, "Enter a name", ToastLength.Long).Show();
+            }
+            else if (SuggestedNames != null  && SuggestedNames.Contains(name))
+            {
+                HelperFunctions.DartsToast(this, "Name already exists", ToastLength.Long).Show();
             }
             else
             {

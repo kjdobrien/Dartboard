@@ -1802,8 +1802,8 @@ namespace Dartboard
 			// aapt resource value: 0x7f0a006f
 			public const int Main = 2131361903;
 			
-			// aapt resource value: 0x7f0a0098
-			public const int SaveSettings = 2131361944;
+			// aapt resource value: 0x7f0a009a
+			public const int SaveSettings = 2131361946;
 			
 			// aapt resource value: 0x7f0a007d
 			public const int action0 = 2131361917;
@@ -1879,6 +1879,9 @@ namespace Dartboard
 			
 			// aapt resource value: 0x7f0a0062
 			public const int backButton = 2131361890;
+			
+			// aapt resource value: 0x7f0a0092
+			public const int backButtonSettings = 2131361938;
 			
 			// aapt resource value: 0x7f0a001a
 			public const int beginning = 2131361818;
@@ -2081,14 +2084,14 @@ namespace Dartboard
 			// aapt resource value: 0x7f0a0084
 			public const int right_side = 2131361924;
 			
+			// aapt resource value: 0x7f0a0095
+			public const int saveNameSwitch = 2131361941;
+			
+			// aapt resource value: 0x7f0a0094
+			public const int saveNameText = 2131361940;
+			
 			// aapt resource value: 0x7f0a0093
-			public const int saveNameSwitch = 2131361939;
-			
-			// aapt resource value: 0x7f0a0092
-			public const int saveNameText = 2131361938;
-			
-			// aapt resource value: 0x7f0a0091
-			public const int saveNamesLayout = 2131361937;
+			public const int saveNamesLayout = 2131361939;
 			
 			// aapt resource value: 0x7f0a006d
 			public const int scoreEditText = 2131361901;
@@ -2192,17 +2195,17 @@ namespace Dartboard
 			// aapt resource value: 0x7f0a000b
 			public const int tabMode = 2131361803;
 			
-			// aapt resource value: 0x7f0a0094
-			public const int tabletModeLayout = 2131361940;
-			
 			// aapt resource value: 0x7f0a0096
-			public const int tabletModeSwitch = 2131361942;
+			public const int tabletModeLayout = 2131361942;
 			
-			// aapt resource value: 0x7f0a0095
-			public const int tabletModeText = 2131361941;
+			// aapt resource value: 0x7f0a0098
+			public const int tabletModeSwitch = 2131361944;
 			
 			// aapt resource value: 0x7f0a0097
-			public const int tabletModeWarningText = 2131361943;
+			public const int tabletModeText = 2131361943;
+			
+			// aapt resource value: 0x7f0a0099
+			public const int tabletModeWarningText = 2131361945;
 			
 			// aapt resource value: 0x7f0a008f
 			public const int text = 2131361935;
@@ -2233,6 +2236,9 @@ namespace Dartboard
 			
 			// aapt resource value: 0x7f0a0061
 			public const int topBar = 2131361889;
+			
+			// aapt resource value: 0x7f0a0091
+			public const int topBarSettings = 2131361937;
 			
 			// aapt resource value: 0x7f0a0039
 			public const int topPanel = 2131361849;
