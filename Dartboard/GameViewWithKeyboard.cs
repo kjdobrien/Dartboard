@@ -53,6 +53,35 @@ namespace Dartboard
 
             board = new Board();
 
+            // Get checkouts 
+            using (StreamReader sr = new StreamReader(Assets.Open("Checkouts.txt")))
+            {
+                char[] delim = { ':' };
+                string line;
+                while ((line = sr.ReadLine()) != null)
+                {
+                    string[] words = line.Split(delim);
+                    int scoreValue;
+                    int.TryParse(words[0], out scoreValue);
+                    string bestCheckout = words[1];
+                    board.Checkouts.Add(scoreValue, bestCheckout);
+                }
+            }
+
+            using (StreamReader sr = new StreamReader(Assets.Open("twoDartCheckouts.txt")))
+            {
+                char[] delim = { ':' };
+                string line;
+                while ((line = sr.ReadLine()) != null)
+                {
+                    string[] words = line.Split(delim);
+                    int scoreValue;
+                    int.TryParse(words[0], out scoreValue);
+                    string bestCheckout = words[1];
+                    board.TwoDartCheckouts.Add(scoreValue, bestCheckout);
+                }
+            }
+
             BackArrow = FindViewById<ImageButton>(Resource.Id.backButton); 
 
             player1Name = FindViewById<TextView>(Resource.Id.player1Name);
@@ -79,10 +108,21 @@ namespace Dartboard
                 legsPlayed = Convert.ToInt32(Intent.GetStringExtra("legsPlayed"));
                 legsToPlay = Convert.ToInt32(Intent.GetStringExtra("legToPlay"));
 
-                player1Score.Text = Player1.score.ToString(); 
+                player1Score.Text = Player1.score.ToString();
                 player2Score.Text = Player2.score.ToString();
 
-                
+                if (Player1.score <= 170 || Player2.score <= 170)
+                {
+                    player1Checkout.Text = GameLogic.GetCheckout(Player1, board);
+                    player1Checkout.Visibility = ViewStates.Visible;              
+                    player2Checkout.Text = GameLogic.GetCheckout(Player2, board);
+                    player2Checkout.Visibility = ViewStates.Visible; 
+                }
+
+
+
+
+
             }
             else
             {
@@ -126,34 +166,7 @@ namespace Dartboard
 
             BackArrow.Click += BackArrow_Click;
 
-            // Get checkouts 
-            using (StreamReader sr = new StreamReader(Assets.Open("Checkouts.txt")))
-            {
-                char[] delim = { ':' };
-                string line;
-                while ((line = sr.ReadLine()) != null)
-                {
-                    string[] words = line.Split(delim);
-                    int scoreValue;
-                    int.TryParse(words[0], out scoreValue);
-                    string bestCheckout = words[1];
-                    board.Checkouts.Add(scoreValue, bestCheckout);
-                }
-            }
 
-            using (StreamReader sr = new StreamReader(Assets.Open("twoDartCheckouts.txt")))
-            {
-                char[] delim = { ':' };
-                string line;
-                while ((line = sr.ReadLine()) != null)
-                {
-                    string[] words = line.Split(delim);
-                    int scoreValue;
-                    int.TryParse(words[0], out scoreValue);
-                    string bestCheckout = words[1];
-                    board.TwoDartCheckouts.Add(scoreValue, bestCheckout);
-                }
-            }
 
             // Set checkouts if playing 101 
             if (startScore == 101)

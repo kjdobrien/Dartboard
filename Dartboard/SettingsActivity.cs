@@ -15,11 +15,27 @@ namespace Dartboard
     [Activity(Label = "SettingsActivity")]
     public class SettingsActivity : Activity
     {
+
+        Switch SaveNameSwitch;
+        Switch TabletModeSwitch;
+        Button SaveSettingsButton;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+            SetContentView(Resource.Layout.Settings);
 
-            // Create your application here
+            SaveNameSwitch = FindViewById<Switch>(Resource.Id.saveNameSwitch);
+            TabletModeSwitch = FindViewById<Switch>(Resource.Id.tabletModeSwitch);
+            SaveSettingsButton = FindViewById<Button>(Resource.Id.SaveSettings);
+            SaveSettingsButton.Click += SaveSettingsButton_Click;
+
+
+        }
+
+        private void SaveSettingsButton_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }

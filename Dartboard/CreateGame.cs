@@ -12,7 +12,7 @@ using Android.Widget;
 
 namespace Dartboard
 {
-    [Activity(Label = "CreateGame", Theme="@style/DartsAppStyle", MainLauncher = true)]
+    [Activity(Label = "CreateGame", Theme="@style/DartsAppStyle")]
     public class CreateGame : Activity
     {
         int startingScore;
@@ -26,6 +26,7 @@ namespace Dartboard
         Button StartGame;
         Button AddPlayer;
         Button ResumeGame;
+        ImageButton SettingsMenu;
         GameData gameData;
         Dialog nameDialog;
 
@@ -35,6 +36,10 @@ namespace Dartboard
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.CreateGame);
+
+            // Initialize the settings menu 
+            SettingsMenu = FindViewById<ImageButton>(Resource.Id.settingsButton);
+            SettingsMenu.Click += SettingsMenu_Click;
 
             // Start the Game button
             StartGame = FindViewById<Button>(Resource.Id.startGame);
@@ -51,6 +56,8 @@ namespace Dartboard
             nameAdapter = new CustomListViewAdapter(this, items, Constants.ViewType.NameListItem); 
             PlayerNames.Adapter = nameAdapter;
 
+            PlayerNames.ItemClick += PlayerNames_ItemClick;
+
             // Get Player Name
             AddPlayer = FindViewById<Button>(Resource.Id.addPlayer);
 
@@ -65,17 +72,18 @@ namespace Dartboard
             List<string> list1 = new List<string>();
             list1 = Resources.GetStringArray(Resource.Array.startScoreArray).ToList();
             selectStartScore.Adapter  = new ArrayAdapter(this, Resource.Layout.spinnerItem, Resource.Id.itemText, list1);
+            selectStartScore.SetSelection(5);
 
             // Get Number of legs
             Spinner legSpinner = FindViewById<Spinner>(Resource.Id.legsSpinner);
             legSpinner.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs>(legSpinner_ItemSelected);
             List<string> list2 = new List<string>();
             list2 = Resources.GetStringArray(Resource.Array.legsArray).ToList();
-            legSpinner.Adapter = new ArrayAdapter(this, Resource.Layout.spinnerItem, Resource.Id.itemText, list2); 
-
+            legSpinner.Adapter = new ArrayAdapter(this, Resource.Layout.spinnerItem, Resource.Id.itemText, list2);
+            legSpinner.SetSelection(4);
 
             gameData = HelperFunctions.CheckForPreviousGame();
-            if (gameData.player1Name != "")
+            if (gameData.player1Name != "" && (Convert.ToInt32(gameData.player1Score)  > 0  || Convert.ToInt32(gameData.player2Score) > 0))
             {
                 ResumeGame.Visibility = ViewStates.Visible;
 
@@ -84,6 +92,26 @@ namespace Dartboard
 
 
             
+        }
+
+        private void PlayerNames_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
+        {
+            items.Remove(items[e.Position]);
+            nameAdapter = new CustomListViewAdapter(this, items, Constants.ViewType.NameListItem);
+            PlayerNames.Adapter = nameAdapter;
+
+            if (PlayerNames.Count < 2)
+            {
+                AddPlayer.Enabled = true;
+
+            }
+
+        }
+
+        private void SettingsMenu_Click(object sender, EventArgs e)
+        {
+            Intent intent = new Intent(this, typeof(SettingsActivity));
+            StartActivity(intent); 
         }
 
         private void SuggestedNamesListView_ItemClick(object sender, AdapterView.ItemClickEventArgs e)

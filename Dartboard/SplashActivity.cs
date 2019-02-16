@@ -14,7 +14,7 @@ using Android.Util;
 
 namespace Dartboard
 {
-    [Activity(Label = "SplashActivity", MainLauncher = false, NoHistory = true, Icon = "@drawable/launcherIcon192x192", Theme = "@style/MyTheme.Splash")]
+    [Activity(Label = "SplashActivity", MainLauncher = true, NoHistory = true, Icon = "@drawable/launcherIcon192x192", Theme = "@style/MyTheme.Splash")]
     public class SplashActivity : Activity
     {
 

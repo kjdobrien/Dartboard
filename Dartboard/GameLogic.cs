@@ -146,6 +146,10 @@ namespace Dartboard
             {
                 return value3dart;
             }
+            else if (player.score <= 40 && player.score % 2 == 0)
+            {
+                return  "D" + (player.score / 2);
+            }
             else
             {
                 return "";
@@ -203,18 +207,21 @@ namespace Dartboard
             if (winner.legsWon >= (numLegs + 1) / 2)
             {
                 alert.SetTitle("Player " + winner.name + " wins the match!");
-                alert.SetNeutralButton("Start Over", (senderAlert, args) => { c.StartActivity(intent); });
+                alert.SetNeutralButton("New Game", (senderAlert, args) => { c.StartActivity(intent); });
             }
             else
             {
                 alert.SetTitle("Player " + winner.name + " wins the leg!");
                 // move to next set/leg or start new game 
                 alert.SetPositiveButton("Move to next leg", (senderAlert, args) => { MoveToNextLeg(leg, players, startScore, activity); });
-                // neutral 
 
 
             }
-            alert.SetNegativeButton("Back to setup", (senderAlert, args) => { c.StartActivity(typeof(CreateGame)); });
+            alert.SetNegativeButton("Back to setup", (senderAlert, args) => {
+                // Clear the contents of the save file 
+                HelperFunctions.DeleteSaveFile(Constants.PerviousGameFile);
+                c.StartActivity(typeof(CreateGame));
+            });
             Dialog dialog = alert.Create();
             dialog.Show();
 

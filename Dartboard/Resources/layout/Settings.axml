@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"    
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+	android:background="#071e22">
+	
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		android:id="@+id/saveNamesLayout">	
+		<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_weight="1"
+		android:text="Save Names"
+		android:textColor="#ece5f0"
+		android:fontFamily="sans-serif"
+		android:textSize="20dp"
+		android:layout_gravity="center"
+		android:layout_marginLeft="5dp"
+		android:id="@+id/saveNameText"
+		/>
+		<Switch
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:gravity="right"
+		android:layout_gravity="center"
+		android:layout_weight="1"
+		android:scaleX="1.0"
+		android:scaleY="1.0"
+		android:id="@+id/saveNameSwitch"
+		/>
+	</LinearLayout>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		android:id="@+id/tabletModeLayout"
+		android:layout_below="@id/saveNamesLayout">	
+		<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_weight="1"
+		android:text="Tablet Mode"
+		android:textColor="#ece5f0"
+		android:fontFamily="sans-serif"
+		android:textSize="20dp"
+		android:layout_gravity="center"
+		android:layout_marginLeft="5dp"
+		android:id="@+id/tabletModeText"
+		/>
+		<Switch
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:gravity="right"
+		android:layout_gravity="center"
+		android:layout_weight="1"
+		android:scaleX="1.0"
+		android:scaleY="1.0"
+		android:id="@+id/tabletModeSwitch"
+		/>
+	</LinearLayout>
+		<TextView
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_below="@id/tabletModeLayout"	
+		android:text="Only use if the screen on your device is over 7 inches"
+		android:textColor="#ece5f0"
+		android:fontFamily="sans-serif"
+		android:textSize="10dp"
+		android:gravity="center"
+		android:layout_gravity="center"
+		android:layout_marginLeft="5dp"
+		android:id="@+id/tabletModeWarningText"
+		/>
+
+
+
+
+
+	<Button
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:layout_alignParentBottom="true"
+	android:text="Save Settings"
+	style="@style/buttonColor"	
+	android:layout_margin="5dp"
+	android:background="@drawable/rounded_buttons"
+	android:id="@+id/SaveSettings"/>
+</RelativeLayout>
