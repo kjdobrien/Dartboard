@@ -31,6 +31,8 @@ namespace Dartboard
         public TextView player2Checkout;
         public LinearLayout Player1Layout;
         public LinearLayout Player2Layout;
+        public ListView Player1ScoreList;
+        public ListView Player2ScoreList;
         int startScore;
         int legsPlayed;
         int legsToPlay; 
@@ -92,6 +94,8 @@ namespace Dartboard
             player2Checkout = FindViewById<TextView>(Resource.Id.player2CheckOut);
             Player1Layout = FindViewById<LinearLayout>(Resource.Id.player1Details);
             Player2Layout = FindViewById<LinearLayout>(Resource.Id.player2Details);
+            Player1ScoreList = FindViewById<ListView>(Resource.Id.player1ScoreList);
+            Player2ScoreList = FindViewById<ListView>(Resource.Id.player2ScoreList); 
 
             ScoreEditText = FindViewById<EditText>(Dartboard.Resource.Id.scoreEditText);
             ScoreEditText.EditorAction += ScoreEditText_EditorAction;
@@ -222,7 +226,7 @@ namespace Dartboard
 
             
 
-
+           
 
         }
 
@@ -238,13 +242,18 @@ namespace Dartboard
 
         private void BackArrow_Click(object sender, EventArgs e)
         {
+            ReturnToMain();
+        }
+
+        private void ReturnToMain()
+        {
             if (Player1.score != 0 && Player2.score != 0)
             {
                 GameLogic.SaveGameData(Player1, Player2, legsPlayed, legsToPlay);
             }
             else
             {
-                HelperFunctions.DeleteSaveFile(Constants.PerviousGameFile); 
+                HelperFunctions.DeleteSaveFile(Constants.PerviousGameFile);
             }
             var alert = new Android.Support.V7.App.AlertDialog.Builder(this);
             alert.SetTitle("Back to Main Menu?");
@@ -253,6 +262,7 @@ namespace Dartboard
             Dialog dialog = alert.Create();
             dialog.Show();
         }
+
 
         private void Player2Score_TextChanged(object sender, Android.Text.TextChangedEventArgs e)
         {
@@ -378,6 +388,11 @@ namespace Dartboard
         {
             ScoreEditText.Text = "";
             score = 0;
+        }
+
+        public override void OnBackPressed()
+        {
+            ReturnToMain();
         }
 
     }

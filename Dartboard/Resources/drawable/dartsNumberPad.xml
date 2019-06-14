@@ -1,7 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Keyboard xmlns:android="http://schemas.android.com/apk/res/android"
   android:keyWidth="33.3%p"
-  android:keyHeight="10%p" >
+  android:keyHeight="10%p" 
+  android:keyTextColor="@color/offWhite"
+  android:keyBackground="@color/offBlack"
+          >
   <Row>
     <Key android:codes="55001" android:keyLabel="UNDO" android:keyWidth="50%p" android:keyEdgeFlags="left" />
     <Key android:codes="67" android:keyLabel="BCKSPC" android:keyWidth="50%p" android:keyEdgeFlags="right" />

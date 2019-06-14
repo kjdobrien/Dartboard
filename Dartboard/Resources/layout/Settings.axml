@@ -94,7 +94,15 @@
 		/>
 
 
-
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/SaveSettings"
+        style="@style/buttonColor"
+        android:text="Delete Saved data"
+        android:background="@drawable/rounded_buttons"
+        android:layout_margin="5dp"
+    />
 
 
 	<Button
@@ -105,5 +113,5 @@
 	style="@style/buttonColor"	
 	android:layout_margin="5dp"
 	android:background="@drawable/rounded_buttons"
-	android:id="@+id/SaveSettings"/>
+	android:id="@id/SaveSettings"/>
 </RelativeLayout>

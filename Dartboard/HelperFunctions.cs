@@ -64,7 +64,9 @@ namespace Dartboard
                     {
                         Names.Add(sr.ReadLine());
                     }
+                    
                 }
+                
                 return Names;
             }
             else
@@ -72,6 +74,25 @@ namespace Dartboard
                 return null; 
             }
         }
+
+        public static List<string> DeleteName(List<string> Names, string name)
+        {           
+            string fileName = "/data/data/Dartboard.Dartboard/previousPlayers.txt";                
+            Names.Remove(name);
+            File.Delete(fileName);
+            using (StreamWriter sw = File.CreateText(fileName))
+            {
+                foreach (string n in Names)
+                {
+                    File.AppendAllLines(fileName, Names);
+                }
+            }
+
+            Names = GetNames();
+
+            return Names;
+        }
+
 
         public static void DeleteSaveFile(string FilePath)
         {
@@ -98,6 +119,7 @@ namespace Dartboard
             }
         }
     }
+
 
     public struct GameData
     {

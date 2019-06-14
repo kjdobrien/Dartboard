@@ -3,5 +3,8 @@
   
   <color name="buttonColour">#0f6938</color>
   <color name="lighterButtonColor">#31a447</color>
+
+  <color name="offWhite">#ece5f0</color>
+  <color name="offBlack">#071e22</color>
   
 </resources>

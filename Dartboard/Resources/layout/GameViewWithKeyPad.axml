@@ -52,9 +52,18 @@
 				android:text="D20 D20 BULL"
 				android:gravity="center_horizontal"
 				android:textColor="#ece5f0"
-				android:visibility="invisible"
-				android:layout_marginBottom="20dp"
+				android:visibility="invisible"				
 				android:id="@+id/player1CheckOut"/>
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:textColor="@color/offWhite"
+                android:layout_marginBottom="20dp"
+                android:requiresFadingEdge="vertical"
+                android:fadingEdgeLength="48dp"
+                android:id="@+id/player1ScoreList"
+            />
 		</LinearLayout>
 
 		<LinearLayout
@@ -87,6 +96,16 @@
 				android:textColor="#ece5f0"
 				android:visibility="invisible"
 				android:id="@+id/player2CheckOut"/>
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:textColor="@color/offWhite"
+                android:layout_marginBottom="20dp"
+                android:requiresFadingEdge="vertical"
+                android:fadingEdgeLength="48dp"
+                android:id="@+id/player2ScoreList"
+            />
 		</LinearLayout>
 
 

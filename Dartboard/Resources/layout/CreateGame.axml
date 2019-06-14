@@ -12,7 +12,7 @@
 		android:scaleType="fitCenter"
 		android:visibility="visible"
 		android:layout_centerHorizontal="true"
-        android:src="@drawable/googlePlayStoreIcon" />
+        android:src="@drawable/googleplayStoreIcon" />
 	<ImageButton
 		android:id="@+id/settingsButton"
 		android:layout_width="wrap_content"
@@ -22,7 +22,7 @@
 		android:src="@drawable/baseline_settings_black_18dp"
 	/>
     <TextView
-        android:text="180 Darts"
+        android:text="180"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -33,12 +33,42 @@
         android:id="@+id/brand"
         android:gravity="center"
         android:textStyle="bold" />
-    <ListView
-        style="@style/DartsAppStyle"
-		android:layout_below="@id/brand"
+
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/previousPlayersHint"
+        android:layout_below="@id/brand"
+        android:text="Player 1 V Player 2"
+        android:layout_gravity="center"
+		android:textColor="#D4CED8"
+        android:fontFamily="sans-serif"
+        android:gravity="center"
+        android:visibility="invisible"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+    />
+
+    	<Button
+        style="@style/buttonColor"
+        android:text="Resume Previous Game"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+		android:layout_margin="5dp"
+        android:id="@+id/resumeGame"
+		android:background="@drawable/rounded_buttons"
+		android:layout_below="@+id/previousPlayersHint"
+		android:visibility="invisible"
+        
+	    />
+
+
+    <ListView
+        style="@style/DartsAppStyle"
+		android:layout_below="@id/resumeGame"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
 		android:textSize="20dp"
+        android:stackFromBottom="true"
         android:id="@+id/playerNames" />
     <Button
         style="@style/buttonColor"
@@ -107,17 +137,7 @@
 	</LinearLayout>
 
 
-	<Button
-        style="@style/buttonColor"
-        android:text="Resume Previous Game"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-		android:layout_margin="5dp"
-        android:id="@+id/resumeGame"
-		android:background="@drawable/rounded_buttons"
-		android:layout_above="@+id/startGame"
-		android:visibility="invisible"
-	/>
+
     <Button
         style="@style/buttonColor"
 		android:background="@drawable/rounded_buttons"
@@ -126,7 +146,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 		android:layout_marginBottom="5dp"
-        android:id="@id/startGame"
+        android:id="@+id/startGame"
 		android:layout_alignParentBottom="true"
 	/>
 </RelativeLayout>

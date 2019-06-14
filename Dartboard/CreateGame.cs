@@ -29,6 +29,7 @@ namespace Dartboard
         ImageButton SettingsMenu;
         GameData gameData;
         Dialog nameDialog;
+        TextView previousPlayersHint;
 
 
 
@@ -48,6 +49,9 @@ namespace Dartboard
             ResumeGame = FindViewById<Button>(Resource.Id.resumeGame);
 
             SuggestedNames = HelperFunctions.GetNames();
+
+            previousPlayersHint = FindViewById<TextView>(Resource.Id.previousPlayersHint); 
+            
 
             // Initialize listView
             PlayerNames = FindViewById<ListView>(Resource.Id.playerNames);
@@ -86,12 +90,22 @@ namespace Dartboard
             if (gameData.player1Name != "" && (Convert.ToInt32(gameData.player1Score)  > 0  || Convert.ToInt32(gameData.player2Score) > 0))
             {
                 ResumeGame.Visibility = ViewStates.Visible;
+                previousPlayersHint.Visibility = ViewStates.Visible;
 
+                string hintText = "{0} {1} V {2} {3}";
+
+                previousPlayersHint.Text = String.Format(hintText, gameData.player1Name, gameData.player1Score, gameData.player2Score, gameData.player2Name);
                 ResumeGame.Click += ResumeGame_Click;
             }
 
 
             
+        }
+
+        private void SuggestedNamesListView_ItemLongClick(object sender, AdapterView.ItemLongClickEventArgs e)
+        {
+            SuggestedNames =  HelperFunctions.DeleteName(SuggestedNames, SuggestedNames[e.Position]);            
+                        
         }
 
         private void PlayerNames_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
@@ -103,8 +117,9 @@ namespace Dartboard
             if (PlayerNames.Count < 2)
             {
                 AddPlayer.Enabled = true;
-
+                StartGame.Enabled = false; 
             }
+            
 
         }
 
@@ -123,9 +138,9 @@ namespace Dartboard
             if (PlayerNames.Count == 2)
             {
                 AddPlayer.Enabled = false;
-
+                StartGame.Enabled = true;
             }
-            StartGame.Enabled = true;
+            
             nameDialog.Cancel(); 
         }
 
@@ -172,6 +187,7 @@ namespace Dartboard
                 SuggestedNamesListView = (ListView)nameDialog.FindViewById(Resource.Id.playerNameList);
                 SuggestedNamesListView.Adapter = new CustomListViewAdapter(this, SuggestedNames, Constants.ViewType.SuggestedName);
                 SuggestedNamesListView.ItemClick += SuggestedNamesListView_ItemClick;
+                SuggestedNamesListView.ItemLongClick += SuggestedNamesListView_ItemLongClick;
 
             }
         }
