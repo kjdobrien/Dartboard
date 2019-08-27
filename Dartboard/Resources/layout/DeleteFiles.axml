@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ece5f0">
+    <RadioGroup
+        android:id="@+id/filesToDelete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Delete Saved Names"
+            android:checked="false"
+            android:textColor="#071e22"
+            android:id="@+id/DeleteSavedNamesRadio"        
+            android:allowUndo="true"
+            android:textAlignment="center"     
+            android:buttonTint="@color/offBlack"
+        />
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Delete Saved Game"
+            android:checked="false"
+            android:textColor="#071e22"
+            android:id="@+id/DeleteSavedGameRadio" 
+            android:allowUndo="true"
+            android:textAlignment="center"
+            android:buttonTint="@color/offBlack"/>
+        </RadioGroup>
+</LinearLayout>

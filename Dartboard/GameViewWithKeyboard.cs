@@ -11,6 +11,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Views.Animations;
+using Android.Views.InputMethods;
 using Android.Widget;
 using Java.Lang;
 using static Android.Views.View;
@@ -42,6 +43,8 @@ namespace Dartboard
         Intent IntentReset;
         bool undoEnabled;
 
+        InputMethodManager inputMethodManager;
+
         private List<Player> Players = new List<Player>();
         private Player Player1 = new Player();
         private Player Player2 = new Player(); 
@@ -54,6 +57,8 @@ namespace Dartboard
             SetContentView(Resource.Layout.GameViewWithKeyPad);
 
             board = new Board();
+
+
 
             // Get checkouts 
             using (StreamReader sr = new StreamReader(Assets.Open("Checkouts.txt")))
@@ -99,13 +104,16 @@ namespace Dartboard
 
             ScoreEditText = FindViewById<EditText>(Dartboard.Resource.Id.scoreEditText);
             ScoreEditText.EditorAction += ScoreEditText_EditorAction;
+            ScoreEditText.Click += ScoreEditText_Click;
+
+
 
             Player1.name = Intent.GetStringExtra("p1name");
             Player2.name = Intent.GetStringExtra("p2name");
 
             if (Intent.HasExtra("gameResumed") && Intent.GetBooleanExtra("gameResumed", false) == true)
             {
-                Player1.score = Convert.ToInt32( Intent.GetStringExtra("p1Score"));
+                Player1.score = Convert.ToInt32(Intent.GetStringExtra("p1Score"));
                 Player2.score = Convert.ToInt32(Intent.GetStringExtra("p2Score"));
                 Player1.turn = Convert.ToBoolean(Intent.GetStringExtra("p1Turn"));
                 Player2.turn = Convert.ToBoolean(Intent.GetStringExtra("p2Turn"));
@@ -118,9 +126,9 @@ namespace Dartboard
                 if (Player1.score <= 170 || Player2.score <= 170)
                 {
                     player1Checkout.Text = GameLogic.GetCheckout(Player1, board);
-                    player1Checkout.Visibility = ViewStates.Visible;              
+                    player1Checkout.Visibility = ViewStates.Visible;
                     player2Checkout.Text = GameLogic.GetCheckout(Player2, board);
-                    player2Checkout.Visibility = ViewStates.Visible; 
+                    player2Checkout.Visibility = ViewStates.Visible;
                 }
 
 
@@ -224,10 +232,16 @@ namespace Dartboard
             };
 
 
-            
 
-           
+            inputMethodManager = (InputMethodManager)GetSystemService(Context.InputMethodService);
+            inputMethodManager.HideSoftInputFromWindow(ScoreEditText.WindowToken, 0);
 
+
+        }
+
+        private void ScoreEditText_Click(object sender, EventArgs e)
+        {
+            inputMethodManager.HideSoftInputFromWindow(ScoreEditText.WindowToken, 0);
         }
 
         private void SetUpIntentReset(string player1Name, string player2Name, string startScore, string legsToPlay)
@@ -268,8 +282,8 @@ namespace Dartboard
         {
             if (GameLogic.IsCheckout(Player2))
             {
-                player1Checkout.Visibility = ViewStates.Visible;
-                player1Checkout.Text = GameLogic.GetCheckout(Player1, board);
+                player2Checkout.Visibility = ViewStates.Visible;
+                player2Checkout.Text = GameLogic.GetCheckout(Player2, board);
             }
             else
             {
@@ -294,60 +308,69 @@ namespace Dartboard
 
         private void ScoreEditText_EditorAction(object sender, TextView.EditorActionEventArgs e)
         {
-            score = Convert.ToInt32(ScoreEditText.Text);
-            if (Player1.turn)
+            if (ScoreEditText.Text == "" || ScoreEditText.Text == " ")
             {
-
-                if (validateScore(score, Player1))
-                {
-                    player1Score.Text = Player1.score.ToString();                    
-                    if (GameLogic.IsCheckout(Player1))
-                    {
-                        player1Checkout.Visibility = ViewStates.Visible;
-                        player1Checkout.Text = GameLogic.GetCheckout(Player1, board);
-                        Player1.Checkout = player1Checkout.Text; 
-                    }
-                    else
-                    {
-                        player1Checkout.Text = "";
-                        player1Checkout.Visibility = ViewStates.Invisible;
-                    }
-                    clearScore();
-                    GameLogic.SwitchPlayer(Player1, Player2, this);
-                }
-                else
-                {
-                    return;
-                }
+                HelperFunctions.DartsToast(this, "Enter a score", ToastLength.Short);
             }
             else
             {
-                player2Checkout.Text = "";
-                if (validateScore(score, Player2))
+                score = Convert.ToInt32(ScoreEditText.Text);
+
+
+                if (Player1.turn)
                 {
 
-                    player2Score.Text = Player2.score.ToString();
-                    if (GameLogic.IsCheckout(Player2))
+                    if (validateScore(score, Player1))
                     {
-                        player2Checkout.Visibility = ViewStates.Visible;
-                        player2Checkout.Text = GameLogic.GetCheckout(Player2, board);
-                        Player2.Checkout = player2Checkout.Text; 
+                        player1Score.Text = Player1.score.ToString();
+                        if (GameLogic.IsCheckout(Player1))
+                        {
+                            player1Checkout.Visibility = ViewStates.Visible;
+                            player1Checkout.Text = GameLogic.GetCheckout(Player1, board);
+                            Player1.Checkout = player1Checkout.Text;
+                        }
+                        else
+                        {
+                            player1Checkout.Text = "";
+                            player1Checkout.Visibility = ViewStates.Invisible;
+                        }
+                        clearScore();
+                        GameLogic.SwitchPlayer(Player1, Player2, this);
                     }
                     else
                     {
-                        player2Checkout.Text = "";
-                        player2Checkout.Visibility = ViewStates.Invisible;
+                        return;
                     }
-                    clearScore();
-                    GameLogic.SwitchPlayer(Player1, Player2, this);
                 }
                 else
                 {
-                    return;
+                    player2Checkout.Text = "";
+                    if (validateScore(score, Player2))
+                    {
+
+                        player2Score.Text = Player2.score.ToString();
+                        if (GameLogic.IsCheckout(Player2))
+                        {
+                            player2Checkout.Visibility = ViewStates.Visible;
+                            player2Checkout.Text = GameLogic.GetCheckout(Player2, board);
+                            Player2.Checkout = player2Checkout.Text;
+                        }
+                        else
+                        {
+                            player2Checkout.Text = "";
+                            player2Checkout.Visibility = ViewStates.Invisible;
+                        }
+                        clearScore();
+                        GameLogic.SwitchPlayer(Player1, Player2, this);
+                    }
+                    else
+                    {
+                        return;
+                    }
                 }
+
+                GameLogic.SaveGameData(Player1, Player2, legsPlayed, legsToPlay);
             }
-            
-            GameLogic.SaveGameData(Player1, Player2, legsPlayed, legsToPlay);
         }
 
         private bool validateScore(int score, Player p)
@@ -356,7 +379,8 @@ namespace Dartboard
             {
                 if (score > p.score | p.score - score == 1 | (p.score - score == 0 && p.Checkout == " No checkout") )
                 {
-                    HelperFunctions.DartsToast(this, "Bust", ToastLength.Short).Show();                    
+                    BustToast bust = new BustToast(this, this, "BUST!", ToastLength.Long);
+                    bust.Show(); 
                 }
                 else
                 {
@@ -393,6 +417,15 @@ namespace Dartboard
         public override void OnBackPressed()
         {
             ReturnToMain();
+        }
+
+
+        public override bool OnKeyUp([GeneratedEnum] Android.Views.Keycode keyCode, KeyEvent e)
+        {
+            inputMethodManager = (InputMethodManager)GetSystemService(Context.InputMethodService);
+            inputMethodManager.HideSoftInputFromWindow(ScoreEditText.WindowToken, 0);
+
+            return true; 
         }
 
     }

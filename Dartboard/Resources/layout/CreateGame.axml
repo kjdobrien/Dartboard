@@ -45,7 +45,7 @@
         android:fontFamily="sans-serif"
         android:gravity="center"
         android:visibility="invisible"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textAppearance="?android:attr/textAppearanceSmall"
     />
 
     	<Button

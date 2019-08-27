@@ -45,12 +45,7 @@ namespace Dartboard
             return gameData;
         }
 
-        public static Toast DartsToast(Activity activity, string text, ToastLength toastLength)
-        {
-            Toast toast = Toast.MakeText(activity, text, toastLength);
-            toast.SetGravity(GravityFlags.Center, 0, 0);
-            return toast;
-        }
+
 
         public static List<string> GetNames()
         {
@@ -64,20 +59,20 @@ namespace Dartboard
                     {
                         Names.Add(sr.ReadLine());
                     }
-                    
+
                 }
-                
+
                 return Names;
             }
             else
             {
-                return null; 
+                return null;
             }
         }
 
         public static List<string> DeleteName(List<string> Names, string name)
-        {           
-            string fileName = "/data/data/Dartboard.Dartboard/previousPlayers.txt";                
+        {
+            string fileName = "/data/data/Dartboard.Dartboard/previousPlayers.txt";
             Names.Remove(name);
             File.Delete(fileName);
             using (StreamWriter sw = File.CreateText(fileName))
@@ -98,13 +93,22 @@ namespace Dartboard
         {
             if (File.Exists(FilePath))
             {
-                File.Delete(FilePath); 
+                File.Delete(FilePath);
             }
+        }
+
+
+
+        public static Toast DartsToast(Activity activity, string text, ToastLength toastLength)
+        {
+            Toast toast = Toast.MakeText(activity, text, toastLength);
+            toast.SetGravity(GravityFlags.Center, 0, 0);
+            return toast;
         }
 
         public static bool CheckForName(string name, List<string> Names)
         {
-            return Names.Contains(name); 
+            return Names.Contains(name);
         }
 
         public static void SavePlayerName(List<string> names)
@@ -115,11 +119,37 @@ namespace Dartboard
                 {
                     file.WriteLine(name);
                 }
-                
+
             }
         }
     }
 
+
+    public class BustToast : Toast
+    {     
+
+        public BustToast(Context context) : base(context) {
+            
+        }
+
+        public BustToast(Context context, Activity activity, string text, ToastLength toastLength):base(context)
+        {
+            View bustView = new View(activity);
+            LayoutInflater inflater = activity.LayoutInflater;
+            View view = inflater.Inflate(Resource.Layout.bust, null);
+
+            TextView txt = view.FindViewById<TextView>(Resource.Id.text);
+
+            txt.Text = text;
+            SetGravity(GravityFlags.Center, 0, 0);
+            Duration = toastLength;
+            View = view;
+
+
+        }
+
+
+    }
 
     public struct GameData
     {

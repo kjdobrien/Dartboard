@@ -30,6 +30,7 @@ namespace Dartboard
         GameData gameData;
         Dialog nameDialog;
         TextView previousPlayersHint;
+        ImageView brandLogo; 
 
 
 
@@ -37,6 +38,10 @@ namespace Dartboard
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.CreateGame);
+
+            brandLogo = FindViewById<ImageView>(Resource.Id.icon);
+            brandLogo.Visibility = ViewStates.Invisible; 
+
 
             // Initialize the settings menu 
             SettingsMenu = FindViewById<ImageButton>(Resource.Id.settingsButton);
@@ -50,7 +55,7 @@ namespace Dartboard
 
             SuggestedNames = HelperFunctions.GetNames();
 
-            previousPlayersHint = FindViewById<TextView>(Resource.Id.previousPlayersHint); 
+            previousPlayersHint = FindViewById<TextView>(Resource.Id.previousPlayersHint);
             
 
             // Initialize listView
@@ -236,6 +241,8 @@ namespace Dartboard
                 //nameEditText.SetError("Enter a name", error);
 
                 HelperFunctions.DartsToast(this, "Enter a name", ToastLength.Long).Show();
+
+
             }
             else if (SuggestedNames != null  && SuggestedNames.Contains(name))
             {

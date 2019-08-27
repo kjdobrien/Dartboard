@@ -207,7 +207,7 @@ namespace Dartboard
             if (winner.legsWon >= (numLegs + 1) / 2)
             {
                 alert.SetTitle("Player " + winner.name + " wins the match!");
-                alert.SetNeutralButton("New Game", (senderAlert, args) => { c.StartActivity(intent); });
+                alert.SetNeutralButton("New Game", (senderAlert, args) => { MoveToNextLeg(0, players, startScore, activity); });
             }
             else
             {

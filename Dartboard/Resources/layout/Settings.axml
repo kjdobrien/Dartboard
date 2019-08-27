@@ -102,6 +102,7 @@
         android:text="Delete Saved data"
         android:background="@drawable/rounded_buttons"
         android:layout_margin="5dp"
+        android:id="@+id/deleteSavedData"
     />
 
 
